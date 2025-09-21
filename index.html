@@ -144,6 +144,45 @@
       .question { font-size: 0.95rem; }
       button { font-size: 0.9rem; padding: 10px; }
     }
+    /* Block hiển thị đáp án */
+.answer-box {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: #fefefe;
+  border: 2px solid #e0e7ff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.answer-box div {
+  margin: 6px 0;
+  font-size: 0.95rem;
+}
+
+.answer-box .correct {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #e6ffed;
+  color: #1b8a3f;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.answer-box .wrong {
+  display: inline-block;
+  padding: 6px 10px;
+  background: #ffe6e6;
+  color: #d93025;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.answer-box .icon {
+  font-size: 1.1rem;
+  margin-right: 6px;
+}
+
   </style>
 </head>
 <body>
@@ -1133,15 +1172,16 @@
     "answer": 1
   }
 ]
-
+  
     let current = 0;
     let answered = Array(questions.length).fill(null);
-
+    let showingAnswer = false; // trạng thái: đang hiển thị đáp án hay chưa
+  
     function updateProgress() {
-      document.getElementById("progress").textContent = 
+      document.getElementById("progress").textContent =
         `Câu ${current + 1}/${questions.length} - Còn lại ${questions.length - current - 1} câu`;
     }
-
+  
     function loadQuestion() {
       const qBox = document.getElementById("quiz");
       const q = questions[current];
@@ -1154,22 +1194,48 @@
             <span>${opt}</span>
           </label>`;
       });
-      html += "</div>";
+      html += "</div><div id='answerBox'></div>";
       qBox.innerHTML = html;
-
+  
       document.getElementById("prevBtn").disabled = current===0;
       document.getElementById("nextBtn").innerText = current===questions.length-1 ? "Kết thúc" : "Tiếp theo";
-
+  
       document.querySelectorAll('input[name="opt"]').forEach(input=>{
         input.addEventListener("change", e=>{
           answered[current] = parseInt(e.target.value);
         });
       });
-
+  
       updateProgress();
+      showingAnswer = false; // reset trạng thái
     }
-
+  
     document.getElementById("nextBtn").addEventListener("click", ()=>{
+      if(!showingAnswer){
+        // Hiển thị đáp án trước
+        const q = questions[current];
+        const userAns = answered[current];
+        let ansHtml = `
+  <div class="answer-box">
+    <div>
+      <span class="icon">${userAns===q.answer ? "✅" : "❌"}</span>
+      Bạn chọn: <span class="${userAns===q.answer?'correct':'wrong'}">
+        ${userAns!==null?q.options[userAns]:"(không chọn)"}
+      </span>
+    </div>
+    <div>
+      <span class="icon">✔️</span>
+      Đáp án đúng: <span class="correct">${q.options[q.answer]}</span>
+    </div>
+  </div>
+`;
+
+        document.getElementById("answerBox").innerHTML = ansHtml;
+        showingAnswer = true;
+        return; // dừng lại, chờ lần bấm tiếp theo
+      }
+  
+      // Nếu đã hiển thị đáp án rồi thì chuyển câu
       if(current < questions.length-1){
         current++;
         loadQuestion();
@@ -1177,14 +1243,14 @@
         showSummary();
       }
     });
-
+  
     document.getElementById("prevBtn").addEventListener("click", ()=>{
       if(current>0){
         current--;
         loadQuestion();
       }
     });
-
+  
     function showSummary(){
       const correct = answered.filter((a,i)=>a===questions[i].answer).length;
       let reviewHtml = `
@@ -1209,15 +1275,15 @@
       `;
       document.querySelector(".quiz-container").innerHTML = reviewHtml;
     }
-
+  
     function restartQuiz(){
       current = 0;
       answered = Array(questions.length).fill(null);
       location.reload();
     }
-
+  
     loadQuestion();
-     /* ===========================
+      /* ===========================
        CODE KHÓA XEM SOURCE (JS)
        ===========================
        - Ngăn chuột phải
@@ -1294,5 +1360,6 @@
       }, 1000);
     })();
   </script>
+  
 </body>
 </html>
