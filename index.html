@@ -63,7 +63,6 @@
       margin-bottom: 15px;
       font-weight: bold;
     }
-
     /* === OPTION STYLE === */
     .options label {
       display: block;
@@ -97,7 +96,6 @@
       50% { transform: scale(1.02); }
       100% { transform: scale(1); }
     }
-
     .controls {
       margin-top: 20px;
       display: flex;
@@ -136,7 +134,6 @@
       margin-bottom: 15px;
       border-left: 5px solid #2575fc;
     }
-
     /* Responsive nhỏ */
     @media (max-width: 600px) {
       .quiz-container { padding: 15px; }
@@ -154,12 +151,10 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   animation: fadeIn 0.4s ease-in-out;
 }
-
 .answer-box div {
   margin: 6px 0;
   font-size: 0.95rem;
 }
-
 .answer-box .correct {
   display: inline-block;
   padding: 6px 10px;
@@ -168,7 +163,6 @@
   border-radius: 8px;
   font-weight: bold;
 }
-
 .answer-box .wrong {
   display: inline-block;
   padding: 6px 10px;
@@ -177,12 +171,10 @@
   border-radius: 8px;
   font-weight: bold;
 }
-
 .answer-box .icon {
   font-size: 1.1rem;
   margin-right: 6px;
 }
-
   </style>
 </head>
 <body>
@@ -198,7 +190,6 @@
       <button id="nextBtn">⏭ Tiếp theo</button>
     </div>
   </div>
-
   <script>
     const questions = [
   {
@@ -1171,23 +1162,35 @@
     ],
     "answer": 1
   }
-]
-  
+];
+
+    // Hàm xáo trộn mảng (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Xáo trộn mảng questions khi khởi tạo
+    const shuffledQuestions = shuffleArray([...questions]);
+
     let current = 0;
-    let answered = Array(questions.length).fill(null);
+    let answered = Array(shuffledQuestions.length).fill(null);
     let showingAnswer = false; // trạng thái: đang hiển thị đáp án hay chưa
-  
+
     function updateProgress() {
       document.getElementById("progress").textContent =
-        `Câu ${current + 1}/${questions.length} - Còn lại ${questions.length - current - 1} câu`;
+        `Câu ${current + 1}/${shuffledQuestions.length} - Còn lại ${shuffledQuestions.length - current - 1} câu`;
     }
-  
+
     function loadQuestion() {
       const qBox = document.getElementById("quiz");
-      const q = questions[current];
+      const q = shuffledQuestions[current];
       let html = `<div class="question">${q.q}</div><div class="options">`;
-      q.options.forEach((opt,i)=>{
-        const checked = answered[current]===i ? "checked" : "";
+      q.options.forEach((opt, i) => {
+        const checked = answered[current] === i ? "checked" : "";
         html += `
           <label>
             <input type="radio" name="opt" value="${i}" ${checked}>
@@ -1196,31 +1199,31 @@
       });
       html += "</div><div id='answerBox'></div>";
       qBox.innerHTML = html;
-  
-      document.getElementById("prevBtn").disabled = current===0;
-      document.getElementById("nextBtn").innerText = current===questions.length-1 ? "Kết thúc" : "Tiếp theo";
-  
-      document.querySelectorAll('input[name="opt"]').forEach(input=>{
-        input.addEventListener("change", e=>{
+
+      document.getElementById("prevBtn").disabled = current === 0;
+      document.getElementById("nextBtn").innerText = current === shuffledQuestions.length - 1 ? "Kết thúc" : "Tiếp theo";
+
+      document.querySelectorAll('input[name="opt"]').forEach(input => {
+        input.addEventListener("change", e => {
           answered[current] = parseInt(e.target.value);
         });
       });
-  
+
       updateProgress();
       showingAnswer = false; // reset trạng thái
     }
-  
-    document.getElementById("nextBtn").addEventListener("click", ()=>{
-      if(!showingAnswer){
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      if (!showingAnswer) {
         // Hiển thị đáp án trước
-        const q = questions[current];
+        const q = shuffledQuestions[current];
         const userAns = answered[current];
         let ansHtml = `
   <div class="answer-box">
     <div>
-      <span class="icon">${userAns===q.answer ? "✅" : "❌"}</span>
-      Bạn chọn: <span class="${userAns===q.answer?'correct':'wrong'}">
-        ${userAns!==null?q.options[userAns]:"(không chọn)"}
+      <span class="icon">${userAns === q.answer ? "✅" : "❌"}</span>
+      Bạn chọn: <span class="${userAns === q.answer ? 'correct' : 'wrong'}">
+        ${userAns !== null ? q.options[userAns] : "(không chọn)"}
       </span>
     </div>
     <div>
@@ -1229,40 +1232,39 @@
     </div>
   </div>
 `;
-
         document.getElementById("answerBox").innerHTML = ansHtml;
         showingAnswer = true;
         return; // dừng lại, chờ lần bấm tiếp theo
       }
-  
+
       // Nếu đã hiển thị đáp án rồi thì chuyển câu
-      if(current < questions.length-1){
+      if (current < shuffledQuestions.length - 1) {
         current++;
         loadQuestion();
       } else {
         showSummary();
       }
     });
-  
-    document.getElementById("prevBtn").addEventListener("click", ()=>{
-      if(current>0){
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (current > 0) {
         current--;
         loadQuestion();
       }
     });
-  
-    function showSummary(){
-      const correct = answered.filter((a,i)=>a===questions[i].answer).length;
+
+    function showSummary() {
+      const correct = answered.filter((a, i) => a === shuffledQuestions[i].answer).length;
       let reviewHtml = `
-        <div class="summary">🎉 Bạn trả lời đúng ${correct}/${questions.length} câu!</div>
+        <div class="summary">🎉 Bạn trả lời đúng ${correct}/${shuffledQuestions.length} câu!</div>
         <div class="review">`;
-      questions.forEach((q,i)=>{
+      shuffledQuestions.forEach((q, i) => {
         const userAns = answered[i];
         const isCorrect = userAns === q.answer;
         reviewHtml += `
           <div class="answer-block">
             <div class="question">${q.q}</div>
-            <div>Bạn chọn: <span class="${isCorrect?'correct':'wrong'}">${userAns!==null?q.options[userAns]:"(không chọn)"}</span></div>
+            <div>Bạn chọn: <span class="${isCorrect ? 'correct' : 'wrong'}">${userAns !== null ? q.options[userAns] : "(không chọn)"}</span></div>
             <div>Đáp án đúng: <span class="correct">${q.options[q.answer]}</span></div>
           </div>
         `;
@@ -1275,15 +1277,15 @@
       `;
       document.querySelector(".quiz-container").innerHTML = reviewHtml;
     }
-  
-    function restartQuiz(){
+
+    function restartQuiz() {
       current = 0;
-      answered = Array(questions.length).fill(null);
+      answered = Array(shuffledQuestions.length).fill(null);
       location.reload();
     }
-  
+
     loadQuestion();
-      /* ===========================
+    /* ===========================
        CODE KHÓA XEM SOURCE (JS)
        ===========================
        - Ngăn chuột phải
@@ -1291,48 +1293,41 @@
        - Ngăn chọn text (CSS + event)
        - Lưu ý: chỉ là rào cản client-side
     */
-    (function lockDevTools(){
+    (function lockDevTools() {
       // ngăn menu chuột phải
-      document.addEventListener('contextmenu', function(e){
+      document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
       });
-
       // ngăn chọn (thêm an toàn nếu CSS không đủ)
-      document.addEventListener('selectstart', function(e){
+      document.addEventListener('selectstart', function(e) {
         e.preventDefault();
       });
-
       // ngăn copy/paste từ chuột phải
-      document.addEventListener('copy', function(e){
+      document.addEventListener('copy', function(e) {
         e.preventDefault();
       });
-
       // ngăn tổ hợp phím thường dùng để mở devtools / xem source
-      document.addEventListener('keydown', function(e){
+      document.addEventListener('keydown', function(e) {
         // Normalize key for older browsers
         const key = e.key || e.keyCode;
-
         // F12
         if (e.key === 'F12' || key === 123) {
           e.preventDefault();
           e.stopPropagation();
           return false;
         }
-
         // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
         if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
           e.preventDefault();
           e.stopPropagation();
           return false;
         }
-
         // Ctrl+U (view-source)
         if (e.ctrlKey && (e.key === 'U' || e.key === 'u' || key === 85)) {
           e.preventDefault();
           e.stopPropagation();
           return false;
         }
-
         // Ctrl+S, Ctrl+Shift+S (optional: ngăn lưu trang)
         if (e.ctrlKey && (e.key === 's' || e.key === 'S')) {
           e.preventDefault();
@@ -1340,7 +1335,6 @@
           return false;
         }
       });
-
       // Một thủ thuật nhẹ: phát hiện nếu DevTools được mở (không hoàn hảo)
       // (kiểm tra chiều cao width console) — chỉ dùng để reload/ẩn nội dung nếu phát hiện
       let devtoolsOpen = false;
@@ -1360,6 +1354,5 @@
       }, 1000);
     })();
   </script>
-  
 </body>
 </html>
