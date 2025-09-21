@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <link rel="icon" href="/asset/img/tom.svg" type="image/png">
+  <link rel="icon" href="/asset/img/tom.svg" type="image/png">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive -->
   <title>TOM - IT</title>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 10px;
       background: linear-gradient(135deg, #6a11cb, #2575fc);
       color: #333;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      /* ngăn chọn/chọn sao chép văn bản (tăng hiệu ứng "khóa") */
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
@@ -24,8 +24,9 @@
     .quiz-container {
       background: #fff;
       border-radius: 20px;
-      padding: 30px;
-      width: 800px;
+      padding: 20px;
+      width: 100%;
+      max-width: 800px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       animation: fadeIn 0.5s ease-in-out;
       max-height: 90vh;
@@ -37,42 +38,43 @@
     }
     .logo {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     .logo img {
-      max-width: 120px;
-      height: 80px;
+      max-width: 100px;
+      height: auto;
       border-radius: 50%;
     }
     .title {
       text-align: center;
-      font-size: 22px;
+      font-size: 1.2rem;
       font-weight: bold;
       margin-bottom: 10px;
       color: #2575fc;
     }
     #progress {
       text-align: center;
-      font-size: 16px;
+      font-size: 0.95rem;
       color: #666;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     .question {
-      font-size: 20px;
-      margin-bottom: 20px;
+      font-size: 1rem;
+      margin-bottom: 15px;
       font-weight: bold;
     }
 
     /* === OPTION STYLE === */
     .options label {
       display: block;
-      margin: 12px 0;
-      padding: 15px 20px;
+      margin: 10px 0;
+      padding: 12px 15px;
       background: #f5f7ff;
       border: 2px solid transparent;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-size: 0.95rem;
     }
     .options input { display: none; }
     .options label:hover {
@@ -86,7 +88,7 @@
       color: #fff;
       background: #2575fc;
       border-radius: 10px;
-      padding: 12px 15px;
+      padding: 10px 12px;
       box-shadow: 0 0 12px rgba(37,117,252,0.5);
       animation: pulse 0.3s ease;
     }
@@ -97,40 +99,50 @@
     }
 
     .controls {
-      margin-top: 25px;
+      margin-top: 20px;
       display: flex;
-      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
     }
     button {
-      padding: 12px 20px;
+      flex: 1;
+      padding: 12px;
       border: none;
       border-radius: 10px;
       cursor: pointer;
       background: #2575fc;
       color: white;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: bold;
       transition: all 0.3s;
     }
-    button:hover { background: #6a11cb; transform: scale(1.05); }
+    button:hover { background: #6a11cb; transform: scale(1.03); }
     button:disabled { background: #ccc; cursor: not-allowed; }
     .summary {
-      font-size: 22px;
+      font-size: 1.2rem;
       font-weight: bold;
       color: #2575fc;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-align: center;
     }
-    .review { margin-top: 20px; }
-    .review .question { font-size: 18px; color: #000; }
+    .review { margin-top: 15px; }
+    .review .question { font-size: 1rem; color: #000; }
     .review .correct { color: green; font-weight: bold; }
     .review .wrong { color: red; font-weight: bold; }
     .answer-block {
       background: #f9f9f9;
-      padding: 10px 15px;
+      padding: 10px;
       border-radius: 8px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border-left: 5px solid #2575fc;
+    }
+
+    /* Responsive nhỏ */
+    @media (max-width: 600px) {
+      .quiz-container { padding: 15px; }
+      .title { font-size: 1rem; }
+      .question { font-size: 0.95rem; }
+      button { font-size: 0.9rem; padding: 10px; }
     }
   </style>
 </head>
@@ -149,7 +161,7 @@
   </div>
 
   <script>
-    const questions =[
+    const questions = [
   {
     "q": "Câu 4: Lợi ích của xã hội khi hoạt động TMĐT phát triển. Phát biểu nào sau đây là sai?",
     "options": [
@@ -1126,8 +1138,8 @@
     let answered = Array(questions.length).fill(null);
 
     function updateProgress() {
-      const progressBox = document.getElementById("progress");
-      progressBox.textContent = `Câu ${current + 1}/${questions.length} - Còn lại ${questions.length - current - 1} câu`;
+      document.getElementById("progress").textContent = 
+        `Câu ${current + 1}/${questions.length} - Còn lại ${questions.length - current - 1} câu`;
     }
 
     function loadQuestion() {
@@ -1191,7 +1203,7 @@
       });
       reviewHtml += `
         </div>
-        <div style="text-align:center; margin-top:20px;">
+        <div style="text-align:center; margin-top:15px;">
           <button onclick="restartQuiz()">🔄 Làm lại</button>
         </div>
       `;
@@ -1205,8 +1217,7 @@
     }
 
     loadQuestion();
-
-    /* ===========================
+     /* ===========================
        CODE KHÓA XEM SOURCE (JS)
        ===========================
        - Ngăn chuột phải
