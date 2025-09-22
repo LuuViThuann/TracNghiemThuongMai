@@ -325,7 +325,7 @@ button:disabled { background: #ccc; cursor: not-allowed; }
   body { padding: 5px; }
   .container { gap: 8px; padding: 0 5px; }
   .tabs { gap: 6px; }
-  .tab { padding: 6px 12px; font-size: 0.85rem; }
+  .tab { padding: 10px 12px; font-size:14px; }
   .quiz-container, .grid-container {
     padding: 10px;
     max-height: calc(90vh - 10px);
@@ -333,12 +333,12 @@ button:disabled { background: #ccc; cursor: not-allowed; }
     min-width: 0;
   }
   .logo img { max-width: 80px; }
-  .title { font-size: 0.95rem; }
-  #progress { font-size: 0.85rem; }
-  .question { font-size: 0.85rem; margin-bottom: 8px; }
-  .options label { font-size: 0.8rem; padding: 6px 8px; }
+  .title { font-size: 0.95rem; text-transform: uppercase;}
+  #progress { font-size: 14px; }
+  .question { font-size: 17px; margin-bottom: 8px; }
+  .options label { font-size: 16px; padding: 6px 8px; }
   .controls { gap: 6px; }
-  button { font-size: 0.8rem; padding: 8px 6px; min-width: 80px; }
+  button { font-size: 15px; padding: 10px 6px; min-width: 80px; }
   .question-grid {
     grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
   }
