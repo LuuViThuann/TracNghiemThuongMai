@@ -3,1003 +3,4006 @@
 <head>
   <link rel="icon" href="/asset/img/tom.svg" type="image/png">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOM - IT</title>
   <link rel="stylesheet" href="asset/css/style.css">
 </head>
 <body>
   <div class="container">
-    <div class="quiz-container">
-      <div class="logo">
-        <img src="https://preview.redd.it/looking-for-opponents-for-tom-tom-and-jerry-for-a-tier-list-v0-jvusu3d0g5ta1.jpg?width=640&crop=smart&auto=webp&s=d955062a32f183d4554fda823834ef905dffa208" alt="Logo">
+    <div class="tabs">
+      <button class="tab active" data-chapter="0">Tổng quan</button>
+      <button class="tab" data-chapter="1">Phần 1</button>
+      <button class="tab" data-chapter="2">Phần 2</button>
+      <button class="tab" data-chapter="3">Phần 3</button>
+      <button class="tab" data-chapter="4">Phần 4</button>
+      <button class="tab" data-chapter="5">Phần 5</button>
+    
+    </div>
+
+    <div class="container-all">
+      <div class="quiz-container">
+        <div class="logo">
+          <img src="https://preview.redd.it/looking-for-opponents-for-tom-tom-and-jerry-for-a-tier-list-v0-jvusu3d0g5ta1.jpg?width=640&crop=smart&auto=webp&s=d955062a32f183d4554fda823834ef905dffa208" alt="Logo">
+        </div>
+        <div class="title">Trắc nghiệm Thương mại Điện tử</div>
+        <div id="progress"></div>
+        <div id="quiz"></div>
+        <div class="controls">
+          <button id="prevBtn">⏪ Quay lại</button>
+          <button id="nextBtn">⏭ Tiếp theo</button>
+        </div>
       </div>
-      <div class="title">Trắc nghiệm Thương mại Điện tử</div>
-      <div id="progress"></div>
-      <div id="quiz"></div>
-      <div class="controls">
-        <button id="prevBtn">⏪ Quay lại</button>
-        <button id="nextBtn">⏭ Tiếp theo</button>
+      <div class="grid-container">
+        <div class="question-grid" id="questionGrid"></div>
       </div>
     </div>
-    <div class="grid-container">
-      <div class="question-grid" id="questionGrid"></div>
-    </div>
+   
   </div>
   <script>
-    const questions = [
-      {
-        "q": "Câu 4: Lợi ích của xã hội khi hoạt động TMĐT phát triển. Phát biểu nào sau đây là sai?",
-        "options": [
-          "Hạn chế đi lại làm giảm thiểu tác động ô nhiễm môi trường",
-          "Các nước chậm phát triển các thể tiếp cận sản phẩm từ nước phát triển",
-          "Nâng cao mức sống người dân",
-          "Cải thiện hệ thống kênh bán hàng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 5: Đây là mô hình TMĐT giữa người tiêu dùng với người tiêu dùng trong đó nổi bật 2 hình thức kinh doanh đó là đấu giá trực tuyến và sàn giao dịch trực tuyến.",
-        "options": ["B2G", "C2B", "B2C", "C2C"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 6: Công nghệ WAF (Web Application Firewall) được sử dụng để:",
-        "options": [
-          "Bảo vệ ứng dụng web khỏi tấn công mạng",
-          "Phương thức thanh toán trực tuyến",
-          "Bảo vệ trí tuệ",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 10: Lợi ích của thương mại điện tử đối với doanh nghiệp bao gồm:",
-        "options": [
-          "Tăng khả năng tiếp cận và thu hút khách hàng",
-          "Giảm chi phí quảng cáo",
-          "Nhanh chóng triển khai và cập nhật thông tin sản phẩm",
-          "Tất cả các phương án trên"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 21: Trong mô hình chữ ký số khóa nào được sử dụng để xác nhận chữ ký?",
-        "options": ["Khóa riêng", "Khóa công khai", "Khóa đối xứng", "Mã hóa băm"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 40: Phương thức thanh toán nào cung cấp một phương tiện trực tuyến để chuyển tiền giữa các tài khoản ngân hàng?",
-        "options": ["Thẻ tín dụng", "Internet banking", "Ví điện tử", "Bitcoin"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 43: Hợp đồng thương mại điện tử thường được xác định bởi:",
-        "options": [
-          "Luật pháp và hợp đồng",
-          "Ý chí của doanh nghiệp",
-          "Sự đồng thuận của cả hai bên",
-          "Tất cả đều đúng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 46: Blockchain thường được sử dụng trong thanh toán ở đâu?",
-        "options": ["Thẻ tín dụng", "E-wallet", "Tiền ảo", "Chuyển khoản ngân hàng"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 49: Quy định về xử lý tranh chấp trong thương mại điện tử được thấy đề cập trong văn bản nào?",
-        "options": [
-          "Luật Cạnh tranh",
-          "Luật An ninh mạng",
-          "Luật Bảo vệ Người tiêu dùng",
-          "Bộ Luật Dân sự"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 53: Trong những thách thức chính của thương mại điện tử toàn cầu là:",
-        "options": [
-          "Sự phổ biến của mô hình kinh doanh truyền thống",
-          "Vấn đề về an ninh thông tin",
-          "Thiếu quảng cáo trực tuyến",
-          "Hiệu suất thấp trong việc xử lý thanh toán trực tuyến"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 59: \"Smart Card\" là:",
-        "options": [
-          "Thẻ thông minh tích hợp thông tin cá nhân",
-          "Công cụ quảng cáo trực tuyến",
-          "Phương thức thanh toán an toàn",
-          "Cả A và B đều đúng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 9: Theo Luật Giao Dịch Điện tử, người kinh doanh thương mại điện tử phải cung cấp thông tin gì trên trang web của mình?",
-        "options": [
-          "Mã số thuế doanh nghiệp",
-          "Giá bán chi tiết của sản phẩm",
-          "Tên, địa chỉ, số điện thoại liên lạc",
-          "Tất cả các phương án trên"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 64: Luật nào quy định về trách nhiệm của bên cung cấp dịch vụ thông tin trực tuyến đối với nội dung được người sử dụng đưa lên?",
-        "options": [
-          "Luật An ninh mạng",
-          "Luật Cạnh tranh",
-          "Luật Bảo vệ Người tiêu dùng",
-          "Bộ Luật Dân sự"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 69: Biến đổi mã hóa (Encryption) trong thương mại điện tử được sử dụng để:",
-        "options": [
-          "Mã hóa thông tin truyền tải để bảo vệ an toàn giao dịch",
-          "Tăng tốc độ truy cập website",
-          "Kiểm soát quảng cáo trực tuyến",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 76: Trong hợp đồng điện tử, yếu tố quan trọng nhất để có tính chất pháp lý là:",
-        "options": [
-          "Chữ ký điện tử",
-          "Thông tin liên lạc của các bên",
-          "Giá trị giao dịch",
-          "Thời gian giao dịch"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 77: Mã giảm giá (discount code) thường được áp dụng ở đâu trong quá trình thanh toán?",
-        "options": ["Trang chủ", "Trang sản phẩm", "Trang giỏ hàng", "Trang thanh toán"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 78: Lợi ích chính của thương mại điện tử bao gồm:",
-        "options": [
-          "Giảm chi phí vận chuyển",
-          "Mở rộng tầm nhìn và tiếp cận đối tượng khách hàng toàn cầu",
-          "Giảm cạnh tranh",
-          "A và B"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 85: Tổ chức nào quản lý và duy trì quy tắc và điều kiện cho việc chuyển giao dữ liệu giữa các tổ chức thương mại điện tử trên internet?",
-        "options": [
-          "ICANN (Cơ quan Quản lý Tên miền và Số IP Quốc tế)",
-          "W3C (Tổ chức Toàn cầu Web)",
-          "IETF (Tổ chức Tiêu chuẩn và Công nghệ Internet)",
-          "ITU (Liên hiệp Viễn thông Quốc tế)"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 90: Hạn chế của thương mại điện tử.",
-        "options": [
-          "Rủi ro trong thanh toán qua mạng",
-          "Thiếu lòng tin vào TMĐT do người bán và người mua không được gặp trực tiếp",
-          "Chuyển đổi thói quen tiêu dùng từ thực đến ảo cần thời gian",
-          "Tất cả đều đúng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 94: Loại ví điện tử nào thường được sử dụng để thanh toán trực tuyến và lưu trữ thông tin thẻ tín dụng?",
-        "options": ["PayPal", "Momo", "Google Pay", "Tất cả các phương án trên"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 95: Các mô hình G2G, G2B, G2C được xếp vào nhóm các loại hình nào sau đây?",
-        "options": [
-          "Mô hình dịch vụ công chính phủ triển khai phục vụ doanh nghiệp.",
-          "Các loại hình xây dựng chính phủ điện tử (e-Government).",
-          "Mô hình hỗ trợ doanh nghiệp cung cấp hàng hóa, dịch vụ cho chính phủ thông qua đấu thầu trực tuyến.",
-          "Mô hình TMĐT giữa doanh nghiệp với doanh nghiệp"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 96: Tổ chức nào thiết lập và duy trì các quy tắc và tiêu chuẩn cho mô hình kinh doanh thương mại điện tử?",
-        "options": [
-          "UNCTAD (Hội nghị Liên hợp quốc về Thương mại và Phát triển)",
-          "ICC (Phòng Thương mại Quốc tế)",
-          "WIPO (Tổ chức Sở hữu Trí tuệ Thế giới)",
-          "ILO (Tổ chức Lao động Quốc tế)"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 6: Chính phủ điện tử là một hình thức thương mại điện tử tham gia bởi các đối tượng nào?",
-        "options": [
-          "Doanh nghiệp với doanh nghiệp",
-          "Doanh nghiệp với cá nhân",
-          "Cá nhân với cá nhân",
-          "Chính phủ với người dân"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 2: Lợi ích lớn nhất của cá nhân khi tham gia thương mại điện tử là gì?",
-        "options": [
-          "Người tiêu dùng có nhiều sự lựa chọn hơn về sản phẩm và dịch vụ",
-          "Mua hàng chất lượng hơn",
-          "Được trực tiếp xem hàng trước khi mua",
-          "Mua hàng miễn phí"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 3: Biện pháp nào giúp giảm rủi ro liên quan đến an ninh thông tin trong thương mại điện tử?",
-        "options": [
-          "Tăng cường quảng cáo trực tuyến",
-          "Sử dụng hệ thống thanh toán không an toàn",
-          "Thiết lập các biện pháp bảo mật mạnh mẽ",
-          "Hạn chế tính tương tác với khách hàng"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 7: Khái niệm \"Letter of Credit (L/C)\" là gì?",
-        "options": ["Chuyển khoản ngân hàng", "Thẻ tín dụng", "Hóa đơn quốc tế", "Thư tín dụng"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 9: Mục đích chính của \"Công nghệ Blockchain\" trong thương mại điện tử là:",
-        "options": [
-          "Bảo mật giao dịch và ngăn chặn sửa đổi dữ liệu",
-          "Tăng tốc độ truy cập website",
-          "Kiểm soát quảng cáo trực tuyến",
-          "Cả a và b đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 3: Khi nào được coi là bước khởi đầu của thương mại điện tử?",
-        "options": ["Thập kỷ 1950", "Thập kỷ 1970", "Thập kỷ 1990", "Thập kỷ 2000"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 11: Phương tiện điện tử thường dùng nhất để đặt hàng trực tuyến tại Việt Nam là gì?",
-        "options": ["Máy tính bảng", "Laptop", "Điện thoại thông minh", "Máy tính bàn"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 12: \"Công nghệ VPN\" (Virtual Private Network) được sử dụng để:",
-        "options": [
-          "Kết nối mạng riêng ảo qua mạng công cộng",
-          "Tăng tốc độ truy cập website",
-          "Kiểm soát quảng cáo trực tuyến",
-          "Cả a và b đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 13: Điều gì là quan trọng nhất khi xây dựng kế hoạch an ninh cho website thương mại điện tử?",
-        "options": [
-          "Sử dụng mật khẩu đơn giản",
-          "Thường xuyên chấp nhận các thanh toán không an toàn",
-          "Thiết lập các biện pháp bảo mật mạnh mẽ, backup thường xuyên",
-          "Hạn chế cập nhật hệ thống"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 14: Thanh toán trực tuyến là gì?",
-        "options": [
-          "Thanh toán bằng tiền mặt",
-          "Thanh toán qua internet",
-          "Thanh toán qua thư tín dụng",
-          "Thanh toán qua cổng thanh toán"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 7: Chứng thực số trong thương mại điện tử liên quan đến việc:",
-        "options": [
-          "Xác nhận danh tính người tham gia giao dịch",
-          "Mã hóa thông tin cá nhân",
-          "Kiểm soát quảng cáo",
-          "Tất cả đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 16: Chứng chỉ SSL (Secure Socket Layer) trong thanh toán trực tuyến có tác dụng gì?",
-        "options": [
-          "Mã hóa thông tin giao dịch",
-          "Xác minh người mua",
-          "Kiểm tra tình trạng đơn hàng",
-          "Quảng cáo sản phẩm"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 17: Tổ chức nào xây dựng và duy trì các tiêu chuẩn cho ngôn ngữ đánh dấu trang web, như HTML và XML?",
-        "options": [
-          "W3C (Tổ chức Toàn cầu Web)",
-          "ICANN (Cơ quan Quản lý Tên miền và Số IP Quốc tế)",
-          "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
-          "IETF (Tổ chức Tiêu chuẩn và Công nghệ Internet)"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 18: Điểm khác biệt cơ bản giữa thanh toán B2B và thanh toán B2C là gì?",
-        "options": ["Giá trị giao dịch", "Phương thức giao dịch", "Thời gian giao dịch", "Khác"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 11: Văn bản pháp luật nào quy định về quản lý, sử dụng dữ liệu cá nhân trong thương mại điện tử?",
-        "options": [
-          "Luật Doanh nghiệp",
-          "Luật An ninh mạng",
-          "Luật Bảo vệ Người tiêu dùng",
-          "Luật Cạnh tranh"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 20: Dịch vụ thanh toán Google Pay thuộc hệ thống thanh toán nào?",
-        "options": ["E-wallet", "Cổng thanh toán trực tuyến", "Thẻ tín dụng", "Chuyển khoản ngân hàng"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 13: \"DDoS Attack\" là:",
-        "options": [
-          "Cuộc tấn công làm suy giảm hoặc làm ngừng hoạt động website",
-          "Hình thức thanh toán an toàn",
-          "Biện pháp bảo vệ dữ liệu",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 23: Theo sách trắng về TMĐT Việt nam 2022 thì dịch vụ hàng hóa được mua bán nhiều nhất trên mạng là gì?",
-        "options": ["Vé máy bay", "Tour du lịch", "Quần áo, giày dép và mỹ phẩm", "Sách, thiết bị trường học"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 24: Biện pháp quan trọng nhất để đảm bảo an toàn cho website thương mại điện tử là gì?",
-        "options": [
-          "Xây dựng tường lửa (firewall)",
-          "Bảo mật cổng thanh toán trực tuyến",
-          "Chống xâm nhập website từ tấn công DoS",
-          "Xây dựng một hệ thương website thương mại điện tử \"kiên cố\" ngay từ đầu và thường xuyên bảo trì, backup website…"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 25: Chữ ký số được sử dụng chủ yếu để:",
-        "options": [
-          "Chứng thực danh tính của người gửi",
-          "Bảo mật dữ liệu truyền tải",
-          "Tăng tính bí mật của thông tin",
-          "Tất cả các phương án trên"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 26: Mã SWIFT được sử dụng trong thanh toán quốc tế để định danh gì?",
-        "options": ["Quốc gia", "Ngân hàng", "Loại tiền tệ", "Số tài khoản người nhận"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 27: Giao dịch TMĐT B2C là giao dịch gì?",
-        "options": [
-          "Giao dịch giữa doanh nghiệp và người tiêu dùng",
-          "Giao dịch giữa người tiêu dùng và người tiêu dùng",
-          "Giao dịch giữa chính phủ và người dân",
-          "Giao dịch giữa cá nhân và cá nhân"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 5: Điều khoản \"Terms and Conditions\" thường chứa đựng các quy định về:",
-        "options": [
-          "Quyền lợi của người tiêu dùng",
-          "Trách nhiệm của doanh nghiệp",
-          "Cả A và B đều đúng",
-          "Tất cả đều sai"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 29: Rủi ro nổi bật liên quan đến an ninh thông tin trong thương mại điện tử bao gồm:",
-        "options": [
-          "Thiếu nguồn cung ổn định",
-          "Lừa đảo và hack",
-          "Sự chậm trễ trong giao dịch",
-          "Độ phức tạp trong quá trình mua sắm"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 30: Phương pháp nào sau đây được sử dụng để tạo ra một chữ ký số?",
-        "options": ["Mã hóa đối xứng", "Mã hóa khóa công khai", "Giải mã đối xứng", "Mã hóa băm"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 31: Hợp đồng điện tử có thể bao gồm những yếu tố nào sau đây?",
-        "options": [
-          "Thỏa thuận về giá",
-          "Điều kiện thanh toán",
-          "Quy định về bảo mật thông tin",
-          "Tất cả các phương án trên"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 6: Theo luật pháp, thông tin cá nhân của người tiêu dùng thường phải được bảo vệ bằng cách:",
-        "options": [
-          "Đồng thuận của người dùng",
-          "Sử dụng chứng thực số",
-          "Tạo ra các trang web an toàn",
-          "Tất cả đều đúng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 33: Hệ thống gợi ý thông minh (recommender system) hỗ trợ chức năng gì cho website?",
-        "options": [
-          "Cho phép tìm kiếm sản phẩm",
-          "Hỗ trợ giỏ mua hàng, đặt hàng",
-          "Hiển thị các mặt hàng có liên quan",
-          "Khác"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 34: Cách ngăn chặn SQL Injection?",
-        "options": [
-          "Sử dụng mã hóa mật khẩu",
-          "Sử dụng câu lệnh SQL phức tạp",
-          "Sử dụng thủ tục lưu trữ SQL",
-          "Sử dụng câu lệnh tham số hóa và câu lệnh chuẩn bị (Prepared Statements)"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 35: Theo điều 52 Nghị định 52/2013/NĐ-CP quy định về Điều kiện thiết lập website thương mại điện tử bán hàng. Phát biểu nào sau đây là sai?",
-        "options": [
-          "Là thương nhân, tổ chức có chức năng, nhiệm vụ phù hợp hoặc cá nhân đã được cấp mã số thuế cá nhân.",
-          "Có website với tên miền hợp lệ và tuân thủ các quy định về quản lý thông tin trên Internet.",
-          "Cần phải có chứng chỉ về an toàn, bảo mật và phải cài đặt SSL",
-          "Đã thông báo với Bộ Công Thương về việc thiết lập website thương mại điện tử bán hàng theo quy định tại Điều 53 Nghị định này"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 8: \"SSL\" (Secure Sockets Layer) được sử dụng để:",
-        "options": [
-          "Mã hóa dữ liệu giao dịch",
-          "Bảo vệ trí tuệ",
-          "Quảng cáo trực tuyến",
-          "Cả a và b đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 37: Mô hình TMĐT giữa doanh nghiệp với người tiêu dùng và thường được biết đến với cái tên khác là mô hình bán hàng trực tuyến.",
-        "options": ["B2G", "C2B", "B2C", "C2C"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 38: DDoS là viết tắt của điều gì?",
-        "options": [
-          "Data Download and Storage",
-          "Distributed Denial of Service",
-          "Digital Data Operation System",
-          "Direct Data Overflow System"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 39: Hợp đồng điện tử là gì?",
-        "options": [
-          "Một tài liệu in ấn được ký bởi các bên",
-          "Một thỏa thuận giữa hai người mua bán",
-          "Một hợp đồng được tạo, chấp nhận và quản lý bằng các phương tiện điện tử",
-          "Một hợp đồng được ký trên giấy"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 41: Đối tượng nào sau đây không tham gia vào các loại hình kinh doanh TMĐT?",
-        "options": ["Khách hàng", "Chính phủ", "Môi giới", "Doanh nghiệp"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 42: Lợi ích của doanh nghiệp khi tham gia thương mại điện tử. Phát biểu nào sau đây là sai?",
-        "options": [
-          "Mở rộng thị trường: tìm kiếm, tiếp cận nhà cung cấp, khách hàng và đối tác trên khắp thế giới.",
-          "Năng suất lao động tăng cao vì luôn cải tiến quy trình sản xuất",
-          "Cải thiện hệ thống phân phối do giảm lượng hàng lưu kho và độ trễ trong phân phối hàng",
-          "Vượt giới hạn về thời gian vì hoạt động kinh doanh được thực hiện 24/7"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 44: Tổ chức nào chịu trách nhiệm xây dựng các tiêu chuẩn an ninh thông tin trong thương mại điện tử?",
-        "options": [
-          "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
-          "WHO (Tổ chức Y tế Thế giới)",
-          "WTO (Tổ chức Thương mại Thế giới)",
-          "UNICEF (Quỹ Nhi đồng Quốc tế)"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 45: Làm thế nào để bảo vệ trước tấn công DDoS?",
-        "options": [
-          "Sử dụng mật khẩu yếu",
-          "Cập nhật phần mềm thường xuyên",
-          "Chia sẻ thông tin đăng nhập công khai",
-          "Tăng cường sử dụng cookie"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 47: Khi nào Việt Nam có sự phổ biến và phát triển đáng kể trong lĩnh vực thương mại điện tử?",
-        "options": ["Thập kỷ 1990", "Thập kỷ 2000", "Thập kỷ 1980", "Thập kỷ 1970"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 48: SQL Injection là gì?",
-        "options": [
-          "Một loại tấn công nhắm vào hệ thống điều khiển tàu hỏa",
-          "Một phương pháp để thực hiện truy vấn SQL trái phép",
-          "Một loại virus tấn công dữ liệu cá nhân",
-          "Một kỹ thuật mã hóa dữ liệu"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 2: Chọn loại hình thức không phải là thương mại điện tử",
-        "options": [
-          "Dịch vụ công của chính phủ",
-          "Website bán hàng",
-          "Bán hàng qua mạng xã hội",
-          "Bán hàng qua tivi"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 51: Tại sao việc sử dụng HTTPS (SSL) là một phần quan trọng của an ninh trang web thương mại điện tử?",
-        "options": [
-          "Tăng tốc độ truy cập trang web",
-          "Bảo vệ dữ liệu truyền tải giữa máy khách và máy chủ",
-          "Giảm chi phí vận chuyển",
-          "Giảm rủi ro về sản phẩm giả mạo"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 52: Rủi ro nào liên quan đến việc không thể kiểm soát chất lượng sản phẩm khi mua sắm trực tuyến?",
-        "options": [
-          "Rủi ro về vận chuyển",
-          "Rủi ro về thanh toán",
-          "Rủi ro về sản phẩm giả mạo hoặc chất lượng kém",
-          "Rủi ro về an ninh thông tin"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 54: Hình thức thanh toán nào cung cấp một mã số duy nhất để xác nhận giao dịch mỗi lần thanh toán?",
-        "options": ["Thẻ tín dụng", "Chuyển khoản ngân hàng", "OTP (Mã xác nhận một lần)", "Ví điện tử"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 55: Hạn chế phổ biến của thương mại điện tử là:",
-        "options": ["Bảo mật thông tin", "Thiếu tính tương tác", "Phụ thuộc vào kết nối internet", "B & C"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 56: SSL (Secure Sockets Layer) là gì?",
-        "options": [
-          "Là phương thức giao dịch thanh toán trên mạng",
-          "Là một tiêu chuẩn an ninh công nghệ toàn cầu tạo ra một liên kết giữa máy chủ web và trình duyệt.",
-          "Là hình thức số hóa thông tin",
-          "Là loại thẻ tín dụng phổ biến được sử dụng ở nhiều nước trên thế giới"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 5: Thuật ngữ nào sau đây được dùng nhiều và mô tả đúng về thương mại điện tử",
-        "options": ["E-trade", "E-commerce", "E-business", "E-marketing"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 58: Tổ chức nào quản lý và duy trì tiêu chuẩn cho hệ thống thanh toán thẻ tín dụng và thẻ ghi nợ?",
-        "options": [
-          "SWIFT (Hiệp hội Thanh toán Liên ngân hàng Quốc tế)",
-          "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
-          "PCI SSC (Hội đồng An ninh Thanh toán Công nghiệp)",
-          "ITU (Liên hiệp Viễn thông Quốc tế)"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 60: Mô hình nào phục vụ chủ yếu cho việc truyền tải thông tin giữa các cơ quan của chính phủ hoặc giữa các chính phủ với nhau và không vì mục đích thương mại.",
-        "options": ["B2G", "B2B", "G2C", "G2G"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 61: Các mối đe dọa bảo mật đối với website thương mại điện tử là gì?",
-        "options": [
-          "Gian lận tài chính",
-          "Đánh cắp dữ liệu",
-          "Website bị tấn công bằng nhiều hình thức như: DDoS, XSS, Bot…",
-          "Tất cả các ý kiến trên"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 4: Trang web thương mại điện tử đầu tiên là gì?",
-        "options": ["Amazon", "eBay", "Alibaba", "Pizza Hut"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 12: Tác dụng của văn bản pháp luật về TMĐT. Phát biểu nào sau đây là sai?",
-        "options": [
-          "Tạo quy định thống nhất cho các giao dịch TMĐT",
-          "Hạn chế hàng giả",
-          "Đem lại niềm tin cho các bên tham gia TMĐT gồm cả người bán, người mua và người cung cấp dịch vụ trung gian",
-          "Là cơ sở để giải quyết khi có tranh chấp, là cơ sở để tòa án đưa ra các phán quyết."
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 66: Xếp loại cấp độ phát triển TMĐT cho doanh nghiệp có sở hữu website trên mạng. Ở mức độ này, website còn đơn giản, chỉ là cung cấp thông tin về doanh nghiệp và sản phẩm mà không có các chức năng khác.",
-        "options": [
-          "Cấp độ 1 - hiện diện trên mạng",
-          "Cấp độ 2 - có website chuyên nghiệp",
-          "Cấp độ 3 - chuẩn bị TMĐT",
-          "Cấp độ 4 - áp dụng TMĐT"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 67: Tổ chức nào chủ trì việc phát hành chứng chỉ SSL để bảo vệ thông tin truyền tải trên internet?",
-        "options": [
-          "IANA (Cơ quan Gán phân định và Chia tách Tên miền Quốc tế)",
-          "CA/Browser Forum (Diễn đàn Chứng chỉ và Trình duyệt)",
-          "IEEE (Hiệp hội Kỹ thuật Điện và Điện tử)",
-          "IEC (Liên hiệp Kỹ thuật Quốc tế)"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 68: \"Hacker\" là:",
-        "options": [
-          "Người có kỹ năng nâng cao trong lĩnh vực an ninh mạng",
-          "Hình thức thanh toán trực tuyến",
-          "Người làm quảng cáo trực tuyến",
-          "Ý kiến khác"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 10: Quy định về bảo mật thông tin trong thương mại điện tử được thấy đề cập trong văn bản nào?",
-        "options": [
-          "Luật Cạnh tranh",
-          "Luật Bảo vệ Người tiêu dùng",
-          "Luật An ninh mạng",
-          "Bộ Luật Dân sự"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 14: \"Biometric Authentication\" sử dụng:",
-        "options": [
-          "Thông tin đăng nhập và mật khẩu",
-          "Thông tin vận chuyển dữ liệu",
-          "Xác nhận bằng đặc điểm sinh học của người dùng",
-          "Cả a và b đều đúng"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 72: Chữ ký số (digital signature) thường được sử dụng để:",
-        "options": [
-          "Bảo mật dữ liệu cá nhân",
-          "Xác nhận danh tính và chữ ký của người ký",
-          "Quảng bá thương hiệu",
-          "Tất cả đều đúng"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 73: Luật bảo vệ người tiêu dùng trong thương mại điện tử thường bảo vệ quyền:",
-        "options": [
-          "Hủy bỏ đơn đặt hàng trong vòng x ngày",
-          "Nhận sản phẩm không giống như mô tả",
-          "Trả lại hàng và nhận hoàn tiền",
-          "Tất cả đều đúng"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 74: Xếp loại cấp độ phát triển TMĐT cho doanh nghiệp bắt đầu triển khai bán hàng hay dịch vụ qua mạng. Tuy nhiên, doanh nghiệp chưa có hệ thống cơ sở dữ liệu nội bộ để phục vụ các giao dịch trên mạng. Các giao dịch còn chậm và không an toàn.",
-        "options": [
-          "Cấp độ 1 - hiện diện trên mạng",
-          "Cấp độ 2 - có website chuyên nghiệp",
-          "Cấp độ 3 - chuẩn bị TMĐT",
-          "Cấp độ 4 - áp dụng TMĐT"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 75: Mô hình thanh toán Cash on Delivery (COD) là gì?",
-        "options": [
-          "Thanh toán qua cổng thanh toán",
-          "Thanh toán khi nhận hàng",
-          "Thanh toán bằng thẻ tín dụng",
-          "Thanh toán qua chuyển khoản ngân hàng"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 79: Grab là ví dụ điển hình của mô hình thương mại điện tử tiên tiến nào?",
-        "options": [
-          "Kinh tế chia sẻ (sharing economy)",
-          "Sàn thương mại điện tử",
-          "Mô hình hỗ trợ quảng cáo",
-          "Mô hình giải trí trực tuyến"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 80: DDoS thường sử dụng phương thức gì để tăng cường lưu lượng mạng?",
-        "options": ["SQL Injection", "Brute Force", "Phishing", "Botnets"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 81: Mô hình thanh toán QR code là gì?",
-        "options": [
-          "Quét mã để thanh toán",
-          "Thanh toán bằng thẻ tín dụng",
-          "Thanh toán qua cổng thanh toán",
-          "Thanh toán khi nhận hàng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 82: Tổ chức nào chủ trì xây dựng và duy trì quy tắc cho việc giao dịch tài chính trực tuyến?",
-        "options": [
-          "W3C (Tổ chức Toàn cầu Web)",
-          "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
-          "SWIFT (Hiệp hội Thanh toán Liên ngân hàng Quốc tế)",
-          "ITU (Liên hiệp Viễn thông Quốc tế)"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 83: Người kinh doanh thương mại điện tử cần thực hiện các biện pháp nào để bảo vệ thông tin của người tiêu dùng theo quy định của văn bản nào?",
-        "options": [
-          "Luật Cạnh tranh",
-          "Luật An ninh mạng",
-          "Luật Bảo vệ Người tiêu dùng",
-          "Luật Doanh nghiệp"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 11: \"Phần mềm Antivirus\" là:",
-        "options": [
-          "Phần mềm chống virus và phần mềm độc hại",
-          "Công cụ quảng cáo trực tuyến",
-          "Phương tiện thanh toán trực tuyến",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 7: \"Firewall\" trong thương mại điện tử là:",
-        "options": [
-          "Một biện pháp bảo vệ để ngăn chặn tấn công mạng từ bên ngoài",
-          "Công cụ quảng cáo trực tuyến",
-          "Một hình thức thanh toán an toàn",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 87: Blockchain thường được sử dụng trong thanh toán nào?",
-        "options": ["Thẻ tín dụng", "E-wallet", "Tiền ảo", "Chuyển khoản ngân hàng"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 12: \"Two-Factor Authentication\" là:",
-        "options": [
-          "Phương thức thanh toán trực tuyến",
-          "Hình thức xác thực bằng hai yếu tố",
-          "Công cụ bảo vệ dữ liệu",
-          "Cả a và b đều đúng"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 10: \"Malware\" là:",
-        "options": [
-          "Phần mềm độc hại nhằm gây hại cho hệ thống máy tính",
-          "Phương tiện thanh toán trực tuyến",
-          "Quảng cáo trực tuyến",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 91: PayPal là dịch vụ thanh toán nào trong thương mại điện tử?",
-        "options": ["E-wallet", "Thẻ tín dụng", "Chuyển khoản ngân hàng", "Thanh toán khi nhận hàng"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 1: Thương mại điện tử là gì?",
-        "options": [
-          "Giao dịch thương mại qua mạng Internet",
-          "Bán hàng qua cửa hàng truyền thống",
-          "Bán hàng qua điện thoại di động",
-          "Bán hàng qua radio và truyền hình"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 93: \"Electronic Data Interchange (EDI)\" là gì?",
-        "options": [
-          "Hình thức thanh toán trực tuyến",
-          "Hệ thống tiêu chuẩn hóa để truyền tải thông tin kinh doanh và dữ liệu giữa các đối tác thương mại thông qua mạng máy tính",
-          "Phương tiện quảng cáo trực tuyến",
-          "Tất cả đều đúng"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 97: Sàn thương mại điện tử Tiki, Lazada là hình thức giao dịch gì của TMĐT?",
-        "options": ["G2B", "B2B và B2C", "B2B", "B2C"],
-        "answer": 3
-      },
-      {
-        "q": "Câu 98: Xếp loại cấp độ phát triển TMĐT cho doanh nghiệp có website bán hàng liên kết trực tiếp với dữ liệu trong mạng nội bộ của doanh nghiệp, mọi hoạt động truyền dữ liệu được tự động hóa, hạn chế sự can thiệp của con người và vì thế làm giảm đáng kể chi phí hoạt động và tăng hiệu quả.",
-        "options": [
-          "Cấp độ 1 - hiện diện trên mạng",
-          "Cấp độ 2 - có website chuyên nghiệp",
-          "Cấp độ 3 - chuẩn bị TMĐT",
-          "Cấp độ 4 - áp dụng TMĐT"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 99: Mô hình kinh doanh thương mại điện tử \"B2C\" nghĩa là:",
-        "options": [
-          "Business to Consumer",
-          "Business to Company",
-          "Consumer to Consumer",
-          "Consumer to Business"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 100: Dịch vụ thanh toán Apple Pay thuộc hệ thống thanh toán nào?",
-        "options": ["E-wallet", "Thẻ tín dụng", "Chuyển khoản ngân hàng", "Cổng thanh toán trực tuyến"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 101: \"Ransomware\" là:",
-        "options": [
-          "Phần mềm độc hại nhằm mã hóa dữ liệu và đòi tiền chuộc",
-          "Phương thức thanh toán trực tuyến",
-          "Công cụ bảo vệ dữ liệu",
-          "Cả a và c đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 102: Một trong những thách thức chính của thương mại điện tử toàn cầu là:",
-        "options": [
-          "Sự phổ biến của mô hình kinh doanh truyền thống",
-          "Vấn đề về an ninh thông tin",
-          "Thiếu quảng cáo trực tuyến",
-          "Hiệu suất thấp trong việc xử lý thanh toán trực tuyến"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 103: Hình thức thanh toán phổ biến khi mua hàng trên mạng tại Việt Nam là gì?",
-        "options": ["Thẻ tín dụng", "Thanh toán khi giao hàng (COD)", "Chuyển khoản", "Thẻ ghi nợ"],
-        "answer": 1
-      },
-      {
-        "q": "Câu 104: Văn bản điện tử sẽ có giá trị pháp lý như văn bản viết nếu như hội đủ các điều kiện nào?",
-        "options": [
-          "Khả năng chứa thông tin và thông tin được lưu giữ, tham chiếu lại khi cần",
-          "Đảm bảo tính xác thực của thông tin",
-          "Đảm bảo được tính toàn vẹn của thông tin",
-          "Tất cả các điều kiện trên"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 105: Nước nào được coi là một trong những quốc gia có thị trường thương mại điện tử lớn nhất thế giới?",
-        "options": ["Trung Quốc", "Ấn Độ", "Mỹ", "Nhật Bản"],
-        "answer": 0
-      },
-      {
-        "q": "Câu 6: SSL (Secure Sockets Layer) được sử dụng để:",
-        "options": [
-          "Bảo vệ an toàn giao dịch qua internet",
-          "Tăng tốc độ truy cập website",
-          "Kiểm soát quảng cáo trực tuyến",
-          "Tất cả đều đúng"
-        ],
-        "answer": 0
-      },
-      {
-        "q": "Câu 107: Rào cản lớn nhất cho việc phát triển ví điện tử chính là các yếu tố nào sau đây?",
-        "options": [
-          "Chưa quen cách thức sử dụng",
-          "Tâm lý lo ngại của người tiêu dùng đối với độ bảo mật của phương tiện thanh toán mới này",
-          "Lỗ hổng bảo mật",
-          "Ý kiến khác"
-        ],
-        "answer": 1
-      },
-      {
-        "q": "Câu 8: Văn bản pháp luật nào quy định về thương mại điện tử tại Việt Nam?",
-        "options": [
-          "Luật Doanh nghiệp",
-          "Luật Cạnh tranh",
-          "Luật Giao dịch điện tử",
-          "Bộ Luật Dân sự"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 109: Rủi ro phổ biến khiến khách hàng không tin tưởng vào thương mại điện tử là:",
-        "options": [
-          "Chi phí vận chuyển cao",
-          "Độ phức tạp trong quá trình đặt hàng",
-          "Thiếu thông tin sản phẩm chi tiết",
-          "An ninh thông tin không đảm bảo"
-        ],
-        "answer": 3
-      },
-      {
-        "q": "Câu 110: Website mà doanh nghiệp đầu tư phát triển sẽ phục vụ cho mục tiêu nào sau đây?",
-        "options": ["Quảng bá doanh nghiệp", "Kênh bán hàng trực tuyến", "Cả A và B", "Ý kiến khác"],
-        "answer": 2
-      },
-      {
-        "q": "Câu 111: Mô hình thanh toán NFC (Near Field Communication) là gì?",
-        "options": [
-          "Thanh toán qua cổng thanh toán",
-          "Thanh toán khi nhận hàng",
-          "Thanh toán bằng cách chạm vào thiết bị",
-          "Thanh toán qua chuyển khoản ngân hàng"
-        ],
-        "answer": 2
-      },
-      {
-        "q": "Câu 112: Xếp loại cấp độ phát triển TMĐT (theo cách thứ hai) cho doanh nghiệp mà ở đó doanh nghiệp này cho phép thực hiện giao dịch đặt hàng, mua hàng qua website trên mạng, có thể bao gồm cả thanh toán trực tuyến.",
-        "options": [
-          "Cấp độ 1 - thương mại thông tin (i-commerce, i=information: thông tin)",
-          "Cấp độ 2 - thương mại giao dịch (t-commerce, t=transaction: giao dịch)",
-          "Cấp độ 3 - thương mại tích hợp (c-business, c=collaboration, connecting: tích hợp, kết nối)",
-          "Ý kiến khác"
-        ],
-        "answer": 1
-      }
+    const chapters = [
+       //  TỔNG QUAN  ---------------------------------------------------------------------
+       [
+  {
+    "q": "Câu 4: Lợi ích của xã hội khi hoạt động TMĐT phát triển. Phát biểu nào sau đây là sai?",
+    "options": [
+      "Hạn chế đi lại làm giảm thiểu tác động ô nhiễm môi trường",
+      "Các nước chậm phát triển các thể tiếp cận sản phẩm từ nước phát triển",
+      "Nâng cao mức sống người dân",
+      "Cải thiện hệ thống kênh bán hàng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 5: Đây là mô hình TMĐT giữa người tiêu dùng với người tiêu dùng trong đó nổi bật 2 hình thức kinh doanh đó là đấu giá trực tuyến và sàn giao dịch trực tuyến.",
+    "options": [ "B2G", "C2B", "B2C", "C2C" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 6: Công nghệ WAF (Web Application Firewall) được sử dụng để:",
+    "options": [
+      "Bảo vệ ứng dụng web khỏi tấn công mạng",
+      "Phương thức thanh toán trực tuyến",
+      "Bảo vệ trí tuệ",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 10: Lợi ích của thương mại điện tử đối với doanh nghiệp bao gồm:",
+    "options": [
+      "Tăng khả năng tiếp cận và thu hút khách hàng",
+      "Giảm chi phí quảng cáo",
+      "Nhanh chóng triển khai và cập nhật thông tin sản phẩm",
+      "Tất cả các phương án trên"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 21: Trong mô hình chữ ký số khóa nào được sử dụng để xác nhận chữ ký?",
+    "options": [ "Khóa riêng", "Khóa công khai", "Khóa đối xứng", "Mã hóa băm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 40: Phương thức thanh toán nào cung cấp một phương tiện trực tuyến để chuyển tiền giữa các tài khoản ngân hàng?",
+    "options": [ "Thẻ tín dụng", "Internet banking", "Ví điện tử", "Bitcoin" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 43: Hợp đồng thương mại điện tử thường được xác định bởi:",
+    "options": [
+      "Luật pháp và hợp đồng",
+      "Ý chí của doanh nghiệp",
+      "Sự đồng thuận của cả hai bên",
+      "Tất cả đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 46: Blockchain thường được sử dụng trong thanh toán ở đâu?",
+    "options": [ "Thẻ tín dụng", "E-wallet", "Tiền ảo", "Chuyển khoản ngân hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 49: Quy định về xử lý tranh chấp trong thương mại điện tử được thấy đề cập trong văn bản nào?",
+    "options": [
+      "Luật Cạnh tranh",
+      "Luật An ninh mạng",
+      "Luật Bảo vệ Người tiêu dùng",
+      "Bộ Luật Dân sự"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 53: Trong những thách thức chính của thương mại điện tử toàn cầu là:",
+    "options": [
+      "Sự phổ biến của mô hình kinh doanh truyền thống",
+      "Vấn đề về an ninh thông tin",
+      "Thiếu quảng cáo trực tuyến",
+      "Hiệu suất thấp trong việc xử lý thanh toán trực tuyến"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 59: \"Smart Card\" là:",
+    "options": [
+      "Thẻ thông minh tích hợp thông tin cá nhân",
+      "Công cụ quảng cáo trực tuyến",
+      "Phương thức thanh toán an toàn",
+      "Cả A và B đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 9: Theo Luật Giao Dịch Điện tử, người kinh doanh thương mại điện tử phải cung cấp thông tin gì trên trang web của mình?",
+    "options": [
+      "Mã số thuế doanh nghiệp",
+      "Giá bán chi tiết của sản phẩm",
+      "Tên, địa chỉ, số điện thoại liên lạc",
+      "Tất cả các phương án trên"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 64: Luật nào quy định về trách nhiệm của bên cung cấp dịch vụ thông tin trực tuyến đối với nội dung được người sử dụng đưa lên?",
+    "options": [
+      "Luật An ninh mạng",
+      "Luật Cạnh tranh",
+      "Luật Bảo vệ Người tiêu dùng",
+      "Bộ Luật Dân sự"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 69: Biến đổi mã hóa (Encryption) trong thương mại điện tử được sử dụng để:",
+    "options": [
+      "Mã hóa thông tin truyền tải để bảo vệ an toàn giao dịch",
+      "Tăng tốc độ truy cập website",
+      "Kiểm soát quảng cáo trực tuyến",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 76: Trong hợp đồng điện tử, yếu tố quan trọng nhất để có tính chất pháp lý là:",
+    "options": [
+      "Chữ ký điện tử",
+      "Thông tin liên lạc của các bên",
+      "Giá trị giao dịch",
+      "Thời gian giao dịch"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 77: Mã giảm giá (discount code) thường được áp dụng ở đâu trong quá trình thanh toán?",
+    "options": [ "Trang chủ", "Trang sản phẩm", "Trang giỏ hàng", "Trang thanh toán" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 78: Lợi ích chính của thương mại điện tử bao gồm:",
+    "options": [
+      "Giảm chi phí vận chuyển",
+      "Mở rộng tầm nhìn và tiếp cận đối tượng khách hàng toàn cầu",
+      "Giảm cạnh tranh",
+      "A và B"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 85: Tổ chức nào quản lý và duy trì quy tắc và điều kiện cho việc chuyển giao dữ liệu giữa các tổ chức thương mại điện tử trên internet?",
+    "options": [
+      "ICANN (Cơ quan Quản lý Tên miền và Số IP Quốc tế)",
+      "W3C (Tổ chức Toàn cầu Web)",
+      "IETF (Tổ chức Tiêu chuẩn và Công nghệ Internet)",
+      "ITU (Liên hiệp Viễn thông Quốc tế)"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 90: Hạn chế của thương mại điện tử.",
+    "options": [
+      "Rủi ro trong thanh toán qua mạng",
+      "Thiếu lòng tin vào TMĐT do người bán và người mua không được gặp trực tiếp",
+      "Chuyển đổi thói quen tiêu dùng từ thực đến ảo cần thời gian",
+      "Tất cả đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 94: Loại ví điện tử nào thường được sử dụng để thanh toán trực tuyến và lưu trữ thông tin thẻ tín dụng?",
+    "options": [ "PayPal", "Momo", "Google Pay", "Tất cả các phương án trên" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 95: Các mô hình G2G, G2B, G2C được xếp vào nhóm các loại hình nào sau đây?",
+    "options": [
+      "Mô hình dịch vụ công chính phủ triển khai phục vụ doanh nghiệp.",
+      "Các loại hình xây dựng chính phủ điện tử (e-Government).",
+      "Mô hình hỗ trợ doanh nghiệp cung cấp hàng hóa, dịch vụ cho chính phủ thông qua đấu thầu trực tuyến.",
+      "Mô hình TMĐT giữa doanh nghiệp với doanh nghiệp"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 96: Tổ chức nào thiết lập và duy trì các quy tắc và tiêu chuẩn cho mô hình kinh doanh thương mại điện tử?",
+    "options": [
+      "UNCTAD (Hội nghị Liên hợp quốc về Thương mại và Phát triển)",
+      "ICC (Phòng Thương mại Quốc tế)",
+      "WIPO (Tổ chức Sở hữu Trí tuệ Thế giới)",
+      "ILO (Tổ chức Lao động Quốc tế)"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 6: Chính phủ điện tử là một hình thức thương mại điện tử tham gia bởi các đối tượng nào?",
+    "options": [
+      "Doanh nghiệp với doanh nghiệp",
+      "Doanh nghiệp với cá nhân",
+      "Cá nhân với cá nhân",
+      "Chính phủ với người dân"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 2: Lợi ích lớn nhất của cá nhân khi tham gia thương mại điện tử là gì?",
+    "options": [
+      "Người tiêu dùng có nhiều sự lựa chọn hơn về sản phẩm và dịch vụ",
+      "Mua hàng chất lượng hơn",
+      "Được trực tiếp xem hàng trước khi mua",
+      "Mua hàng miễn phí"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 3: Biện pháp nào giúp giảm rủi ro liên quan đến an ninh thông tin trong thương mại điện tử?",
+    "options": [
+      "Tăng cường quảng cáo trực tuyến",
+      "Sử dụng hệ thống thanh toán không an toàn",
+      "Thiết lập các biện pháp bảo mật mạnh mẽ",
+      "Hạn chế tính tương tác với khách hàng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 7: Khái niệm \"Letter of Credit (L/C)\" là gì?",
+    "options": [ "Chuyển khoản ngân hàng", "Thẻ tín dụng", "Hóa đơn quốc tế", "Thư tín dụng" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 9: Mục đích chính của \"Công nghệ Blockchain\" trong thương mại điện tử là:",
+    "options": [
+      "Bảo mật giao dịch và ngăn chặn sửa đổi dữ liệu",
+      "Tăng tốc độ truy cập website",
+      "Kiểm soát quảng cáo trực tuyến",
+      "Cả a và b đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 3: Khi nào được coi là bước khởi đầu của thương mại điện tử?",
+    "options": [ "Thập kỷ 1950", "Thập kỷ 1970", "Thập kỷ 1990", "Thập kỷ 2000" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 11: Phương tiện điện tử thường dùng nhất để đặt hàng trực tuyến tại Việt Nam là gì?",
+    "options": [ "Máy tính bảng", "Laptop", "Điện thoại thông minh", "Máy tính bàn" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 12: \"Công nghệ VPN\" (Virtual Private Network) được sử dụng để:",
+    "options": [
+      "Kết nối mạng riêng ảo qua mạng công cộng",
+      "Tăng tốc độ truy cập website",
+      "Kiểm soát quảng cáo trực tuyến",
+      "Cả a và b đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 13: Điều gì là quan trọng nhất khi xây dựng kế hoạch an ninh cho website thương mại điện tử?",
+    "options": [
+      "Sử dụng mật khẩu đơn giản",
+      "Thường xuyên chấp nhận các thanh toán không an toàn",
+      "Thiết lập các biện pháp bảo mật mạnh mẽ, backup thường xuyên",
+      "Hạn chế cập nhật hệ thống"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 14: Thanh toán trực tuyến là gì?",
+    "options": [
+      "Thanh toán bằng tiền mặt",
+      "Thanh toán qua internet",
+      "Thanh toán qua thư tín dụng",
+      "Thanh toán qua cổng thanh toán"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 7: Chứng thực số trong thương mại điện tử liên quan đến việc:",
+    "options": [
+      "Xác nhận danh tính người tham gia giao dịch",
+      "Mã hóa thông tin cá nhân",
+      "Kiểm soát quảng cáo",
+      "Tất cả đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 16: Chứng chỉ SSL (Secure Socket Layer) trong thanh toán trực tuyến có tác dụng gì?",
+    "options": [
+      "Mã hóa thông tin giao dịch",
+      "Xác minh người mua",
+      "Kiểm tra tình trạng đơn hàng",
+      "Quảng cáo sản phẩm"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 17: Tổ chức nào xây dựng và duy trì các tiêu chuẩn cho ngôn ngữ đánh dấu trang web, như HTML và XML?",
+    "options": [
+      "W3C (Tổ chức Toàn cầu Web)",
+      "ICANN (Cơ quan Quản lý Tên miền và Số IP Quốc tế)",
+      "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
+      "IETF (Tổ chức Tiêu chuẩn và Công nghệ Internet)"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 18: Điểm khác biệt cơ bản giữa thanh toán B2B và thanh toán B2C là gì?",
+    "options": [ "Giá trị giao dịch", "Phương thức giao dịch", "Thời gian giao dịch", "Khác" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 11: Văn bản pháp luật nào quy định về quản lý, sử dụng dữ liệu cá nhân trong thương mại điện tử?",
+    "options": [
+      "Luật Doanh nghiệp",
+      "Luật An ninh mạng",
+      "Luật Bảo vệ Người tiêu dùng",
+      "Luật Cạnh tranh"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 20: Dịch vụ thanh toán Google Pay thuộc hệ thống thanh toán nào?",
+    "options": [ "E-wallet", "Cổng thanh toán trực tuyến", "Thẻ tín dụng", "Chuyển khoản ngân hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 13: \"DDoS Attack\" là:",
+    "options": [
+      "Cuộc tấn công làm suy giảm hoặc làm ngừng hoạt động website",
+      "Hình thức thanh toán an toàn",
+      "Biện pháp bảo vệ dữ liệu",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 23: Theo sách trắng về TMĐT Việt nam 2022 thì dịch vụ hàng hóa được mua bán nhiều nhất trên mạng là gì?",
+    "options": [ "Vé máy bay", "Tour du lịch", "Quần áo, giày dép và mỹ phẩm", "Sách, thiết bị trường học" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 24: Biện pháp quan trọng nhất để đảm bảo an toàn cho website thương mại điện tử là gì?",
+    "options": [
+      "Xây dựng tường lửa (firewall)",
+      "Bảo mật cổng thanh toán trực tuyến",
+      "Chống xâm nhập website từ tấn công DoS",
+      "Xây dựng một hệ thương website thương mại điện tử \"kiên cố\" ngay từ đầu và thường xuyên bảo trì, backup website…"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 25: Chữ ký số được sử dụng chủ yếu để:",
+    "options": [
+      "Chứng thực danh tính của người gửi",
+      "Bảo mật dữ liệu truyền tải",
+      "Tăng tính bí mật của thông tin",
+      "Tất cả các phương án trên"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 26: Mã SWIFT được sử dụng trong thanh toán quốc tế để định danh gì?",
+    "options": [ "Quốc gia", "Ngân hàng", "Loại tiền tệ", "Số tài khoản người nhận" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 27: Giao dịch TMĐT B2C là giao dịch gì?",
+    "options": [
+      "Giao dịch giữa doanh nghiệp và người tiêu dùng",
+      "Giao dịch giữa người tiêu dùng và người tiêu dùng",
+      "Giao dịch giữa chính phủ và người dân",
+      "Giao dịch giữa cá nhân và cá nhân"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 5: Điều khoản \"Terms and Conditions\" thường chứa đựng các quy định về:",
+    "options": [
+      "Quyền lợi của người tiêu dùng",
+      "Trách nhiệm của doanh nghiệp",
+      "Cả A và B đều đúng",
+      "Tất cả đều sai"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 29: Rủi ro nổi bật liên quan đến an ninh thông tin trong thương mại điện tử bao gồm:",
+    "options": [
+      "Thiếu nguồn cung ổn định",
+      "Lừa đảo và hack",
+      "Sự chậm trễ trong giao dịch",
+      "Độ phức tạp trong quá trình mua sắm"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 30: Phương pháp nào sau đây được sử dụng để tạo ra một chữ ký số?",
+    "options": [ "Mã hóa đối xứng", "Mã hóa khóa công khai", "Giải mã đối xứng", "Mã hóa băm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 31: Hợp đồng điện tử có thể bao gồm những yếu tố nào sau đây?",
+    "options": [
+      "Thỏa thuận về giá",
+      "Điều kiện thanh toán",
+      "Quy định về bảo mật thông tin",
+      "Tất cả các phương án trên"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 6: Theo luật pháp, thông tin cá nhân của người tiêu dùng thường phải được bảo vệ bằng cách:",
+    "options": [
+      "Đồng thuận của người dùng",
+      "Sử dụng chứng thực số",
+      "Tạo ra các trang web an toàn",
+      "Tất cả đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 33: Hệ thống gợi ý thông minh (recommender system) hỗ trợ chức năng gì cho website?",
+    "options": [
+      "Cho phép tìm kiếm sản phẩm",
+      "Hỗ trợ giỏ mua hàng, đặt hàng",
+      "Hiển thị các mặt hàng có liên quan",
+      "Khác"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 34: Cách ngăn chặn SQL Injection?",
+    "options": [
+      "Sử dụng mã hóa mật khẩu",
+      "Sử dụng câu lệnh SQL phức tạp",
+      "Sử dụng thủ tục lưu trữ SQL",
+      "Sử dụng câu lệnh tham số hóa và câu lệnh chuẩn bị (Prepared Statements)"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 35: Theo điều 52 Nghị định 52/2013/NĐ-CP quy định về Điều kiện thiết lập website thương mại điện tử bán hàng. Phát biểu nào sau đây là sai?",
+    "options": [
+      "Là thương nhân, tổ chức có chức năng, nhiệm vụ phù hợp hoặc cá nhân đã được cấp mã số thuế cá nhân.",
+      "Có website với tên miền hợp lệ và tuân thủ các quy định về quản lý thông tin trên Internet.",
+      "Cần phải có chứng chỉ về an toàn, bảo mật và phải cài đặt SSL",
+      "Đã thông báo với Bộ Công Thương về việc thiết lập website thương mại điện tử bán hàng theo quy định tại Điều 53 Nghị định này"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 8: \"SSL\" (Secure Sockets Layer) được sử dụng để:",
+    "options": [
+      "Mã hóa dữ liệu giao dịch",
+      "Bảo vệ trí tuệ",
+      "Quảng cáo trực tuyến",
+      "Cả a và b đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 37: Mô hình TMĐT giữa doanh nghiệp với người tiêu dùng và thường được biết đến với cái tên khác là mô hình bán hàng trực tuyến.",
+    "options": [ "B2G", "C2B", "B2C", "C2C" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 38: DDoS là viết tắt của điều gì?",
+    "options": [
+      "Data Download and Storage",
+      "Distributed Denial of Service",
+      "Digital Data Operation System",
+      "Direct Data Overflow System"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 39: Hợp đồng điện tử là gì?",
+    "options": [
+      "Một tài liệu in ấn được ký bởi các bên",
+      "Một thỏa thuận giữa hai người mua bán",
+      "Một hợp đồng được tạo, chấp nhận và quản lý bằng các phương tiện điện tử",
+      "Một hợp đồng được ký trên giấy"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 41: Đối tượng nào sau đây không tham gia vào các loại hình kinh doanh TMĐT?",
+    "options": [ "Khách hàng", "Chính phủ", "Môi giới", "Doanh nghiệp" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 42: Lợi ích của doanh nghiệp khi tham gia thương mại điện tử. Phát biểu nào sau đây là sai?",
+    "options": [
+      "Mở rộng thị trường: tìm kiếm, tiếp cận nhà cung cấp, khách hàng và đối tác trên khắp thế giới.",
+      "Năng suất lao động tăng cao vì luôn cải tiến quy trình sản xuất",
+      "Cải thiện hệ thống phân phối do giảm lượng hàng lưu kho và độ trễ trong phân phối hàng",
+      "Vượt giới hạn về thời gian vì hoạt động kinh doanh được thực hiện 24/7"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 44: Tổ chức nào chịu trách nhiệm xây dựng các tiêu chuẩn an ninh thông tin trong thương mại điện tử?",
+    "options": [
+      "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
+      "WHO (Tổ chức Y tế Thế giới)",
+      "WTO (Tổ chức Thương mại Thế giới)",
+      "UNICEF (Quỹ Nhi đồng Quốc tế)"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 45: Làm thế nào để bảo vệ trước tấn công DDoS?",
+    "options": [
+      "Sử dụng mật khẩu yếu",
+      "Cập nhật phần mềm thường xuyên",
+      "Chia sẻ thông tin đăng nhập công khai",
+      "Tăng cường sử dụng cookie"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 47: Khi nào Việt Nam có sự phổ biến và phát triển đáng kể trong lĩnh vực thương mại điện tử?",
+    "options": [ "Thập kỷ 1990", "Thập kỷ 2000", "Thập kỷ 1980", "Thập kỷ 1970" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 48: SQL Injection là gì?",
+    "options": [
+      "Một loại tấn công nhắm vào hệ thống điều khiển tàu hỏa",
+      "Một phương pháp để thực hiện truy vấn SQL trái phép",
+      "Một loại virus tấn công dữ liệu cá nhân",
+      "Một kỹ thuật mã hóa dữ liệu"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 2: Chọn loại hình thức không phải là thương mại điện tử",
+    "options": [
+      "Dịch vụ công của chính phủ",
+      "Website bán hàng",
+      "Bán hàng qua mạng xã hội",
+      "Bán hàng qua tivi"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 51: Tại sao việc sử dụng HTTPS (SSL) là một phần quan trọng của an ninh trang web thương mại điện tử?",
+    "options": [
+      "Tăng tốc độ truy cập trang web",
+      "Bảo vệ dữ liệu truyền tải giữa máy khách và máy chủ",
+      "Giảm chi phí vận chuyển",
+      "Giảm rủi ro về sản phẩm giả mạo"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 52: Rủi ro nào liên quan đến việc không thể kiểm soát chất lượng sản phẩm khi mua sắm trực tuyến?",
+    "options": [
+      "Rủi ro về vận chuyển",
+      "Rủi ro về thanh toán",
+      "Rủi ro về sản phẩm giả mạo hoặc chất lượng kém",
+      "Rủi ro về an ninh thông tin"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 54: Hình thức thanh toán nào cung cấp một mã số duy nhất để xác nhận giao dịch mỗi lần thanh toán?",
+    "options": [ "Thẻ tín dụng", "Chuyển khoản ngân hàng", "OTP (Mã xác nhận một lần)", "Ví điện tử" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 55: Hạn chế phổ biến của thương mại điện tử là:",
+    "options": [ "Bảo mật thông tin", "Thiếu tính tương tác", "Phụ thuộc vào kết nối internet", "B & C" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 56: SSL (Secure Sockets Layer) là gì?",
+    "options": [
+      "Là phương thức giao dịch thanh toán trên mạng",
+      "Là một tiêu chuẩn an ninh công nghệ toàn cầu tạo ra một liên kết giữa máy chủ web và trình duyệt.",
+      "Là hình thức số hóa thông tin",
+      "Là loại thẻ tín dụng phổ biến được sử dụng ở nhiều nước trên thế giới"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 5: Thuật ngữ nào sau đây được dùng nhiều và mô tả đúng về thương mại điện tử",
+    "options": [ "E-trade", "E-commerce", "E-business", "E-marketing" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 58: Tổ chức nào quản lý và duy trì tiêu chuẩn cho hệ thống thanh toán thẻ tín dụng và thẻ ghi nợ?",
+    "options": [
+      "SWIFT (Hiệp hội Thanh toán Liên ngân hàng Quốc tế)",
+      "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
+      "PCI SSC (Hội đồng An ninh Thanh toán Công nghiệp)",
+      "ITU (Liên hiệp Viễn thông Quốc tế)"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 60: Mô hình nào phục vụ chủ yếu cho việc truyền tải thông tin giữa các cơ quan của chính phủ hoặc giữa các chính phủ với nhau và không vì mục đích thương mại.",
+    "options": [ "B2G", "B2B", "G2C", "G2G" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 61: Các mối đe dọa bảo mật đối với website thương mại điện tử là gì?",
+    "options": [
+      "Gian lận tài chính",
+      "Đánh cắp dữ liệu",
+      "Website bị tấn công bằng nhiều hình thức như: DDoS, XSS, Bot…",
+      "Tất cả các ý kiến trên"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 4: Trang web thương mại điện tử đầu tiên là gì?",
+    "options": [ "Amazon", "eBay", "Alibaba", "Pizza Hut" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 12: Tác dụng của văn bản pháp luật về TMĐT. Phát biểu nào sau đây là sai?",
+    "options": [
+      "Tạo quy định thống nhất cho các giao dịch TMĐT",
+      "Hạn chế hàng giả",
+      "Đem lại niềm tin cho các bên tham gia TMĐT gồm cả người bán, người mua và người cung cấp dịch vụ trung gian",
+      "Là cơ sở để giải quyết khi có tranh chấp, là cơ sở để tòa án đưa ra các phán quyết."
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 66: Xếp loại cấp độ phát triển TMĐT cho doanh nghiệp có sở hữu website trên mạng. Ở mức độ này, website còn đơn giản, chỉ là cung cấp thông tin về doanh nghiệp và sản phẩm mà không có các chức năng khác.",
+    "options": [
+      "Cấp độ 1 - hiện diện trên mạng",
+      "Cấp độ 2 - có website chuyên nghiệp",
+      "Cấp độ 3 - chuẩn bị TMĐT",
+      "Cấp độ 4 - áp dụng TMĐT"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 67: Tổ chức nào chủ trì việc phát hành chứng chỉ SSL để bảo vệ thông tin truyền tải trên internet?",
+    "options": [
+      "IANA (Cơ quan Gán phân định và Chia tách Tên miền Quốc tế)",
+      "CA/Browser Forum (Diễn đàn Chứng chỉ và Trình duyệt)",
+      "IEEE (Hiệp hội Kỹ thuật Điện và Điện tử)",
+      "IEC (Liên hiệp Kỹ thuật Quốc tế)"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 68: \"Hacker\" là:",
+    "options": [
+      "Người có kỹ năng nâng cao trong lĩnh vực an ninh mạng",
+      "Hình thức thanh toán trực tuyến",
+      "Người làm quảng cáo trực tuyến",
+      "Ý kiến khác"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 10: Quy định về bảo mật thông tin trong thương mại điện tử được thấy đề cập trong văn bản nào?",
+    "options": [
+      "Luật Cạnh tranh",
+      "Luật Bảo vệ Người tiêu dùng",
+      "Luật An ninh mạng",
+      "Bộ Luật Dân sự"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 14: \"Biometric Authentication\" sử dụng:",
+    "options": [
+      "Thông tin đăng nhập và mật khẩu",
+      "Thông tin vận chuyển dữ liệu",
+      "Xác nhận bằng đặc điểm sinh học của người dùng",
+      "Cả a và b đều đúng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 72: Chữ ký số (digital signature) thường được sử dụng để:",
+    "options": [
+      "Bảo mật dữ liệu cá nhân",
+      "Xác nhận danh tính và chữ ký của người ký",
+      "Quảng bá thương hiệu",
+      "Tất cả đều đúng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 73: Luật bảo vệ người tiêu dùng trong thương mại điện tử thường bảo vệ quyền:",
+    "options": [
+      "Hủy bỏ đơn đặt hàng trong vòng x ngày",
+      "Nhận sản phẩm không giống như mô tả",
+      "Trả lại hàng và nhận hoàn tiền",
+      "Tất cả đều đúng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 74: Xếp loại cấp độ phát triển TMĐT cho doanh nghiệp bắt đầu triển khai bán hàng hay dịch vụ qua mạng. Tuy nhiên, doanh nghiệp chưa có hệ thống cơ sở dữ liệu nội bộ để phục vụ các giao dịch trên mạng. Các giao dịch còn chậm và không an toàn.",
+    "options": [
+      "Cấp độ 1 - hiện diện trên mạng",
+      "Cấp độ 2 - có website chuyên nghiệp",
+      "Cấp độ 3 - chuẩn bị TMĐT",
+      "Cấp độ 4 - áp dụng TMĐT"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 75: Mô hình thanh toán Cash on Delivery (COD) là gì?",
+    "options": [
+      "Thanh toán qua cổng thanh toán",
+      "Thanh toán khi nhận hàng",
+      "Thanh toán bằng thẻ tín dụng",
+      "Thanh toán qua chuyển khoản ngân hàng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 79: Grab là ví dụ điển hình của mô hình thương mại điện tử tiên tiến nào?",
+    "options": [
+      "Kinh tế chia sẻ (sharing economy)",
+      "Sàn thương mại điện tử",
+      "Mô hình hỗ trợ quảng cáo",
+      "Mô hình giải trí trực tuyến"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 80: DDoS thường sử dụng phương thức gì để tăng cường lưu lượng mạng?",
+    "options": [ "SQL Injection", "Brute Force", "Phishing", "Botnets" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 81: Mô hình thanh toán QR code là gì?",
+    "options": [
+      "Quét mã để thanh toán",
+      "Thanh toán bằng thẻ tín dụng",
+      "Thanh toán qua cổng thanh toán",
+      "Thanh toán khi nhận hàng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 82: Tổ chức nào chủ trì xây dựng và duy trì quy tắc cho việc giao dịch tài chính trực tuyến?",
+    "options": [
+      "W3C (Tổ chức Toàn cầu Web)",
+      "ISO (Tổ chức Tiêu chuẩn Hóa Quốc tế)",
+      "SWIFT (Hiệp hội Thanh toán Liên ngân hàng Quốc tế)",
+      "ITU (Liên hiệp Viễn thông Quốc tế)"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 83: Người kinh doanh thương mại điện tử cần thực hiện các biện pháp nào để bảo vệ thông tin của người tiêu dùng theo quy định của văn bản nào?",
+    "options": [
+      "Luật Cạnh tranh",
+      "Luật An ninh mạng",
+      "Luật Bảo vệ Người tiêu dùng",
+      "Luật Doanh nghiệp"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 11: \"Phần mềm Antivirus\" là:",
+    "options": [
+      "Phần mềm chống virus và phần mềm độc hại",
+      "Công cụ quảng cáo trực tuyến",
+      "Phương tiện thanh toán trực tuyến",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 7: \"Firewall\" trong thương mại điện tử là:",
+    "options": [
+      "Một biện pháp bảo vệ để ngăn chặn tấn công mạng từ bên ngoài",
+      "Công cụ quảng cáo trực tuyến",
+      "Một hình thức thanh toán an toàn",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 87: Blockchain thường được sử dụng trong thanh toán nào?",
+    "options": [ "Thẻ tín dụng", "E-wallet", "Tiền ảo", "Chuyển khoản ngân hàng" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 12: \"Two-Factor Authentication\" là:",
+    "options": [
+      "Phương thức thanh toán trực tuyến",
+      "Hình thức xác thực bằng hai yếu tố",
+      "Công cụ bảo vệ dữ liệu",
+      "Cả a và b đều đúng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 10: \"Malware\" là:",
+    "options": [
+      "Phần mềm độc hại nhằm gây hại cho hệ thống máy tính",
+      "Phương tiện thanh toán trực tuyến",
+      "Quảng cáo trực tuyến",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 91: PayPal là dịch vụ thanh toán nào trong thương mại điện tử?",
+    "options": [ "E-wallet", "Thẻ tín dụng", "Chuyển khoản ngân hàng", "Thanh toán khi nhận hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 1: Thương mại điện tử là gì?",
+    "options": [
+      "Giao dịch thương mại qua mạng Internet",
+      "Bán hàng qua cửa hàng truyền thống",
+      "Bán hàng qua điện thoại di động",
+      "Bán hàng qua radio và truyền hình"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 93: \"Electronic Data Interchange (EDI)\" là gì?",
+    "options": [
+      "Hình thức thanh toán trực tuyến",
+      "Hệ thống tiêu chuẩn hóa để truyền tải thông tin kinh doanh và dữ liệu giữa các đối tác thương mại thông qua mạng máy tính",
+      "Phương tiện quảng cáo trực tuyến",
+      "Tất cả đều đúng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 97: Sàn thương mại điện tử Tiki, Lazada là hình thức giao dịch gì của TMĐT?",
+    "options": [ "G2B", "B2B và B2C", "B2B", "B2C" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 98: Xếp loại cấp độ phát triển TMĐT cho doanh nghiệp có website bán hàng liên kết trực tiếp với dữ liệu trong mạng nội bộ của doanh nghiệp, mọi hoạt động truyền dữ liệu được tự động hóa, hạn chế sự can thiệp của con người và vì thế làm giảm đáng kể chi phí hoạt động và tăng hiệu quả.",
+    "options": [
+      "Cấp độ 1 - hiện diện trên mạng",
+      "Cấp độ 2 - có website chuyên nghiệp",
+      "Cấp độ 3 - chuẩn bị TMĐT",
+      "Cấp độ 4 - áp dụng TMĐT"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 99: Mô hình kinh doanh thương mại điện tử \"B2C\" nghĩa là:",
+    "options": [
+      "Business to Consumer",
+      "Business to Company",
+      "Consumer to Consumer",
+      "Consumer to Business"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 100: Dịch vụ thanh toán Apple Pay thuộc hệ thống thanh toán nào?",
+    "options": [ "E-wallet", "Thẻ tín dụng", "Chuyển khoản ngân hàng", "Cổng thanh toán trực tuyến" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 101: \"Ransomware\" là:",
+    "options": [
+      "Phần mềm độc hại nhằm mã hóa dữ liệu và đòi tiền chuộc",
+      "Phương thức thanh toán trực tuyến",
+      "Công cụ bảo vệ dữ liệu",
+      "Cả a và c đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 102: Một trong những thách thức chính của thương mại điện tử toàn cầu là:",
+    "options": [
+      "Sự phổ biến của mô hình kinh doanh truyền thống",
+      "Vấn đề về an ninh thông tin",
+      "Thiếu quảng cáo trực tuyến",
+      "Hiệu suất thấp trong việc xử lý thanh toán trực tuyến"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 103: Hình thức thanh toán phổ biến khi mua hàng trên mạng tại Việt Nam là gì?",
+    "options": [ "Thẻ tín dụng", "Thanh toán khi giao hàng (COD)", "Chuyển khoản", "Thẻ ghi nợ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 104: Văn bản điện tử sẽ có giá trị pháp lý như văn bản viết nếu như hội đủ các điều kiện nào?",
+    "options": [
+      "Khả năng chứa thông tin và thông tin được lưu giữ, tham chiếu lại khi cần",
+      "Đảm bảo tính xác thực của thông tin",
+      "Đảm bảo được tính toàn vẹn của thông tin",
+      "Tất cả các điều kiện trên"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 105: Nước nào được coi là một trong những quốc gia có thị trường thương mại điện tử lớn nhất thế giới?",
+    "options": [ "Trung Quốc", "Ấn Độ", "Mỹ", "Nhật Bản" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 6: SSL (Secure Sockets Layer) được sử dụng để:",
+    "options": [
+      "Bảo vệ an toàn giao dịch qua internet",
+      "Tăng tốc độ truy cập website",
+      "Kiểm soát quảng cáo trực tuyến",
+      "Tất cả đều đúng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 107: Rào cản lớn nhất cho việc phát triển ví điện tử chính là các yếu tố nào sau đây?",
+    "options": [
+      "Chưa quen cách thức sử dụng",
+      "Tâm lý lo ngại của người tiêu dùng đối với độ bảo mật của phương tiện thanh toán mới này",
+      "Lỗ hổng bảo mật",
+      "Ý kiến khác"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 8: Văn bản pháp luật nào quy định về thương mại điện tử tại Việt Nam?",
+    "options": [
+      "Luật Doanh nghiệp",
+      "Luật Cạnh tranh",
+      "Luật Giao dịch điện tử",
+      "Bộ Luật Dân sự"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 109: Rủi ro phổ biến khiến khách hàng không tin tưởng vào thương mại điện tử là:",
+    "options": [
+      "Chi phí vận chuyển cao",
+      "Độ phức tạp trong quá trình đặt hàng",
+      "Thiếu thông tin sản phẩm chi tiết",
+      "An ninh thông tin không đảm bảo"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 110: Website mà doanh nghiệp đầu tư phát triển sẽ phục vụ cho mục tiêu nào sau đây?",
+    "options": [ "Quảng bá doanh nghiệp", "Kênh bán hàng trực tuyến", "Cả A và B", "Ý kiến khác" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 111: Mô hình thanh toán NFC (Near Field Communication) là gì?",
+    "options": [
+      "Thanh toán qua cổng thanh toán",
+      "Thanh toán khi nhận hàng",
+      "Thanh toán bằng cách chạm vào thiết bị",
+      "Thanh toán qua chuyển khoản ngân hàng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 112: Xếp loại cấp độ phát triển TMĐT (theo cách thứ hai) cho doanh nghiệp mà ở đó doanh nghiệp này cho phép thực hiện giao dịch đặt hàng, mua hàng qua website trên mạng, có thể bao gồm cả thanh toán trực tuyến.",
+    "options": [
+      "Cấp độ 1 - thương mại thông tin (i-commerce, i=information: thông tin)",
+      "Cấp độ 2 - thương mại giao dịch (t-commerce, t=transaction: giao dịch)",
+      "Cấp độ 3 - thương mại tích hợp (c-business, c=collaboration, connecting: tích hợp, kết nối)",
+      "Ý kiến khác"
+    ],
+    "answer": 1
+  }
+],
+
+      //  CHƯƠNG 1 ---------------------------------------------------------------------
+      [
+  {
+    "q": "Câu 28: SEO Google Maps còn được gọi là gì?",
+    "options": [ "Global SEO", "Local SEO", "National SEO", "Universal SEO" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 40: Công cụ nào KHÔNG hỗ trợ SEO Onpage trong WordPress?",
+    "options": [ "Yoast SEO", "Rank Math SEO", "Adobe Photoshop", "SEOPress" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 51: Công cụ nào KHÔNG được đề cập để phân tích từ khóa?",
+    "options": [ "Google Keyword Planner", "Ahrefs", "SEMrush", "Microsoft Word" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 56: Xu hướng nào trong tiếp thị trực tuyến nhấn mạnh việc sử dụng livestream shopping?",
+    "options": [ "Nội dung video", "Tiếp thị trải nghiệm", "Nội dung tương tác", "Nội dung thân thiện di động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 57: Nền tảng nào tập trung vào kết nối chuyên môn và tuyển dụng?",
+    "options": [ "TikTok", "Instagram", "LinkedIn", "Twitter" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 59: Công cụ AI nào hỗ trợ SEO trong WordPress?",
+    "options": [ "Adobe Illustrator", "Rank Math SEO", "Microsoft PowerPoint", "Google Chrome" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 73: Thuật ngữ \"DA\" trong SEO đề cập đến gì?",
+    "options": [ "Domain Authority", "Data Analysis", "Digital Advertising", "Dynamic Algorithm" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 84: PPC trong SEM là viết tắt của gì?",
+    "options": [ "Pay-Per-Click", "Page-Per-Click", "Post-Per-Click", "Product-Per-Click" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 85: Theo thống kê của WeAreSocial Digital, bao nhiêu phần trăm người dùng tra cứu thông tin trên Internet trước khi mua hàng?",
+    "options": [ "50%", "60%", "70%", "80%" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 86: Độ dài văn bản tối thiểu đề xuất cho bài viết SEO là bao nhiêu?",
+    "options": ["200 từ" , "400 từ" , "600 từ" , "800 từ"],
+    "answer": 2
+  },
+  {
+    "q": "Câu 96: Search Engine Marketing (SEM) bao gồm những gì?",
+    "options": [ "Chỉ SEO", "SEO và PPC", "Chỉ PPC", "Email marketing" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 97: Mẹo nào sau đây KHÔNG thuộc SEO Google Maps?",
+    "options": [ "Sử dụng từ khóa trong mô tả", "Đăng bài thường xuyên", "Giảm chất lượng hình ảnh", "Khuyến khích đánh giá" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 98: Hình thức nào sau đây là một phần của SEO Onpage?",
+    "options": [ "Chạy quảng cáo Google Ads", "Xây dựng liên kết từ bên ngoài", "Quảng cáo trên mạng xã hội", "Tối ưu hóa tiêu đề và mô tả meta" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 100: Bước nào trong SMM liên quan đến việc tạo quảng cáo ngắn và thú vị?",
+    "options": [ "Lập kế hoạch", "Thực hiện kế hoạch", "Giám sát và kiểm soát", "Chọn nền tảng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 1: Nền tảng nào phù hợp nhất để tiếp thị liên kết với giới trẻ?",
+    "options": [ "LinkedIn", "TikTok", "Twitter", "YouTube" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 2: Là từ khóa thương hiệu?",
+    "options": [ "SEO là gì", "Áo cưới Thu Thủy", "Khóa học SEO tại Hà Nội", "Bệnh thoái hóa khớp" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 3: Tiếp thị đa kênh có ý nghĩa gì trong tiếp thị trực tuyến?",
+    "options": [ "Chỉ sử dụng một kênh duy nhất", "Sử dụng nhiều kênh như mạng xã hội, email, và tìm kiếm", "Không cần nội dung sáng tạo", "Chỉ tập trung vào quảng cáo trả phí" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 4: Hình thức tiếp thị trực tuyến nào sau đây không phát triển tốt trong thời gian gần đây?",
+    "options": [ "Tiếp thị mạng xã hội", "Email marketing", "Tối ưu hóa công cụ tìm kiếm", "Tiếp thị địa điểm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 5: Tiếp thị trực tuyến được định nghĩa là gì?",
+    "options": [ "Quảng cáo trên truyền hình và radio", "Sử dụng mạng Internet để quảng cáo sản phẩm hoặc dịch vụ", "Tiếp thị qua các cửa hàng vật lý", "Gửi thư quảng cáo qua bưu điện" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 6: Phân khúc đối tượng trong email marketing dựa trên yếu tố nào?",
+    "options": [ "Chỉ tên người nhận", "Hành vi, sở thích và nhân khẩu học", "Không cần phân khúc", "Chỉ địa chỉ email" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 7: Công cụ nào được sử dụng để giám sát hiệu suất SEO?",
+    "options": [ "Google Analytics", "Microsoft Excel", "Adobe Photoshop", "Windows Media Player" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 8: Email marketing sử dụng email để đạt mục tiêu gì?",
+    "options": [ "Giảm tương tác với khách hàng", "Xây dựng mối quan hệ và thúc đẩy doanh số", "Tăng chi phí sản xuất", "Giảm nhận biết thương hiệu" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 9: Nền tảng nào sau đây KHÔNG được đề cập để đi backlink?",
+    "options": [ "Mạng xã hội", "Diễn đàn", "Blog miễn phí", "Quảng cáo truyền hình" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 10: Làm thế nào để khuyến khích đánh giá từ khách hàng trên Google Maps?",
+    "options": [ "Không trả lời đánh giá", "Nhắc nhở khách hàng để lại đánh giá", "Giảm chất lượng dịch vụ", "Không cần đánh giá" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 11: Thủ thuật nào KHÔNG thuộc SEO mạng xã hội?",
+    "options": [ "Tối ưu hóa hồ sơ", "Tạo nội dung chất lượng", "Tăng chi phí quảng cáo", "Sử dụng hashtag" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 12: Mục tiêu nào sau đây KHÔNG thuộc chiến lược tiếp thị mạng xã hội?",
+    "options": [ "Tăng chuyển đổi", "Giảm nhận biết thương hiệu", "Tăng lưu lượng truy cập trang web", "Xây dựng mối liên hệ tích cực" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 13: Tại sao email marketing ít phổ biến hơn trước ở Việt Nam?",
+    "options": [ "Vì sự phổ biến của mạng xã hội", "Vì không hiệu quả", "Vì tăng chi phí", "Vì không cần khách hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 14: Thủ thuật SEO mạng xã hội nào liên quan đến tối ưu hóa hồ sơ?",
+    "options": [ "Sử dụng từ khóa trong tên người dùng và mô tả", "Không trả lời bình luận", "Giảm chất lượng nội dung", "Không sử dụng hashtag" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 15: Trong SEO, \"Anchor text\" có vai trò gì?",
+    "options": [ "Tăng chi phí quảng cáo", "Xác định nội dung của URL liên kết", "Giảm thứ hạng trang web", "Không cần liên kết" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 16: Mạng xã hội mang lại lợi ích gì cho thương mại điện tử?",
+    "options": [ "Giảm chi phí sản xuất", "Tiếp cận và tương tác với khách hàng tiềm năng", "Không cần quảng cáo", "Giảm doanh số bán hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 17: Quy trình SEO là một quá trình như thế nào?",
+    "options": [ "Một lần và hoàn thành", "Liên tục và đòi hỏi cập nhật", "Không cần giám sát", "Chỉ cần quảng cáo trả phí" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 18: Lợi ích nào sau đây KHÔNG thuộc về tiếp thị trực tuyến?",
+    "options": [ "Tiếp cận rộng lớn", "Tính tương tác cao", "Tăng chi phí quảng cáo", "Đo lường hiệu quả" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 19: Hình thức nào sau đây KHÔNG thuộc tiếp thị trực tuyến?",
+    "options": [ "SEO", "Email marketing", "Quảng cáo trên truyền hình", "Tiếp thị mạng xã hội" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 20: Hashtag trong tiếp thị mạng xã hội có vai trò gì?",
+    "options": [ "Giảm khả năng tìm thấy nội dung", "Tăng khả năng tìm thấy nội dung", "Tăng chi phí quảng cáo", "Giảm tương tác" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 21: Nền tảng nào sau đây được đề cập là điểm đến phổ biến cho nội dung video?",
+    "options": [ "LinkedIn", "TikTok", "Gmail", "Google Maps" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 22: Tại sao không nên quảng cáo trên tất cả các nền tảng mạng xã hội?",
+    "options": [ "Vì không hiệu quả về chi phí", "Vì tăng doanh số bán hàng", "Vì không cần đối tượng mục tiêu", "Vì giảm tương tác" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 23: Thuật ngữ \"CRO\" trong SEO có nghĩa là gì?",
+    "options": [ "Click Rate Optimization", "Conversion Rate Optimization", "Content Rate Optimization", "Crawl Rate Optimization" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 24: Backlink trong SEO là gì?",
+    "options": [ "Liên kết nội bộ trong trang web", "Liên kết từ một trang web khác trỏ đến trang web của bạn", "Liên kết từ trang web của bạn đến trang khác", "Liên kết không hoạt động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 25: Ưu điểm của backlink từ mạng xã hội là gì?",
+    "options": [ "Chủ yếu là link dofollow", "Tăng độ \"Trust\" cho website với Google", "Không cần nội dung", "Giảm thứ hạng trang web" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 26: Quy trình thu thập thông tin của Google bắt đầu bằng bước nào?",
+    "options": [ "Lưu trữ dữ liệu", "Thu thập dữ liệu tự động bằng bot web", "Xử lý và phân tích dữ liệu", "Hiển thị kết quả" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 27: Lợi ích nào sau đây thuộc về SEO Google Maps?",
+    "options": [ "Giảm uy tín doanh nghiệp", "Thu hút khách hàng địa phương", "Giảm thứ hạng SEO", "Tăng chi phí quảng cáo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 29: Google đánh giá backlink dựa trên yếu tố nào?",
+    "options": [ "Chỉ số lượng backlink", "Chất lượng và tính tự nhiên của backlink", "Không cần backlink", "Chỉ anchor text" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 30: Backlink có vai trò gì trong SEO?",
+    "options": [ "Giảm thứ hạng trang web", "Gia tăng thứ hạng từ khóa trên Google", "Tăng chi phí quảng cáo", "Không cần liên kết" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 31: Loại từ khóa nào có nhu cầu mua hàng cao nhất?",
+    "options": [ "Từ khóa thông tin", "Từ khóa thương hiệu", "Từ khóa thương mại", "Từ khóa chung" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 32: Mục tiêu chính của tiếp thị trực tuyến là gì?",
+    "options": [ "Giảm chi phí sản xuất", "Tăng nhận biết thương hiệu và doanh số bán hàng", "Tăng số lượng nhân viên", "Giảm sử dụng Internet" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 33: Nền tảng mạng xã hội nào có hơn 2 tỷ người dùng toàn cầu?",
+    "options": [ "Instagram", "Twitter", "Facebook", "LinkedIn" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 34: Công cụ nào được đề cập để quản lý email marketing?",
+    "options": [ "Photoshop", "Mailchimp", "Microsoft Word", "Google Docs" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 35: Liên kết \"Nofollow\" khác với \"Dofollow\" ở điểm nào?",
+    "options": [ "Không được công cụ tìm kiếm đưa vào xếp hạng", "Tăng thứ hạng trang web", "Không cần liên kết", "Tăng chi phí quảng cáo" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 36: Xu hướng \"nội dung tương tác\" trong tiếp thị trực tuyến bao gồm gì?",
+    "options": [ "Chỉ sử dụng quảng cáo tĩnh", "Câu chuyện tương tác và cuộc thi trên mạng xã hội", "Không cần tương tác với khách hàng", "Chỉ sử dụng email marketing" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 37: Mục tiêu chính của SEO là gì?",
+    "options": [ "Tăng chi phí quảng cáo", "Tăng lượng truy cập tự nhiên vào trang web", "Giảm thứ hạng trên công cụ tìm kiếm", "Chỉ sử dụng quảng cáo trả phí" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 38: Công cụ nào giúp theo dõi hiệu suất bài đăng trên mạng xã hội?",
+    "options": [ "Google Analytics", "Photoshop", "Microsoft Excel", "WordPress" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 39: Google sử dụng công nghệ nào để phân tích dữ liệu trong SEO?",
+    "options": [ "Máy học và trí tuệ nhân tạo", "Quảng cáo truyền thống", "Phần mềm kế toán", "Công nghệ thực tế ảo" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 41: Việc trả lời đánh giá khách hàng trên Google Maps cần được thực hiện như thế nào?",
+    "options": [ "Không trả lời", "Chuyên nghiệp và lịch sự", "Không quan tâm đến khiếu nại", "Giảm chất lượng dịch vụ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 42: Bước đầu tiên để tối ưu hóa Google Maps là gì?",
+    "options": [ "Tạo và xác minh doanh nghiệp trên Google My Business", "Khuyến khích đánh giá khách hàng", "Theo dõi hiệu quả SEO", "Tạo liên kết đến Google Maps" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 43: Tiêu đề email cần có đặc điểm gì?",
+    "options": [ "Dài dòng và phức tạp", "Ngắn gọn và hấp dẫn", "Không cần từ khóa", "Giảm tương tác" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 44: Google Search Console có vai trò gì trong SEO?",
+    "options": [ "Tạo nội dung trang web", "Giám sát hiệu suất tìm kiếm và lỗi crawl", "Tăng chi phí quảng cáo", "Giảm thứ hạng trang web" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 45: Việc chèn từ khóa tự nhiên vào trang web có vai trò gì trong SEO Onpage?",
+    "options": [ "Giảm thứ hạng trang web", "Giúp công cụ tìm kiếm hiểu nội dung", "Tăng chi phí quảng cáo", "Không cần nội dung" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 46: Vai trò nào sau đây KHÔNG thuộc tiếp thị mạng xã hội?",
+    "options": [ "Tạo nhận thức thương hiệu", "Xây dựng cộng đồng", "Tăng chi phí quảng cáo", "Tăng doanh số bán hàng" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 47: Nền tảng nào sau đây KHÔNG được đề cập để đi backlink?",
+    "options": [ "Mạng xã hội", "Diễn đàn", "Blog miễn phí", "Quảng cáo truyền hình" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 48: Liên kết đến Google Maps nên được thêm ở đâu?",
+    "options": [ "Chỉ trên website", "Website, blog, mạng xã hội và các kênh khác", "Chỉ trên báo chí", "Không cần liên kết" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 49: Tiếp thị địa điểm sử dụng kỹ thuật nào để tăng hiển thị trên Google Maps?",
+    "options": [ "Email marketing", "SEO", "PPC", "Quảng cáo truyền hình" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 50: Thử nghiệm A/B trong email marketing nhằm mục đích gì?",
+    "options": [ "Giảm hiệu quả chiến dịch", "Xác định phương án mang lại kết quả tốt nhất", "Tăng chi phí quảng cáo", "Giảm tương tác" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 52: SEO Offpage bao gồm hoạt động nào?",
+    "options": [ "Tối ưu hóa tiêu đề trang web", "Xây dựng backlink từ trang web khác", "Tạo nội dung trang web", "Tối ưu hóa hình ảnh" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 53: Hành vi nào sau đây bị nghiêm cấm trong SEO?",
+    "options": [ "Tạo nội dung chất lượng", "Nhồi nhét từ khóa phi đạo đức", "Tối ưu hóa trải nghiệm người dùng", "Xây dựng liên kết nội bộ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 54: Việc hợp tác với Influencer trong SMM có lợi ích phù hợp với mục tiêu nào?",
+    "options": [ "Giảm độ tin cậy thương hiệu", "Tăng tầm ảnh hưởng và độ tin cậy", "Giảm tương tác", "Không cần quảng cáo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 55: Mẹo nào sau đây KHÔNG giúp tạo nội dung trang web chất lượng?",
+    "options": [ "Cung cấp tiêu đề thu hút", "Sử dụng giọng văn nhất quán", "Mắc lỗi chính tả", "Thêm nút kêu gọi hành động" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 58: Ví dụ nào sau đây minh họa cho sự đơn giản trong quảng cáo trực tuyến?",
+    "options": [ "Quảng cáo dài dòng, nhiều thông tin", "Quảng cáo của Apple với thiết kế sáng tạo, dễ hiểu", "Quảng cáo phức tạp với nhiều chi tiết", "Quảng cáo không có hình ảnh" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 60: Tại sao bỏ qua tiếp thị trực tuyến có thể gây bất lợi cho doanh nghiệp?",
+    "options": [ "Vì tăng chi phí quảng cáo", "Vì nhường khách hàng cho đối thủ cạnh tranh", "Vì không cần khách hàng tiềm năng", "Vì giảm tương tác với khách hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 61: Bước nào KHÔNG thuộc quy trình email marketing?",
+    "options": [ "Xây dựng danh sách email", "Phân khúc đối tượng", "Tăng chi phí quảng cáo", "Tạo nội dung hấp dẫn" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 62: Lợi ích nào sau đây KHÔNG thuộc email marketing?",
+    "options": [ "Cá nhân hóa cao", "Tiết kiệm chi phí", "Tăng chi phí quảng cáo", "Tự động hóa" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 63: Thuật ngữ \"Content is King\" trong SEO nhấn mạnh điều gì?",
+    "options": [ "Tầm quan trọng của quảng cáo trả phí", "Tầm quan trọng của nội dung chất lượng", "Giảm chất lượng nội dung", "Không cần nội dung" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 64: Thông tin nào KHÔNG cần điền trên Google My Business?",
+    "options": [ "Giờ mở cửa", "Hình ảnh và video", "Lịch sử cá nhân của chủ doanh nghiệp", "Sản phẩm/dịch vụ" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 65: Công cụ nào sau đây là miễn phí để phân tích từ khóa?",
+    "options": [ "Ahrefs", "SEMrush", "Google Keyword Planner", "Moz" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 66: SEO tập trung vào yếu tố nào để cải thiện thứ hạng trang web?",
+    "options": [ "Tăng chi phí quảng cáo", "Cung cấp trải nghiệm người dùng tốt và nội dung hữu ích", "Chỉ sử dụng quảng cáo trả phí", "Giảm chất lượng nội dung" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 67: Tiếp thị mạng xã hội (SMM) tập trung vào điều gì?",
+    "options": [ "Chỉ tối ưu hóa trang web", "Quảng bá sản phẩm qua các nền tảng mạng xã hội", "Chỉ sử dụng email marketing", "Quảng cáo trên" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 68: Từ khóa thông tin có đặc điểm gì?",
+    "options": [ "Nhu cầu mua hàng cao", "Cung cấp thông tin hữu ích nhưng quyết định mua thấp", "Chỉ liên quan đến thương hiệu", "Không cần phân tích" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 69: Hình thức tiếp thị trực tuyến nào ít được sử dụng ở Việt Nam hiện nay?",
+    "options": [ "Tiếp thị mạng xã hội", "Email marketing", "SEO", "Tiếp thị địa điểm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 70: Mục đích của nghiên cứu từ khóa trong SEO là gì?",
+    "options": [ "Giảm lưu lượng truy cập", "Xác định từ khóa người dùng tìm kiếm", "Tăng chi phí quảng cáo", "Không cần nội dung" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 71: SEO Onpage tập trung vào việc tối ưu hóa yếu tố nào?",
+    "options": [ "Liên kết từ trang web khác", "Các yếu tố bên trong trang web như tiêu đề, mô tả, nội dung", "Quảng cáo trả phí", "Tăng chi phí quảng cáo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 72: Tại sao tiếp thị trực tuyến có chi phí linh hoạt?",
+    "options": [ "Vì sử dụng quảng cáo truyền hình", "Vì cho phép điều chỉnh chi tiêu theo hiệu quả chiến dịch", "Vì không cần công cụ phân tích", "Vì chỉ sử dụng một kênh duy nhất" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 74: Tự động hóa trong email marketing bao gồm việc gì?",
+    "options": [ "Gửi email chào mừng và nhắc nhở", "Giảm chất lượng nội dung", "Không cần công cụ", "Tăng chi phí" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 75: Tiếp thị liên kết (Affiliate Marketing) hoạt động như thế nào?",
+    "options": [ "Doanh nghiệp tự quảng bá sản phẩm", "Trả hoa hồng cho đối tác để quảng bá sản phẩm", "Chỉ sử dụng quảng cáo trả phí", "Không cần đối tác" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 76: Tại sao sự đơn giản lại quan trọng trong quảng cáo trực tuyến hiện nay?",
+    "options": [ "Vì khách hàng thích quảng cáo phức tạp", "Vì giúp quảng cáo nổi bật và thu hút", "Vì tăng chi phí sản xuất", "Vì giảm tính sáng tạo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 77: Bước nào KHÔNG thuộc quy trình SEO cơ bản?",
+    "options": [ "Nghiên cứu từ khóa", "Tối ưu hóa Onpage", "Quảng cáo trên truyền hình", "Giám sát và đánh giá" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 78: File \"Robot.txt\" trong SEO có vai trò gì?",
+    "options": [ "Tạo nội dung trang web", "Điều hướng và đưa mệnh lệnh cho bot tìm kiếm", "Tăng chi phí quảng cáo", "Giảm thứ hạng trang web" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 79: Công cụ nào giúp theo dõi hiệu quả SEO Google Maps?",
+    "options": [ "Google My Business Insights", "Microsoft Excel", "Adobe Photoshop", "Google Docs" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 80: Tại sao Google phạt các trang web có backlink tăng không tự nhiên?",
+    "options": [ "Vì tăng thứ hạng nhanh chóng", "Vì không đáp ứng trải nghiệm người dùng", "Vì giảm chi phí", "Vì không cần nội dung" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 81: Inbound marketing khác với outbound marketing ở điểm nào?",
+    "options": [ "Tập trung vào quảng cáo truyền thống", "Thu hút khách hàng qua nội dung hữu ích", "Chỉ sử dụng email marketing", "Không cần nội dung sáng tạo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 82: Theo tài liệu, tỷ lệ người dùng nhấp vào các vị trí đầu trên trang tìm kiếm là bao nhiêu?",
+    "options": [],
+    "answer": "70%"
+  },
+  {
+    "q": "Câu 83: Xu hướng nào sau đây KHÔNG được đề cập trong tiếp thị trực tuyến?",
+    "options": [ "Nội dung thân thiện với thiết bị di động", "Nội dung video", "Quảng cáo trên báo giấy", "Tiếp thị trải nghiệm" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 87: TikTok đặc biệt phổ biến với đối tượng nào?",
+    "options": [ "Người cao tuổi", "Trẻ em và thanh thiếu niên", "Doanh nhân", "Nhà khoa học" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 88: Tiếp thị trực tuyến là một phần của lĩnh vực nào?",
+    "options": [ "Tiếp thị truyền thống", "Tiếp thị số (Digital marketing)", "Quản lý nhân sự", "Kế toán tài chính" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 89: Hành vi nào có thể làm giảm uy tín của trang web trong SEO?",
+    "options": [ "Tạo nội dung chất lượng", "Đạo văn nội dung", "Tối ưu hóa hình ảnh", "Xây dựng liên kết nội bộ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 90: Bước đầu tiên trong chiến lược tiếp thị mạng xã hội là gì?",
+    "options": [ "Thực hiện kế hoạch", "Lập kế hoạch", "Giám sát và kiểm soát", "Chọn nền tảng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 91: Doanh nghiệp thường sử dụng hỗn hợp các hình thức tiếp thị trực tuyến để đạt mục tiêu gì?",
+    "options": [ "Giảm chi phí", "Tạo hiệu quả tối đa trong quảng cáo", "Chỉ tập trung vào một kênh", "Không cần tương tác với khách hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 92: Công cụ tìm kiếm nào KHÔNG được đề cập trong tài liệu?",
+    "options": [ "Google", "Bing", "Yahoo", "DuckDuckGo" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 93: Tại sao không nên mua danh sách email?",
+    "options": [ "Vì tỷ lệ tương tác thấp và gây hại uy tín", "Vì tăng doanh số bán hàng", "Vì không cần email", "Vì giảm chi phí" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 94: Công cụ nào trong WordPress giúp kiểm tra bài viết chuẩn SEO?",
+    "options": [ "Photoshop", "Yoast SEO", "Microsoft Word", "Google Docs" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 95: Ví dụ nào sau đây là từ khóa thương hiệu?",
+    "options": [ "SEO là gì", "Áo cưới Thu Thủy", "Khóa học SEO tại Hà Nội", "Bệnh thoái hóa khớp" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 99: Mục tiêu của SEO Google Maps là gì?",
+    "options": [ "Giảm hiển thị trong kết quả tìm kiếm", "Tăng hiển thị trong kết quả tìm kiếm địa phương", "Tăng chi phí quảng cáo", "Giảm doanh số bán hàng" ],
+    "answer": 1
+  }
+],
+        //  CHƯƠNG 2 ---------------------------------------------------------------------
+        [
+  {
+    "q": "Câu 39: Tiền điện tử KHÔNG được phát hành bởi ai?",
+    "options": [ "Ngân hàng trung ương", "Người dùng mạng", "Nhà phát triển blockchain", "Thợ đào coin" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 58: Tính năng bảo hiểm phản hồi gian lận thường đi kèm với loại thẻ nào?",
+    "options": [ "Thẻ tín dụng", "Thẻ ghi nợ", "Séc điện tử", "Ví điện tử" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 74: Điểm lợi ích nổi bật nhất của thanh toán điện tử so với truyền thống là gì?",
+    "options": [ "Bảo mật tuyệt đối", "Tiện lợi và nhanh chóng", "Không cần Internet", "Không có chi phí" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 1: Một lợi ích lớn của thanh toán điện tử đối với doanh nghiệp là gì?",
+    "options": [ "Giảm sử dụng tiền mặt", "Mất khách hàng", "Tăng rủi ro", "Giảm cạnh tranh" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 2: Loại tiền điện tử nào KHÔNG tồn tại?",
+    "options": [ "Ethereum", "Ripple", "MasterPay", "Litecoin" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 3: Dữ liệu thanh toán nhạy cảm nên được bảo mật bằng cách nào?",
+    "options": [ "Nén dữ liệu", "Mã hóa", "Sao chép nhiều bản", "Gửi qua email thường" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 4: Ví dụ về cổng thanh toán điện tử ở Việt Nam là gì?",
+    "options": [ "Ngân Lượng", "Ethereum", "Ripple", "Litecoin" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 5: Điểm tiện lợi của séc điện tử là gì?",
+    "options": [ "Xử lý nhanh chóng", "Chậm trễ", "Bắt buộc ký giấy", "Không mã hóa" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 6: Rủi ro nào có thể xảy ra khi lưu trữ dữ liệu thẻ tín dụng trực tuyến?",
+    "options": [ "Hack, mất cắp thông tin", "Mất kết nối Internet", "Giao hàng chậm", "Khách không nhận hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 7: Tiền điện tử cho phép người dùng thực hiện giao dịch như thế nào?",
+    "options": [ "Qua ngân hàng", "Trực tiếp, không cần trung gian", "Bằng tiền mặt", "Qua hợp đồng giấy" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 8: Yếu tố nào KHÔNG ảnh hưởng đến sự phát triển của thanh toán điện tử?",
+    "options": [ "Độ tin cậy của công nghệ", "Chính sách pháp lý", "Thói quen tiêu dùng", "Giá cả hàng hóa" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 9: Biện pháp quản lý rủi ro KHÔNG đúng là gì?",
+    "options": [ "Giám sát gian lận", "Sao lưu dữ liệu", "Giáo dục nhân viên", "Bỏ qua chuẩn PCI DSS" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 10: Một lợi ích lớn của thanh toán điện tử đối với doanh nghiệp là gì?",
+    "options": [ "Giảm sử dụng tiền mặt", "Mất khách hàng", "Tăng rủi ro", "Giảm cạnh tranh" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 11: Điểm khác biệt chính giữa B2B và B2C về quy trình thanh toán là gì?",
+    "options": [ "B2C đơn giản, nhanh chóng; B2B phức tạp hơn", "B2C luôn cần hợp đồng", "B2B không cần bảo mật", "Cả hai đều giống nhau" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 12: Trong B2B, thanh toán bằng thẻ tín dụng có thể thực hiện qua:",
+    "options": [ "Cổng thanh toán trực tuyến", "POS cá nhân", "Máy in hóa đơn", "Tiền mặt" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 13: Một biện pháp giảm rủi ro gian lận là gì?",
+    "options": [ "Giám sát và phát hiện bất thường", "Tắt toàn bộ hệ thống", "Không dùng thẻ", "Tăng chi phí dịch vụ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 14: Một lợi ích khi có cổng thanh toán điện tử là gì?",
+    "options": [ "Nâng cao trải nghiệm mua sắm trực tuyến", "Làm chậm quá trình mua", "Tăng chi phí vận chuyển", "Hạn chế lựa chọn thanh toán" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 15: Tiền điện tử thường dùng cho:",
+    "options": [ "Mua hàng, đầu tư, chuyển tiền quốc tế", "Quản lý nhân sự", "Thiết kế website", "Viết phần mềm" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 16: Một rủi ro thường gặp khi khách hàng từ chối giao dịch đã thanh toán là gì?",
+    "options": [ "Người bán chịu thiệt hại", "Ngân hàng chịu hết", "Khách hàng bị phạt", "Không có ảnh hưởng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 17: Một ví điện tử phổ biến của Apple là gì?",
+    "options": [ "Apple Pay", "Zalo Pay", "Samsung Pay", "MoMo" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 18: Trong B2B, giá trị giao dịch thường như thế nào?",
+    "options": [ "Nhỏ lẻ", "Lớn, thường xuyên", "Không đáng kể", "Chỉ vài trăm nghìn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 19: Một lợi ích quan trọng của thanh toán điện tử là gì?",
+    "options": [ "Dễ dàng theo dõi và quản lý chi tiêu", "Giảm độ an toàn", "Mất nhiều thời gian", "Tăng chi phí" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 20: Cổng thanh toán điện tử giúp doanh nghiệp:",
+    "options": [ "Tối ưu hóa quy trình thanh toán", "Bỏ qua quy trình xác thực", "Tránh sử dụng Internet", "Hủy toàn bộ giao dịch" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 21: Thanh toán điện tử (e-Payment) được định nghĩa là gì?",
+    "options": [ "Thanh toán cho hàng hóa/dịch vụ trên Internet", "Thanh toán bằng tiền mặt tại quầy", "Thanh toán qua séc giấy", "Thanh toán bằng ngoại tệ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 22: Trong B2B, phương thức thanh toán nào giúp quản lý công nợ hiệu quả?",
+    "options": [ "Tài khoản A/P và A/R", "Ví điện tử cá nhân", "ATM", "Tiền mặt" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 23: Chuyển tiền qua phương thức nào?",
+    "options": [ "Email hoặc số điện thoại", "Fax", "Giấy tờ tùy thân", "Thư tay" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 24: Tiêu chí nào khác biệt rõ nhất giữa B2B và B2C?",
+    "options": [ "Ngôn ngữ sử dụng", "Quy mô giao dịch", "Loại hàng hóa", "Địa điểm giao dịch" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 25: Mọi giao dịch tiền điện tử đều được lưu lại ở đâu?",
+    "options": [ "Ổ cứng cá nhân", "Blockchain", "Email", "USB" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 26: Séc điện tử khác séc giấy ở điểm nào?",
+    "options": [ "Không cần qua ngân hàng", "Xử lý qua hệ thống điện tử", "Không có chi phí", "Không cần xác nhận" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 27: Doanh nghiệp cần đào tạo nhân viên về điều gì?",
+    "options": [ "Biện pháp bảo mật và nguy cơ thanh toán điện tử", "Lập trình website", "Quản lý nhân sự", "Thiết kế đồ họa" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 28: Việc sao lưu và khôi phục dữ liệu giúp đảm bảo điều gì?",
+    "options": [ "Tính khả dụng hệ thống thanh toán", "Tăng chi phí", "Giảm hiệu suất", "Hạn chế giao dịch" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 29: Điều kiện để website TMĐT chấp nhận thanh toán trực tuyến là gì?",
+    "options": [ "Kết nối với cổng thanh toán điện tử", "Không cần Internet", "Chỉ cần ví điện tử cá nhân", "Chỉ cần thẻ tín dụng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 30: Loại tiền điện tử đầu tiên và phổ biến nhất là gì?",
+    "options": [ "Ethereum", "Bitcoin", "Ripple", "Litecoin" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 31: Séc điện tử thường đi kèm với biện pháp bảo mật nào?",
+    "options": [ "Chữ ký tay", "Mã xác nhận/token", "Tem chống giả", "Chứng minh thư" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 32: Trong thập niên đầu thế kỷ 21, sự bùng nổ TMĐT có nguyên nhân từ đâu?",
+    "options": [ "Dịch vụ thanh toán điện tử hoàn thiện", "Doanh nghiệp không đầu tư", "Không có ngân hàng trực tuyến", "Chỉ dùng tiền mặt" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 33: Một hình thức thanh toán điện tử giữa doanh nghiệp và doanh nghiệp là:",
+    "options": [ "Ví điện tử (PayPal, Alipay)", "Giỏ hàng điện tử", "Thanh toán POS", "QR cá nhân" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 34: Biện pháp KHÔNG phù hợp trong quản lý rủi ro thanh toán là gì?",
+    "options": [ "Giám sát gian lận", "Bỏ qua mã hóa", "Sao lưu dữ liệu", "Đào tạo nhân viên" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 35: Thẻ ghi nợ thường yêu cầu gì để sử dụng an toàn?",
+    "options": [ "Mã PIN", "Không cần mật khẩu", "Không cần Internet", "Chữ ký tay" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 36: Một trong những ví điện tử phổ biến ở Việt Nam là gì?",
+    "options": [ "MoMo", "Visa", "MasterCard", "Bitcoin" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 37: Một loại rủi ro khác trong thanh toán điện tử là gì?",
+    "options": [ "Hacker lấy cắp thông tin thẻ", "Website quá đẹp", "Giao diện khó nhìn", "Email không gửi" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 38: Để đảm bảo tính an toàn, dữ liệu thẻ tín dụng phải được:",
+    "options": [ "Mã hóa", "Sao chép không giới hạn", "Lưu trong USB", "Chia sẻ với nhiều bên" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 40: Khi sử dụng thẻ tín dụng, khách hàng thường được cấp bao nhiêu ngày miễn lãi?",
+    "options": [],
+    "answer": "45 ngày"
+  },
+  {
+    "q": "Câu 41: Loại tiền điện tử nào KHÔNG phải là đồng phổ biến?",
+    "options": [ "Ethereum", "Ripple", "Litecoin", "VNĐ" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 42: Công nghệ nền tảng của tiền điện tử là gì?",
+    "options": [ "QR Code", "Blockchain", "Cloud Server", "HTML" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 43: Thanh toán điện tử trong B2C thường có đặc điểm nào?",
+    "options": [ "Giao dịch nhỏ, thường xuyên", "Giao dịch lớn, phức tạp", "Cần hợp đồng dài hạn", "Không bao giờ dùng thẻ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 44: Ví điện tử có chức năng nào?",
+    "options": [ "Chỉ lưu mật khẩu", "Lưu trữ, quản lý và thanh toán trực tuyến", "Dùng để vay tín dụng", "Chỉ rút tiền ATM" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 45: Loại thẻ nào cho phép người dùng \"mượn tiền\" từ ngân hàng?",
+    "options": [ "Thẻ ghi nợ", "Thẻ tín dụng", "Thẻ trả trước", "Thẻ thành viên" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 46: Hình thức thanh toán nào thường được sử dụng trong thương mại điện tử?",
+    "options": [ "Tiền mặt", "Chuyển khoản ngân hàng", "Thẻ tín dụng", "Hóa đơn giấy" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 47: Một số cổng thanh toán điện tử phổ biến hiện nay là gì?",
+    "options": [ "PayPal, Momo, Viettel Pay", "Bitcoin, Ethereum, Ripple", "Western Union, MoneyGram, Visa", "Facebook, Google, Amazon" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 48: Rủi ro khi dùng thẻ tín dụng trực tuyến là gì?",
+    "options": [ "Mất hóa đơn", "Sử dụng thẻ bất hợp pháp", "Không in được biên lai", "Chậm xác nhận đơn hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 49: Ví điện tử KHÔNG hỗ trợ:",
+    "options": [ "Chuyển tiền trực tiếp giữa người dùng", "Lưu thông tin thẻ ngân hàng", "Thanh toán trực tuyến", "Phát hành thẻ cứng" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 50: Thẻ ghi nợ có đặc điểm nào sau đây?",
+    "options": [ "Cho phép chi tiêu vượt số dư", "Liên kết trực tiếp tài khoản ngân hàng", "Không cần mã PIN", "Không có phí dịch vụ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 51: Điểm bảo mật của ví điện tử thường là gì?",
+    "options": [ "Không cần mật khẩu", "PIN, sinh trắc học", "Không cần mã OTP", "Lưu tự động không bảo mật" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 52: Thẻ ghi nợ KHÔNG cho phép:",
+    "options": [ "Vượt số dư trong tài khoản", "Thanh toán POS", "Rút tiền ATM", "Liên kết ngân hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 53: Ví điện tử cho phép chuyển tiền qua phương thức nào?",
+    "options": [ "Email hoặc số điện thoại", "Fax", "Giấy tờ tùy thân", "Thư tay" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 54: Hình thức thanh toán điện tử phổ biến trong B2C là gì?",
+    "options": [ "Thanh toán POS", "Tín dụng thương mại", "Hóa đơn điện tử", "Chuyển khoản liên ngân hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 55: Rủi ro nào có thể xảy ra trong thanh toán điện tử nếu khách hàng đổi ý?",
+    "options": [ "Người bán chịu thiệt hại", "Ngân hàng hủy bỏ dịch vụ", "Không có ảnh hưởng gì", "Tự động chuyển tiền" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 56: Thẻ tín dụng thường đi kèm với tính năng bảo mật nào?",
+    "options": [ "CVV và xác thực hai yếu tố", "Mật khẩu một chữ số", "Không cần mã bảo mật", "Không xác thực" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 57: Chức năng chính của cổng thanh toán điện tử là gì?",
+    "options": [ "Mã hóa và xác thực giao dịch", "Bán sản phẩm", "Lưu trữ hàng hóa", "Cho vay tín dụng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 59: Ví dụ nào là cổng thanh toán điện tử?",
+    "options": [ "Viettel Pay", "Bitcoin", "Thẻ ATM", "Séc giấy" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 60: Một ví dụ về cổng thanh toán quốc tế là gì?",
+    "options": [ "PayPal", "VNĐ", "MoMo", "Bitcoin" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 61: Lợi ích quan trọng của cổng thanh toán điện tử là gì?",
+    "options": [ "Tăng chi phí", "Giảm rủi ro gian lận", "Yêu cầu hợp đồng phức tạp", "Giảm trải nghiệm mua sắm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 62: Một trong những biện pháp quản lý rủi ro thanh toán điện tử là gì?",
+    "options": [ "Không dùng Internet", "Xác thực OTP và 2FA", "Hủy toàn bộ thẻ", "Luôn thanh toán bằng tiền mặt" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 63: Một biện pháp quản lý rủi ro quan trọng trong thanh toán điện tử là gì?",
+    "options": [ "Sử dụng xác thực sinh trắc học", "Bỏ qua mã OTP", "Lưu mật khẩu công khai", "Gửi dữ liệu không mã hóa" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 64: Công nghệ nào thường dùng để xác thực người dùng trong thanh toán điện tử?",
+    "options": [ "OTP", "QR Code", "Email", "SMS thông thường" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 65: Một trong những hạn chế khi dùng cổng thanh toán điện tử là gì?",
+    "options": [ "Chi phí dịch vụ cao", "Không thể kết nối ngân hàng", "Không hỗ trợ ví điện tử", "Không có bảo mật" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 66: Khi khách hàng thanh toán trực tuyến, thông tin thẻ được xử lý thế nào?",
+    "options": [ "Mã hóa và gửi đến ngân hàng phát hành", "Lưu công khai trên website", "Gửi qua email", "Không cần xác thực" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 67: Một hạn chế khác của thanh toán điện tử là gì?",
+    "options": [ "Phí dịch vụ có thể cao", "Không thể theo dõi chi tiêu", "Không thể mua sắm toàn cầu", "Không có bảo mật" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 68: Hạn chế nào xuất hiện khi sử dụng thanh toán điện tử?",
+    "options": [ "Tốn giấy in", "Phụ thuộc vào công nghệ và Internet", "Không thể dùng thẻ", "Không có phí dịch vụ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 69: Vì sao một số người ngại dùng thanh toán điện tử?",
+    "options": [ "Lo ngại bảo mật thông tin", "Không thích tiền mặt", "Doanh nghiệp bắt buộc", "Hệ thống quá nhanh" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 70: So với B2C, thanh toán B2B thường yêu cầu gì?",
+    "options": [ "Hợp đồng chi tiết", "Không cần hợp đồng", "Không cần bảo mật", "Đơn giản, nhanh gọn" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 71: Hình thức thanh toán nào phổ biến nhất trong B2B?",
+    "options": [ "Chuyển khoản ngân hàng", "POS", "Ví điện tử cá nhân", "Tiền mặt" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 72: Ví dụ nào KHÔNG phải ví điện tử?",
+    "options": [ "PayPal", "Momo", "Zalo Pay", "MasterCard" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 73: Một yêu cầu trong quản lý rủi ro là:",
+    "options": [ "Tuân thủ PCI DSS", "Bỏ qua tiêu chuẩn quốc tế", "Không cần kiểm tra định kỳ", "Không cần sao lưu dữ liệu" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 75: Thẻ tín dụng thường có lãi suất như thế nào nếu không trả nợ đúng hạn?",
+    "options": [ "Thấp hơn vay thông thường", "Cao hơn vay thông thường", "Không có lãi", "Bằng với lãi ngân hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 76: Một đặc điểm bảo mật của tiền điện tử là gì?",
+    "options": [ "Dễ bị làm giả", "Giao dịch được xác minh trên blockchain", "Không thể theo dõi", "Lưu trên giấy" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 77: Xác thực sinh trắc học thường được dùng để làm gì?",
+    "options": [ "Tăng độ an toàn thanh toán", "Thay thế ngân hàng", "Giảm tốc độ xử lý", "Hủy giao dịch" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 78: Nhà cung cấp séc điện tử tiêu biểu là gì?",
+    "options": [ "Western Union", "Amazon", "Google", "VNPT" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 79: Một số loại tiền điện tử phổ biến hiện nay là:",
+    "options": [ "Bitcoin, Ethereum, Ripple", "MoMo, Zalo Pay, Apple Pay", "Visa, MasterCard, JCB", "Ngân Lượng, Viettel Pay, VNPT Pay" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 80: Một lợi ích khi tích hợp cổng thanh toán điện tử cho doanh nghiệp là gì?",
+    "options": [ "Quản lý giao dịch tài chính dễ dàng", "Tăng chi phí quản lý", "Không có lợi ích", "Giảm trải nghiệm khách hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 81: Ưu điểm chính của séc điện tử so với séc giấy là gì?",
+    "options": [ "Chi phí cao hơn", "Nhanh chóng, tiện lợi", "Cần nhiều thủ tục", "Khó mã hóa" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 82: Loại phí nào có thể phát sinh khi dùng thẻ tín dụng?",
+    "options": [ "Phí giao dịch quốc tế", "Phí quản lý email", "Phí duy trì số điện thoại", "Phí Internet" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 83: Để tránh mất cắp dữ liệu thẻ, doanh nghiệp nên làm gì?",
+    "options": [ "Lưu dữ liệu trên máy độc lập", "Chia sẻ qua mạng xã hội", "Công khai thông tin", "Gửi email cho khách hàng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 84: Kiểm tra định kỳ hệ thống quản lý rủi ro có tác dụng gì?",
+    "options": [ "Nâng cao hiệu quả bảo mật", "Giảm độ an toàn", "Không cần thiết", "Làm gián đoạn kinh doanh" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 85: Kết luận của Chương 4 cho thấy điều kiện quan trọng nhất để website TMĐT hoạt động hiệu quả là gì?",
+    "options": [ "Kết nối với cổng thanh toán uy tín, bảo mật", "Không cần Internet", "Không cần ngân hàng", "Chỉ cần hợp đồng giấy" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 86: Một trong những phương thức thanh toán phổ biến trong B2C là gì?",
+    "options": [ "Dịch vụ POS", "Hóa đơn thương mại", "Séc điện tử", "Hợp đồng bảo hiểm" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 87: Tiêu chí nào khác biệt rõ nhất giữa B2B và B2C?",
+    "options": [ "Ngôn ngữ sử dụng", "Quy mô giao dịch", "Loại hàng hóa", "Địa điểm giao dịch" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 88: Loại thẻ nào KHÔNG cho phép chi tiêu vượt số dư tài khoản?",
+    "options": [ "Thẻ ghi nợ", "Thẻ tín dụng", "Thẻ trả sau", "Thẻ ưu đãi" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 89: Phí thường niên, phí trễ hạn là đặc trưng của loại thẻ nào?",
+    "options": [ "Thẻ tín dụng", "Thẻ ghi nợ", "Ví điện tử", "Tiền điện tử" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 90: Hạn chế của cổng thanh toán điện tử là gì?",
+    "options": [ "Phụ thuộc vào Internet", "Không hỗ trợ thẻ tín dụng", "Không hỗ trợ ví điện tử", "Không có phí dịch vụ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 91: Doanh nghiệp thường gửi hóa đơn điện tử qua đâu?",
+    "options": [ "Fax", "Email", "Điện thoại bàn", "Tin nhắn SMS" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 92: Trong quản lý rủi ro, yếu tố KHÔNG thuộc biện pháp bảo mật là gì?",
+    "options": [ "OTP", "Xác thực hai yếu tố", "Mã hóa", "Tăng phí dịch vụ" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 93: Trong B2C, bước cuối cùng của quy trình mua hàng là gì?",
+    "options": [ "Người bán tiến hành giao hàng", "Khách hàng ký hợp đồng", "Doanh nghiệp phát hành hóa đơn điện tử", "Ngân hàng gửi tiền mặt" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 94: Đặc điểm chính của tiền điện tử là gì?",
+    "options": [ "Do ngân hàng trung ương phát hành", "Phân quyền, dựa trên blockchain", "Không cần công nghệ", "Dễ in ra giấy" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 95: Để đổi tiền từ séc điện tử, người nhận cần gì?",
+    "options": [ "Mã xác nhận", "Sổ hộ khẩu", "Hộ chiếu", "Thẻ cứng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 96: PCI DSS liên quan đến vấn đề nào?",
+    "options": [ "Chuẩn an toàn thanh toán", "Giao tiếp mạng xã hội", "Phần mềm di động", "Lập trình web" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 97: Cổng thanh toán điện tử có vai trò chính là gì?",
+    "options": [ "Bán sản phẩm", "Trung gian xử lý giao dịch", "Lưu trữ dữ liệu", "Cho vay tín dụng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 98: Trong thanh toán điện tử, quyền riêng tư dữ liệu liên quan đến:",
+    "options": [ "Vấn đề bảo mật thông tin cá nhân", "Tăng chi phí", "Không thể thanh toán", "Không có Internet" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 99: Doanh nghiệp cần quản lý công nợ bằng tài khoản nào?",
+    "options": [ "A/P và A/R", "ATM và POS", "Ví điện tử và tiền mặt", "Thẻ ghi nợ và tín dụng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 100: Hạn chế chính của thanh toán điện tử là gì?",
+    "options": [ "Tốn nhiều giấy tờ", "Rủi ro bảo mật và gian lận", "Không thể quản lý chi tiêu", "Bắt buộc phải dùng tiền mặt" ],
+    "answer": 1
+  }
+],
+        //  CHƯƠNG 3 ---------------------------------------------------------------------
+        [
+  {
+    "q": "Câu 3: Biện pháp nào KHÔNG giúp phòng tránh DDoS?",
+    "options": [
+      "Sử dụng dịch vụ bảo mật đám mây",
+      "Phân tích lưu lượng dữ liệu",
+      "Tắt tường lửa ứng dụng web",
+      "Tăng băng thông mạng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 8: Biện pháp nào giúp phòng tránh tấn công XSS?",
+    "options": [
+      "Cho phép tất cả mã JavaScript",
+      "Tắt tường lửa",
+      "Lọc và mã hóa dữ liệu đầu ra",
+      "Sử dụng HTTP thay vì HTTPS"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 13: Tấn công XSS có thể được phát hiện bằng:",
+    "options": [
+      "Kiểm tra tốc độ tải trang",
+      "Phân tích mã nguồn trang web",
+      "Tăng băng thông mạng",
+      "Lưu trữ dữ liệu khách hàng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 17: VPN có thể hỗ trợ:",
+    "options": [
+      "Liên lạc an toàn giữa các chi nhánh",
+      "Liên lạc an toàn giữa các website",
+      "Liên lạc an toàn giữa người dùng và website",
+      "Tắt mã hóa dữ liệu"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 26: Loại nào sau đây KHÔNG phải là một dạng tấn công phishing?",
+    "options": [ "Email Phishing", "Vishing", "Smishing", "DDoS Phishing" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 27: Tại sao sao lưu dữ liệu định kỳ lại quan trọng trong thương mại điện tử?",
+    "options": [
+      "Để tăng tốc độ website",
+      "Để đảm bảo khôi phục hệ thống",
+      "Để mã hóa dữ liệu người dùng",
+      "Để giảm chi phí máy chủ"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 28: Tiêu chuẩn ISO/IEC 27001 yêu cầu:",
+    "options": [
+      "Tăng tốc độ website",
+      "Quản lý an toàn thông tin",
+      "Quản lý rủi ro thông tin",
+      "Giảm chi phí vận hành"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 36: Giai đoạn nào trong kế hoạch an ninh thương mại điện tử liên quan đến việc xác định tài sản cần bảo mật?",
+    "options": [ "Lập kế hoạch", "Thực thi", "Đánh giá", "Giám sát" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 38: Tiêu chuẩn nào đảm bảo xử lý thông tin thẻ tín dụng an toàn?",
+    "options": [ "ISO/IEC 27001", "SMTP", "SSL/TLS", "PCI DSS" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 44: Rủi ro lớn nhất website WordPress có thể bị tấn công nếu:",
+    "options": [
+      "Không cập nhật phần mềm định kỳ",
+      "Sử dụng plugin lỗi thời hoặc không rõ nguồn",
+      "Không sử dụng giao thức HTTPS",
+      "Áp dụng xác thực hai yếu tố"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 46: Chứng chỉ SSL xác thực điều gì khi tạo liên kết mã hóa?",
+    "options": [
+      "Xác thực người truy cập",
+      "Số lượng người dùng",
+      "Danh tính của website",
+      "Dung lượng máy chủ"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 48: Mục tiêu của tấn công phishing là gì?",
+    "options": [
+      "Làm sập website",
+      "Gọi điện giả mạo để lấy thông tin",
+      "Mã hóa dữ liệu người dùng",
+      "Đánh cắp thông tin nhạy cảm bằng cách giả mạo là một thực thể đáng tin cậy"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 61: Tấn công DDoS thường sử dụng:",
+    "options": [
+      "Nhiều thiết bị để tạo lưu lượng giả",
+      "Nhiều thiết bị truy cập",
+      "Giao thức HTTPS",
+      "Tường lửa ứng dụng web"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 69: Nguyên nhân chính dẫn đến việc lộ thông tin thẻ tín dụng là gì?",
+    "options": [
+      "Do lỗi trong hệ thống thanh toán",
+      "Do tấn công từ các hacker",
+      "Tất cả các nguyên nhân trên",
+      "Do người dùng không bảo mật thông tin cá nhân"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 73: Sao lưu dữ liệu hiệu quả yêu cầu:",
+    "options": [
+      "Lưu trữ trên cùng máy chủ",
+      "Kiểm tra dung lượng lưu trữ thường xuyên",
+      "Kiểm tra định kỳ khả năng phục hồi",
+      "Lưu trữ mà không kiểm tra"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 74: Giai đoạn lập kế hoạch trong an ninh TMĐT bao gồm:",
+    "options": [
+      "Thực thi các công nghệ bảo mật",
+      "Xác định mối đe dọa và giải pháp tương ứng",
+      "Giám sát hiệu quả các biện pháp",
+      "Sao lưu dữ liệu định kỳ"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 76: Biểu tượng ổ khóa trong thanh địa chỉ của website biểu thị điều gì?",
+    "options": [
+      "Website không có mã độc",
+      "Website sử dụng mã hóa SSL",
+      "Website",
+      "Website đủ tiêu chuẩn bảo mật trong thanh toán"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 77: Mục tiêu chính của tấn công DDoS là gì?",
+    "options": [
+      "Đánh cắp dữ liệu người dùng",
+      "Làm quá tải tài nguyên hệ thống để dịch vụ không khả dụng",
+      "Cài đặt mã độc lên máy chủ",
+      "Sửa đổi nội dung website"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 79: PCI DSS là viết tắt của gì?",
+    "options": [
+      "Tiêu chuẩn Bảo mật Dữ liệu Thẻ Thanh toán",
+      "Hệ thống Bảo mật Dữ liệu Máy tính Cá nhân",
+      "Tiêu chuẩn Bảo mật Dữ liệu Đám mây Công cộng",
+      "Tiêu chuẩn Lưu trữ Dữ liệu Thẻ Riêng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 81: Phương pháp nào giúp giảm thiểu rủi ro từ tấn công DDoS?",
+    "options": [
+      "Phân tích lưu lượng dữ liệu để phát hiện bất thường",
+      "Sử dụng mật khẩu 2 lớp",
+      "Xây dựng tường lửa để đảm bảo an toàn thông tin hệ thống",
+      "Lưu trữ thông tin thẻ tín dụng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 88: Loại chứng chỉ SSL nào cung cấp mức xác thực cao nhất?",
+    "options": [
+      "Xác thực tên miền",
+      "Xác thực tổ chức",
+      "Xác thực mở rộng",
+      "Xác thực cơ bản"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 89: Biện pháp nào giúp bảo vệ website WordPress khỏi tấn công?",
+    "options": [
+      "Vô hiệu hóa sao lưu dữ liệu",
+      "Sử dụng WAF và giới hạn đăng nhập",
+      "Cho phép tất cả truy cập từ bên ngoài",
+      "Sử dụng giao thức HTTP"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 94: Tường lửa ứng dụng web (WAF) khác tường lửa mạng ở điểm:",
+    "options": [
+      "Chỉ bảo vệ phần cứng",
+      "Tập trung vào lưu lượng HTTP",
+      "Lưu trữ dữ liệu giao dịch",
+      "Tăng tốc độ tải trang"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 97: Vai trò của tường lửa trong an ninh thương mại điện tử là gì?",
+    "options": [
+      "Kiểm soát lưu lượng truy cập website",
+      "Kiểm soát lưu lượng mạng vào và ra",
+      "Lưu trữ dữ liệu người dùng",
+      "Thiết kế giao diện website"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 98: Biện pháp nào giúp phòng tránh SQL Injection?",
+    "options": [
+      "Sử dụng câu truy vấn động",
+      "Kiểm tra và lọc dữ liệu đầu vào",
+      "Tắt mã hóa SSL",
+      "Giảm tần suất sao lưu"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 1: Tấn công XSS có thể được phát hiện bằng:",
+    "options": [
+      "Kiểm tra tốc độ tải trang",
+      "Phân tích mã nguồn trang web",
+      "Tăng băng thông mạng",
+      "Lưu trữ dữ liệu khách hàng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 2: Tấn công SQL Injection xảy ra khi:",
+    "options": [
+      "Dữ liệu đầu vào không được kiểm tra đúng cách",
+      "Máy chủ bị quá tải",
+      "Giao thức HTTPS bị vô hiệu hóa",
+      "Tường lửa bị tắt"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 4: Chứng thực hai yếu tố (2FA) giúp:",
+    "options": [
+      "Giảm chi phí bảo trì hệ thống",
+      "Tăng tốc độ truy cập vào tài khoản",
+      "Chặn tất cả các cuộc tấn công mạng",
+      "Đảm bảo tính bảo mật cao hơn cho tài khoản người dùng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 5: Tường lửa có thể:",
+    "options": [
+      "Tăng tốc độ mạng",
+      "Chặn truy cập trái phép từ bên ngoài",
+      "Lưu trữ dữ liệu người dùng",
+      "Giảm dung lượng máy chủ"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 6: Chứng chỉ SSL được sử dụng để:",
+    "options": [
+      "Bảo vệ thông tin truyền tải giữa trình duyệt và máy chủ",
+      "Tăng tốc độ tải trang web",
+      "Giảm chi phí lưu trữ dữ liệu",
+      "Chặn các cuộc tấn công DDoS"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 7: VPN có thể được sử dụng để:",
+    "options": [
+      "Kết nối internet an toàn",
+      "Tắt mã hóa dữ liệu",
+      "Lưu trữ dữ liệu khách hàng",
+      "Kết nối an toàn giữa các chi nhánh công ty"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 9: Phương pháp phổ biến để phát tán mã độc là gì?",
+    "options": [
+      "Tệp đính kèm email an toàn",
+      "Đánh cắp thông tin đường truyền",
+      "Lưu lượng mạng mã hóa",
+      "Khai thác lỗ hổng bảo mật"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 10: Trọng tâm chính của an ninh trong thương mại điện tử là gì?",
+    "options": [
+      "Bảo vệ thông tin trao đổi và tính toàn vẹn hệ thống",
+      "Đảm bảo xử lý giao dịch nhanh",
+      "Tăng lưu lượng truy cập website",
+      "Giảm chi phí bảo trì máy chủ"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 11: Cổng thanh toán đạt chuẩn PCI DSS giúp:",
+    "options": [
+      "Tăng tốc độ giao dịch",
+      "Lưu trữ dữ liệu thô",
+      "Giảm rủi ro đánh cắp thông tin thẻ",
+      "Tắt mã hóa HTTPS"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 12: Tấn công phishing thường sử dụng kỹ thuật nào sau đây?",
+    "options": [
+      "Gửi email giả mạo yêu cầu nhấp vào liên kết độc hại",
+      "Làm quá tải máy chủ bằng lưu lượng giả mạo",
+      "Chèn mã SQL vào cơ sở dữ liệu",
+      "Mã hóa dữ liệu giao dịch"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 14: Loại tấn công nào sau đây là một dạng của phishing?",
+    "options": [ "SQL Injection", "Call Phishing", "SMS Phishing", "Tấn công Zero-Day" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 15: Tại sao doanh nghiệp nên sử dụng cổng thanh toán thứ ba?",
+    "options": [
+      "Để tăng tốc độ website",
+      "Để lưu trữ dữ liệu khách hàng",
+      "Để giảm rủi ro liên quan đến thông tin thẻ tín dụng",
+      "Để giảm chi phí vận hành"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 16: VPN hỗ trợ liên lạc an toàn bằng cách:",
+    "options": [
+      "Tăng tốc độ mạng",
+      "Sử dụng mã hóa và xác thực danh tính",
+      "Tắt tường lửa",
+      "Lưu trữ thông tin giao dịch"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 18: SQL Injection chủ yếu được sử dụng để:",
+    "options": [
+      "Làm quá tải máy chủ",
+      "Theo dõi lưu lượng mạng",
+      "Mã hóa dữ liệu người dùng",
+      "Thực thi các truy vấn SQL trái phép trên cơ sở dữ liệu"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 19: Lỗ hổng Zero-Day nguy hiểm vì:",
+    "options": [
+      "Đã có bản vá chính thức",
+      "Lỗ hổng chưa được nhà phát triển biết đến",
+      "Chỉ ảnh hưởng đến phần mềm mã nguồn đóng",
+      "Lỗ hổng bảo mật do bên thứ 3 phát hiện"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 20: DDoS là gì?",
+    "options": [
+      "Tấn công website từ 1 nguồn lưu lượng truy cập giả mạo",
+      "Tấn công từ chối dịch vụ",
+      "Bảo mật Dữ liệu Động",
+      "Tấn công bằng cách làm cho hệ thống bị quá tải bằng lưu lượng truy cập giả mạo."
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 21: Tường lửa ứng dụng web (WAF) có thể:",
+    "options": [
+      "Ngăn chặn tấn công dựa trên lưu lượng HTTP",
+      "Hạn chế tấn công DDoS",
+      "Lưu trữ dữ liệu người dùng",
+      "Giảm dung lượng máy chủ"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 22: Yếu tố nào góp phần làm gia tăng các cuộc tấn công mạng tại Việt Nam?",
+    "options": [
+      "Thiếu người dùng internet",
+      "Lỗ hổng bảo mật trong quá trình phát triển website",
+      "Sự phát triển mua sắm trực tuyến và số lượng người dùng internet",
+      "Không có nền tảng thương mại điện tử"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 23: Tấn công XSS có thể được ngăn chặn bằng:",
+    "options": [
+      "Cho phép tất cả mã JavaScript",
+      "Sử dụng tiêu đề HTTP bảo mật",
+      "Tắt giao thức HTTPS",
+      "Sử dụng mật khẩu yếu"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 24: Biện pháp nào giúp giảm thiểu tấn công phishing?",
+    "options": [
+      "Nhấp vào liên kết từ email không rõ nguồn",
+      "Lưu trữ thông tin nhạy cảm trên máy chủ",
+      "Tắt xác thực hai yếu tố",
+      "Luôn cảnh giác với tội phạm trên mạng"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 25: Để phòng tránh tấn công trung gian, nên:",
+    "options": [
+      "Sử dụng mạng Wi-Fi không an toàn",
+      "Sử dụng giao thức HTTPS và VPN",
+      "Tắt tường lửa",
+      "Lưu trữ thông tin thẻ tín dụng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 29: Tấn công DDoS có thể được phát hiện bằng cách:",
+    "options": [
+      "Kiểm tra tốc độ tải trang",
+      "Phân tích lưu lượng mạng bất thường",
+      "Tắt mã hóa SSL",
+      "Lưu trữ thông tin thẻ tín dụng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 30: Tấn công nào dễ xảy ra nhất trên mạng Wi-Fi không an toàn?",
+    "options": [ "Tấn công DDoS", "Tấn công Trung gian (MITM)", "SQL Injection", "Tấn công Zero-Day" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 31: Mục đích của SSL/TLS trong thương mại điện tử là gì?",
+    "options": [
+      "Mã hóa thông tin website",
+      "Mã hóa giao tiếp giữa người dùng và máy chủ",
+      "Quản lý tài khoản người dùng",
+      "Mã hóa thông tin thanh toán"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 32: Tấn công trung gian (Man-in-the-Middle) là gì?",
+    "options": [
+      "Làm quá tải máy chủ bằng lưu lượng giả",
+      "Gửi email giả mạo cho người dùng",
+      "Can thiệp vào giao tiếp giữa 2 hệ thống",
+      "Cài mã độc lên thiết bị người dùng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 33: Tấn công phishing có thể được phát hiện bằng cách:",
+    "options": [
+      "Nhấp vào mọi liên kết trong email",
+      "Sử dụng mạng Wi-Fi công cộng",
+      "Cung cấp thông tin cá nhân ngay lập tức",
+      "Kiểm tra tính xác thực của nguồn thông điệp"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 34: Giai đoạn đánh giá trong kế hoạch an ninh bao gồm:",
+    "options": [
+      "Thực thi công nghệ bảo mật",
+      "Giám sát hiệu quả biện pháp",
+      "Xác định giá trị và rủi ro của tài sản",
+      "Lựa chọn nhà cung cấp dịch vụ"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 35: Tấn công Cross-Site Scripting (XSS) liên quan đến:",
+    "options": [
+      "Chèn mã độc vào website để đánh cắp dữ liệu",
+      "Làm quá tải máy chủ",
+      "Chèn truy vấn SQL vào cơ sở dữ liệu",
+      "Theo dõi lưu lượng mạng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 37: Sao lưu dữ liệu nên được thực hiện:",
+    "options": [
+      "Định kỳ mỗi tháng 1 lần",
+      "Chỉ khi có bản vá mới",
+      "Khi website bị tấn công",
+      "Định kỳ và kiểm tra khả năng phục hồi"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 39: Hậu quả nào sau đây là do mã độc (malware) gây ra?",
+    "options": [
+      "Làm quá tải hệ thống",
+      "Theo dõi hành vi người dùng và đánh cắp dữ liệu",
+      "Làm đầy dung lượng lưu trữ máy chủ",
+      "Giảm hiệu suất phần cứng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 40: Tấn công XSS có thể dẫn đến:",
+    "options": [
+      "Tăng tốc độ tải trang",
+      "Đánh cắp cookie phiên hoặc thông tin đăng nhập",
+      "Tăng dung lượng lưu trữ",
+      "Giảm lưu lượng mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 41: Tường lửa ứng dụng web (WAF) có thể:",
+    "options": [
+      "Chặn các cuộc tấn công SQL Injection",
+      "Ngăn chặn tấn công DoS",
+      "Lưu trữ dữ liệu giao dịch",
+      "Giảm dung lượng máy chủ"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 42: VPN được sử dụng để:",
+    "options": [
+      "Tạo kết nối an toàn quan mạng leased line",
+      "Kết nối an toàn cho mạng nội bộ",
+      "Tạo kết nối an toàn qua mạng công cộng",
+      "Cả 3 câu đều đúng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 43: Mục đích của giai đoạn giám sát trong kế hoạch an ninh thương mại điện tử là gì?",
+    "options": [
+      "Xác định tài sản doanh nghiệp",
+      "Lựa chọn công nghệ bảo mật",
+      "Phát hiện mối đe dọa mới và đánh giá hiệu quả biện pháp",
+      "Thực thi các giải pháp bảo mật"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 45: Biện pháp nào giúp bảo mật thanh toán qua mạng?",
+    "options": [
+      "Lưu trữ thông tin thẻ trên máy chủ",
+      "SSL",
+      "Sử dụng cổng thanh toán đạt chuẩn PCI DSS",
+      "Sử dụng mật khẩu yếu"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 47: Tiêu chuẩn PCI DSS yêu cầu:",
+    "options": [
+      "Tắt mã hóa dữ liệu",
+      "Duy trì bảo mật cao cho thông tin thẻ tín dụng",
+      "Tăng tốc độ giao dịch",
+      "Giảm chi phí vận hành"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 49: Tiêu chuẩn ISO/IEC 27001 liên quan đến lĩnh vực nào?",
+    "options": [
+      "Thiết kế website",
+      "Quản lý an toàn thông tin",
+      "Xử lý thanh toán",
+      "Tối ưu hóa tốc độ mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 50: Chứng chỉ SSL giúp bảo vệ thông tin nào trong giao dịch trực tuyến?",
+    "options": [
+      "Thông tin tài khoản ngân hàng",
+      "Thông tin cá nhân của người dùng",
+      "Thông tin sản phẩm",
+      "Thông tin giao hàng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 51: Tại sao việc sử dụng mật khẩu mạnh lại quan trọng trong bảo mật trực tuyến?",
+    "options": [
+      "Để dễ nhớ hơn",
+      "Để giảm chi phí bảo trì",
+      "Để ngăn chặn truy cập trái phép",
+      "Để tăng tốc độ truy cập"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 52: Tiêu chuẩn PCI DSS yêu cầu doanh nghiệp:",
+    "options": [
+      "Tắt mã hóa dữ liệu",
+      "Thực hiện kiểm tra bảo mật thanh toán định kỳ",
+      "Lưu trữ dữ liệu thô",
+      "Giảm chi phí vận hành"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 53: Để bảo vệ website WordPress, nên:",
+    "options": [
+      "Sử dụng tài khoản quản trị với mật khẩu yếu",
+      "Sử dụng các plugin nhiều người sử dụng",
+      "Tắt cập nhật tự động",
+      "Áp dụng xác thực hai yếu tố và mã hóa HTTPS"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 54: Loại mã độc nào được thiết kế để đòi tiền chuộc nhằm khôi phục quyền truy cập tệp?",
+    "options": [ "Spyware", "Virus", "Worm", "Ransomware" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 55: Tấn công Man-in-the-Middle (MitM) là gì?",
+    "options": [
+      "Tấn công vào hệ thống máy chủ",
+      "Tấn công bằng cách gửi email giả mạo",
+      "Nghe lén và can thiệp vào giao tiếp giữa hai bên",
+      "Tấn công vào mạng Wi-Fi công cộng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 56: Tấn công DDoS có thể gây ra:",
+    "options": [
+      "Tăng tốc độ website",
+      "Làm gián đoạn dịch vụ trực tuyến",
+      "Mã hóa dữ liệu giao dịch",
+      "Tăng dung lượng lưu trữ"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 57: Website WordPress cần biện pháp nào để tăng bảo mật?",
+    "options": [
+      "Sử dụng plugin không rõ nguồn gốc",
+      "Tắt tường lửa",
+      "Cập nhật phần mềm và plugin định kỳ",
+      "Sử dụng mật khẩu mặc định"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 58: Tấn công bằng phần mềm độc hại thường khai thác:",
+    "options": [
+      "Lỗ hổng bảo mật",
+      "Lỗi trên đường truyền",
+      "Lỗ hổng trong CSDL",
+      "Giao thức HTTPS"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 59: Biện pháp nào giúp ngăn chặn tấn công DDoS hiệu quả?",
+    "options": [
+      "Tắt mã hóa HTTPS",
+      "Sử dụng dịch vụ bảo mật với hạ tầng lớn",
+      "Lưu trữ thông tin thẻ tín dụng",
+      "Giảm tần suất sao lưu dữ liệu"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 60: Tấn công trung gian có thể bị ngăn chặn bằng:",
+    "options": [
+      "Sử dụng mạng Wi-Fi công cộng",
+      "Tắt giao thức HTTPS",
+      "Áp dụng mã hóa đầu cuối",
+      "Lưu trữ thông tin nhạy cảm"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 62: Để giảm thiểu tấn công SQL Injection, cần:",
+    "options": [
+      "Sử dụng truy vấn động",
+      "Sử dụng câu lệnh tham số hóa (prepared statements)",
+      "Tắt tường lửa",
+      "Lưu trữ dữ liệu thô"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 63: HTTPS sử dụng giao thức nào để bảo mật truyền dữ liệu?",
+    "options": [ "FTP", "SMTP", "HTTP", "TLS/SSL" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 64: Hậu quả nghiêm trọng nhất của tấn công Zero-Day là:",
+    "options": [
+      "Gây thiệt hại lớn do không có bản vá",
+      "Giảm tốc độ website",
+      "Tăng lưu lượng truy cập",
+      "Giảm chi phí vận hành"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 65: Website WordPress nên sử dụng:",
+    "options": [
+      "Mật khẩu mặc định",
+      "Dùng plugin an toàn",
+      "Các biện pháp như WAF, HTTPS, và cập nhật định kỳ",
+      "Giao thức HTTP"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 66: Tấn công SQL Injection có thể dẫn đến:",
+    "options": [
+      "Truy cập CSDL",
+      "Giảm chi phí vận hành",
+      "Tăng lưu lượng truy cập",
+      "Đọc hoặc sửa đổi dữ liệu cơ sở dữ liệu"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 67: Clone Phishing liên quan đến việc:",
+    "options": [
+      "Tạo bản sao thông điệp hợp pháp với nội dung độc hại",
+      "Làm quá tải máy chủ",
+      "Chèn mã SQL vào cơ sở dữ liệu",
+      "Theo dõi lưu lượng mạng"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 68: VPN giúp:",
+    "options": [
+      "Tăng tốc độ internet",
+      "Lưu trữ dữ liệu người dùng",
+      "Tạo kết nối an toàn qua mạng công cộng",
+      "Chặn lưu lượng mạng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 70: TLS được thiết kế để:",
+    "options": [
+      "Thay thế hoàn toàn HTTP",
+      "Lưu trữ thông tin thanh toán",
+      "Tăng tốc độ truyền dữ liệu",
+      "Khắc phục lỗ hổng của SSL"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 71: SQL Injection có thể bị khai thác khi:",
+    "options": [
+      "Dữ liệu đầu vào được mã hóa",
+      "Tường lửa bị vô hiệu hóa",
+      "Ứng dụng không kiểm tra đầu vào người dùng",
+      "Giao thức HTTP được sử dụng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 72: Chứng chỉ SSL xác thực mở rộng cung cấp:",
+    "options": [
+      "Mức bảo mật thấp nhất",
+      "Xác minh danh tính tổ chức và tên miền",
+      "Tăng tốc độ tải trang",
+      "Giảm chi phí vận hành"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 75: Tấn công Zero-Day là gì?",
+    "options": [
+      "Tấn công sử dụng phần mềm lỗi thời",
+      "Tấn công nhắm vào dữ liệu mã hóa",
+      "Tấn công khai thác lỗ hổng chưa được biết đến",
+      "Tấn công làm quá tải máy chủ"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 78: Chứng chỉ SSL có vai trò gì trong việc bảo mật website?",
+    "options": [
+      "Giúp tăng tốc độ tải trang",
+      "Thay thế hoàn toàn HTTP",
+      "Giảm chi phí duy trì máy chủ",
+      "Đảm bảo tính toàn vẹn và bảo mật thông tin truyền tải"
+    ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 80: Tường lửa hoạt động như:",
+    "options": [
+      "Một công cụ tăng tốc mạng",
+      "Rào chắn giữa mạng an toàn và không an toàn",
+      "Công cụ lưu trữ dữ liệu",
+      "Phần mềm mã hóa giao dịch"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 82: Tấn công Vishing là gì?",
+    "options": [
+      "Tấn công qua tin nhắn SMS",
+      "Tấn công qua cuộc gọi điện thoại",
+      "Tấn công qua email",
+      "Tấn công qua mạng Wi-Fi"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 83: Biện pháp nào KHÔNG hiệu quả để phòng tránh phishing?",
+    "options": [
+      "Kiểm tra URL trước khi nhấp",
+      "Sử dụng xác thực hai yếu tố",
+      "Cung cấp thông tin cá nhân qua email",
+      "Cảnh giác với email không mong muốn"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 84: Tấn công trung gian có thể bị ngăn chặn bằng:",
+    "options": [
+      "Sử dụng giao thức HTTP",
+      "Sử dụng PCI DSS",
+      "Áp dụng chứng chỉ SSL/TLS hợp lệ",
+      "Sử dụng mạng Wi-Fi công cộng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 85: Sao lưu dữ liệu định kỳ giúp:",
+    "options": [
+      "Tăng tốc độ website",
+      "Phục hồi hệ thống khi xảy ra sự cố",
+      "Mã hóa giao dịch",
+      "Giảm lưu lượng mạng"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 86: Tấn công trung gian thường xảy ra khi:",
+    "options": [
+      "Sử dụng HTTPS",
+      "Kết nối qua mạng Wi-Fi không an toàn",
+      "Sử dụng VPN",
+      "Tắt mã hóa dữ liệu"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 87: ISO/IEC 27001 giúp doanh nghiệp:",
+    "options": [
+      "Thiết kế giao diện website",
+      "Xây dựng hệ thống quản lý an toàn thông tin",
+      "Tăng lưu lượng truy cập",
+      "Giảm chi phí vận hành"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 90: Để bảo mật thanh toán qua mạng, nên:",
+    "options": [
+      "Lưu trữ thông tin thẻ trên máy chủ",
+      "Tắt giao thức HTTPS",
+      "Sử dụng mã hóa và xác thực hai yếu tố",
+      "Sử dụng mật khẩu mặc định"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 91: Tấn công trung gian có thể bị khai thác qua:",
+    "options": [
+      "Giao thức HTTPS",
+      "Tường lửa ứng dụng web",
+      "Kỹ thuật giả mạo ARP hoặc DNS",
+      "VPN được cấu hình đúng"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 92: Điều gì là mối quan tâm hàng đầu của khách hàng trong thương mại điện tử?",
+    "options": [
+      "Chỉ truy cập các website nổi tiếng",
+      "Bảo mật thông tin cá nhân trong giao dịch",
+      "Số lượng sản phẩm có sẵn",
+      "Tốc độ tải website"
+    ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 93: Biện pháp nào giúp bảo vệ thông tin cá nhân trong giao dịch trực tuyến?",
+    "options": [
+      "Truy cập vào mạng Wi-Fi công cộng mà không có bảo mật",
+      "Chia sẻ thông tin cá nhân qua email",
+      "Sử dụng mật khẩu mạnh và thay đổi thường xuyên",
+      "Không sử dụng mã hóa dữ liệu"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 95: Nguy cơ bảo mật trong thanh toán qua mạng bao gồm:",
+    "options": [
+      "Tăng tốc độ giao dịch",
+      "Giảm chi phí vận hành",
+      "Đánh cắp thông tin thẻ tín dụng",
+      "Tăng dung lượng lưu trữ"
+    ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 96: Tiêu chuẩn PCI DSS áp dụng cho:",
+    "options": [
+      "Các tổ chức xử lý thông tin thẻ tín dụng",
+      "Các nhà cung cấp dịch vụ internet",
+      "Các công ty thiết kế website",
+      "Các nhà phát triển phần mềm"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 99: Spear Phishing khác với Email Phishing ở điểm nào?",
+    "options": [
+      "Nhắm mục tiêu cụ thể với thông tin cá nhân hóa",
+      "Sử dụng tin nhắn SMS",
+      "Thực hiện qua cuộc gọi điện thoại",
+      "Tạo bản sao website hợp pháp"
+    ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 100: Tấn công XSS thường nhắm đến:",
+    "options": [
+      "Tốc độ tải trang",
+      "Sử dụng câu lệnh SQL",
+      "Dung lượng máy chủ",
+      "Dữ liệu người dùng qua mã JavaScript độc hại"
+    ],
+    "answer": 3
+  }
+],
+        //  CHƯƠNG 4 ---------------------------------------------------------------------
+        [
+  {
+    "q": "Câu 1: Theo Luật Bảo vệ quyền lợi người tiêu dùng, quyền khiếu nại được bảo vệ như thế nào?",
+    "options": [ "Cấm khiếu nại", "Người tiêu dùng có quyền khiếu nại khi có vấn đề liên quan hàng hóa không đúng cam kết", "Chỉ áp dụng cho doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 2: Luật An ninh mạng quy định nguyên tắc nào?",
+    "options": [ "Chỉ tính toàn vẹn", "Tính toàn vẹn, bí mật và khả dụng", "Chỉ tính bí mật", "Không có nguyên tắc" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 3: UNCTAD có vai trò gì trong TMĐT?",
+    "options": [ "Quản lý tên miền", "Hỗ trợ kỹ thuật cho các quốc gia đang phát triển", "Chỉ điều chỉnh giao dịch nội địa", "Cấm sử dụng chứng từ điện tử" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 4: Việt Nam tham gia Công ước về chứng từ điện tử với tư cách gì?",
+    "options": [ "Thành viên chính thức", "Quan sát viên", "Không tham gia", "Tổ chức điều phối" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 5: Pháp luật TMĐT điều chỉnh những nội dung nào?",
+    "options": [ "Chỉ giao dịch truyền thống", "Đặc trưng của TMĐT không có trong thương mại truyền thống", "Chỉ quảng cáo trực tuyến", "Không liên quan đến giao dịch" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 6: Nghị định 26/2007/NĐ-CP quy định gì về giá trị pháp lý của chữ ký số?",
+    "options": [ "Không có giá trị pháp lý", "Áp dụng cho giao dịch ngoại tuyến", "Có giá trị pháp lý trong giao dịch điện tử nếu đáp ứng quy định", "Cấm sử dụng chữ ký số" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 7: Nghị định 26/2007/NĐ-CP quy định về gì?",
+    "options": [ "Thương mại điện tử", "Chữ ký số và dịch vụ chứng thực chữ ký số", "An ninh mạng", "Bảo vệ quyền lợi người tiêu dùng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 8: Luật mẫu về chữ ký điện tử của UNCITRAL nhằm mục đích gì?",
+    "options": [ "Hạn chế sử dụng chữ ký điện tử", "Xây dựng khung pháp lý thống nhất cho chữ ký điện tử", "Chỉ áp dụng cho giao dịch nội địa", "Xây dựng khung pháp lý chữ ký số" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 9: Theo Luật Giao dịch điện tử, chăm sóc khách hàng cần đáp ứng gì?",
+    "options": [ "Không cần bảo vệ quyền lợi khách hàng", "Bảo vệ quyền lợi người tiêu dùng trong giao dịch", "Chỉ áp dụng cho doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 10: Theo Nghị định 52/2013/NĐ-CP, thông báo thiết lập website TMĐT được thực hiện qua đâu?",
+    "options": [ "online.gov.vn", "Cổng thông tin Quản lý hoạt động TMĐT", "Bộ công thương", "Tất cả đều đúng" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 11: Hành vi nào sau đây bị cấm trong TMĐT?",
+    "options": [ "Sử dụng chữ ký số hợp pháp", "Xâm phạm hệ thống thông tin TMĐT", "Bảo vệ dữ liệu cá nhân", "Hỗ trợ khách hàng trực tuyến" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 12: Luật mẫu về TMĐT của UNCITRAL có bao nhiêu điều khoản?",
+    "options": [ "10", "15", "17", "20" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 13: Pháp luật TMĐT giúp gì cho người bán và người mua?",
+    "options": [ "Hạn chế giao dịch", "Đảm bảo quy trình giao dịch thống nhất", "Cấm sử dụng chứng từ điện tử", "Bảo vệ quyền đổi trả cho người mua" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 14: Luật An ninh mạng quy định gì về cơ sở hạ tầng quan trọng?",
+    "options": [ "Không cần bảo vệ", "Bảo vệ an toàn mạng", "Thực hiện biện pháp đặc biệt để bảo vệ", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 15: Theo Luật Giao dịch điện tử, điều kiện để giao dịch điện tử hợp lệ là gì?",
+    "options": [ "Không cần sự đồng tình của các bên", "Phải có sự đồng tình của các bên và tuân thủ pháp luật", "Chỉ cần sử dụng chữ ký số", "Không cần tuân thủ pháp luật" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 16: Luật An toàn thông tin mạng nhằm mục đích gì?",
+    "options": [ "Hạn chế giao dịch trực tuyến", "Bảo vệ an ninh quốc gia và quyền lợi cá nhân trên không gian mạng", "Chỉ bảo vệ dữ liệu doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 17: Theo Nghị định 52/2013/NĐ-CP, ai có thể thiết lập website TMĐT bán hàng?",
+    "options": [ "Thương nhân, tổ chức hoặc cá nhân có mã số thuế", "Doanh nghiệp", "Chỉ cơ quan nhà nước", "Không ai được phép" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 18: Luật An ninh mạng quy định gì về dữ liệu cá nhân?",
+    "options": [ "Không cần bảo vệ", "Quản lý và bảo vệ dữ liệu cá nhân", "Chỉ bảo vệ dữ liệu doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 19: Luật An ninh mạng yêu cầu gì khi xảy ra sự cố an ninh mạng?",
+    "options": [ "Không cần báo cáo", "Báo cáo ngay lập tức cho cơ quan chức năng", "Tắt hệ thống", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 20: Nghị định 57/2006/NĐ-CP là văn bản hướng dẫn luật nào?",
+    "options": [ "Luật An ninh mạng", "Luật Giao dịch điện tử", "Luật Công nghệ thông tin", "Luật Bảo vệ quyền lợi người tiêu dùng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 21: Luật Công nghệ thông tin được thông qua vào ngày nào?",
+    "options": [ "29/6/2005", "29/6/2008", "29/6/2006", "12/6/2018" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 22: Chữ ký số có thể được sử dụng trong những trường hợp nào?",
+    "options": [ "Trong giao dịch điện tử và hợp đồng điện tử", "Không có giá trị pháp lý", "Chỉ trong giao dịch ngoại tuyến", "Chỉ trong giao dịch nội bộ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 23: Công ước về chứng từ điện tử được bao nhiêu quốc gia tham gia ký kết?",
+    "options": [ "10", "50", "60", "200" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 24: Chứng từ điện tử có giá trị pháp lý khi nào?",
+    "options": [ "Khi được chứng thực", "Khi được ký chữ ký số", "Khi được tạo, truyền và lưu trữ qua phương tiện điện tử", "Không có giá trị pháp lý" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 25: Luật An toàn thông tin mạng bảo vệ thông tin gì?",
+    "options": [ "Chỉ dữ liệu cá nhân", "Thông tin liên quan đến an ninh quốc gia", "Chỉ dữ liệu doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 26: Tổ chức nào chịu trách nhiệm phát triển Luật mẫu về TMĐT?",
+    "options": [ "WTO", "UNCITRAL", "ICANN", "EU" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 27: Luật mẫu về TMĐT của UNCITRAL được thông qua vào năm nào?",
+    "options": [ "1996", "1997", "2000", "2005" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 28: Ủy ban Châu Âu có vai trò gì trong TMĐT?",
+    "options": [ "Quản lý tên miền", "Đề xuất và thực hiện quy định về TMĐT trong EU", "Chỉ điều chỉnh giao dịch nội địa", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 29: Hiệp hội Thương mại Điện tử Toàn cầu (GeCommerce) có vai trò gì?",
+    "options": [ "Quản lý tên miền", "Quản lý hosting", "Chỉ điều chỉnh giao dịch nội địa", "Hướng dẫn và tư vấn cho doanh nghiệp về TMĐT" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 30: Chứng minh thư điện tử được sử dụng để làm gì?",
+    "options": [ "Tăng tốc độ website", "Không liên quan đến TMĐT", "Bảo vệ an toàn thông tin trên mạng", "Xác minh danh tính trực tuyến và đảm bảo an toàn giao dịch" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 31: ICANN có vai trò gì trong TMĐT?",
+    "options": [ "Quản lý hệ thống tên miền trên Internet", "Ban hành luật TMĐT", "Chỉ hỗ trợ giao dịch nội địa", "Điều chỉnh giá cả sản phẩm trực tuyến" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 32: Nghị định 52/2013/NĐ-CP quy định gì về tên miền website TMĐT?",
+    "options": [ "Phải có tên miền .vn", "Chỉ cần tên miền quốc tế", "Phải có tên miền hợp lệ và tuân thủ quy định", "Không liên quan đến tên miền" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 33: Hợp đồng điện tử được thực hiện qua phương tiện nào?",
+    "options": [ "Chỉ qua giấy tờ truyền thống", "Qua Internet, email hoặc các hình thức truyền thông điện tử", "Thông qua internet", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 34: Hành vi nào bị coi là vi phạm pháp luật TMĐT?",
+    "options": [ "Sử dụng chứng từ điện tử hợp pháp", "Giả mạo, chiếm đoạt chứng từ điện tử", "Tăng cường bảo mật hệ thống", "Hỗ trợ giao dịch trực tuyến" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 35: Luật Bảo vệ quyền lợi người tiêu dùng quy định gì về đổi/trả hàng?",
+    "options": [ "Cấm đổi/trả hàng", "Yêu cầu doanh nghiệp có chính sách đổi/trả hàng rõ ràng", "Chỉ áp dụng cho giao dịch ngoại tuyến", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 36: Luật Giao dịch điện tử là nền tảng cho lĩnh vực nào?",
+    "options": [ "Chỉ giao dịch ngoại tuyến", "Giao dịch thương mại điện tử", "Giao dịch sử dụng công nghệ thông tin và truyền thông", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 37: Theo Luật Giao dịch điện tử, quảng cáo cần đáp ứng yêu cầu gì?",
+    "options": [ "Cho phép quảng cáo giả mạo", "Nội dung chính xác và rõ ràng", "Cấm mọi hình thức quảng cáo", "Không liên quan đến quảng cáo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 38: Nghị định 26/2007/NĐ-CP quy định gì về chứng thư số?",
+    "options": [ "Không liên quan đến chứng thư số", "Cấm sử dụng chứng thư số", "Chỉ điều chỉnh giao dịch nội địa", "Quản lý và cung cấp dịch vụ chứng thực chữ ký số" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 39: Luật Giao dịch điện tử quy định gì về chữ ký số?",
+    "options": [ "Không có giá trị pháp lý", "Thay thế con dấu", "Chỉ dùng cho giao dịch nội địa", "Thay thế chữ ký truyền thống trên giấy" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 40: WTO chịu trách nhiệm gì trong TMĐT?",
+    "options": [ "Quản lý tên miền Internet", "Đề xuất quy định về thương mại điện tử", "Chỉ điều chỉnh thương mại truyền thống", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 41: Luật Bảo vệ quyền lợi người tiêu dùng quy định gì về thanh toán trực tuyến?",
+    "options": [ "Đảm bảo an toàn cho thanh toán trực tuyến", "Đảm bảo an ninh cho thanh toán trực tuyến", "Chỉ áp dụng cho giao dịch ngoại tuyến", "Đảm bảo bảo mật và an toàn thông tin trên mạng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 42: Luật An ninh mạng Việt Nam có hiệu lực từ ngày nào?",
+    "options": [ "1/1/2007", "1/7/2016", "1/1/2019", "1/1/2020" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 43: Theo Nghị định 52/2013/NĐ-CP, thông tin nào phải thông báo khi thiết lập website TMĐT?",
+    "options": [ "Chỉ tên miền website", "Khai báo thông tin cá nhân", "Tên miền, loại hàng hóa, thông tin đăng ký kinh doanh, v.v.", "Không cần thông báo" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 44: Luật Bảo vệ quyền lợi người tiêu dùng yêu cầu gì về quảng cáo?",
+    "options": [ "Không cho phép quảng cáo giả mạo", "Hàng hóa chính hãng", "Cung cấp thông tin chính xác, rõ ràng về sản phẩm", "Không liên quan đến quảng cáo" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 45: Văn bản pháp luật về TMĐT giúp gì khi xảy ra tranh chấp?",
+    "options": [ "Không liên quan đến tranh chấp", "Hạn chế quyền khiếu nại", "Là cơ sở pháp lý để giải quyết tranh chấp", "Cấm giải quyết tranh chấp" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 46: Luật An toàn thông tin mạng quy định gì về hệ thống thông tin quan trọng?",
+    "options": [ "Không cần bảo vệ", "Quản lý và bảo vệ hệ thống thông tin quan trọng của quốc gia", "Chỉ bảo vệ dữ liệu cá nhân", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 47: Luật Bảo vệ quyền lợi người tiêu dùng quy định điều gì về giao dịch trực tuyến?",
+    "options": [ "Chỉ áp dụng cho giao dịch nội địa", "Người tiêu dùng có quyền khiếu nại khi có vấn đề xảy ra", "Cấm giao dịch trực tuyến", "Không bảo vệ quyền lợi người tiêu dùng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 48: Luật An ninh mạng áp dụng cho ai?",
+    "options": [ "Chỉ cơ quan nhà nước", "Chỉ doanh nghiệp", "Tất cả cá nhân, tổ chức hoạt động trong không gian mạng", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 49: Luật An toàn thông tin mạng quy định gì về phòng chống tấn công mạng?",
+    "options": [ "Không đề cập đến tấn công mạng", "Bảo vệ dữ liệu cá nhân", "Đưa ra biện pháp phòng chống tấn công mạng", "Bảo vệ hoạt động liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 50: Luật An toàn thông tin mạng có hiệu lực từ ngày nào?",
+    "options": [ "1/7/2016", "1/7/2017", "1/1/2019", "1/1/2020" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 51: Luật Công nghệ thông tin hỗ trợ TMĐT bằng cách nào?",
+    "options": [ "Hạn chế ứng dụng công nghệ thông tin", "Tạo hành lang pháp lý cho ứng dụng và phát triển công nghệ thông tin", "Chỉ bảo vệ dữ liệu doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 52: Văn bản pháp luật về TMĐT có tác dụng nào sau đây?",
+    "options": [ "Tạo hành lang pháp lý thống nhất cho giao dịch TMĐT", "Hạn chế giao dịch trực tuyến", "Chỉ điều chỉnh giao dịch truyền thống", "Không liên quan đến tranh chấp" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 53: Luật An toàn thông tin mạng quy định trách nhiệm của ai trong bảo vệ an ninh mạng?",
+    "options": [ "Chỉ cơ quan nhà nước", "Doanh nghiệp", "Tổ chức và cá nhân", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 54: Công ước về chứng từ điện tử được ký kết vào năm nào?",
+    "options": [ "2000", "2005", "2006", "2010" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 55: Luật An toàn thông tin mạng thúc đẩy điều gì?",
+    "options": [ "Hạn chế giao dịch trực tuyến", "Hợp tác quốc tế trong an ninh mạng", "Chỉ bảo vệ dữ liệu nội địa", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 56: Luật Công nghệ thông tin có hiệu lực từ ngày nào?",
+    "options": [ "1/1/2005", "1/1/2007", "1/7/2016", "1/1/2019" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 57: Luật mẫu về TMĐT của UNCITRAL được công bố bởi tổ chức nào?",
+    "options": [ "WTO", "Đại hội đồng Liên Hợp Quốc", "EU", "ICANN" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 58: Nghị định 13/2023/NĐ-CP có liên quan đến TMĐT như thế nào?",
+    "options": [ "Quy định về bảo vệ dữ liệu cá nhân trong giao dịch", "Chỉ điều chỉnh giao dịch ngoại tuyến", "Cấm sử dụng dữ liệu cá nhân", "Không liên quan đến TMĐT" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 59: Luật Bảo vệ quyền lợi người tiêu dùng yêu cầu gì về thông tin pháp lý?",
+    "options": [ "Không cần cung cấp", "Thông tin cá nhân", "Cung cấp thông tin đầy đủ về điều kiện giao dịch", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 60: Luật Bảo vệ quyền lợi người tiêu dùng quy định điều gì về thông tin sản phẩm?",
+    "options": [ "Không cần cung cấp thông tin", "Cung cấp thông tin đầy đủ và chính xác về sản phẩm", "Chỉ cần thông tin sơ sài", "Cấm cung cấp thông tin" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 61: Theo Luật Giao dịch điện tử, tài liệu điện tử hợp pháp cần điều kiện gì?",
+    "options": [ "Không cần chứng thực", "Chỉ cần chữ ký truyền thống", "Phải được chứng thực theo quy định pháp luật", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 62: Luật An toàn thông tin mạng quy định gì về tên miền quốc gia?",
+    "options": [ "Không cần bảo vệ", "Quản lý và bảo vệ tên miền .com", "Quản lý và bảo vệ tên miền .vn", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 63: Nghị định 13/2023/NĐ-CP bảo vệ dữ liệu cá nhân trong giao dịch nào?",
+    "options": [ "Giao dịch ngoại tuyến", "Giao dịch xuất khẩu hàng hóa", "Giao dịch thương mại điện tử", "Không liên quan đến TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 64: Điều nào không được phép trong giao dịch điện tử theo Luật Giao dịch điện tử?",
+    "options": [ "Thực hiện giao dịch mà không có sự đồng ý của các bên", "Sử dụng chữ ký số bất hợp pháp", "Đảm bảo tính bảo mật thông tin", "Giao dịch qua các phương tiện điện tử" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 65: Luật Bảo vệ quyền lợi người tiêu dùng cấm hành vi nào?",
+    "options": [ "Quảng cáo hơn với sự thật", "Quảng cáo sai sự thật", "Quảng cáo giả mạo", "Bảo vệ dữ liệu cá nhân" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 66: Nghị định 57/2006/NĐ-CP công nhận điều gì?",
+    "options": [ "Chứng từ điện tử không có giá trị pháp lý", "Thay thế hợp đồng điện tử", "Chứng từ điện tử có giá trị pháp lý tương đương chứng từ truyền thống", "Sử dụng chứng từ điện tử thay thế văn bản truyền thống" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 67: Luật An ninh mạng quy định gì về tội phạm mạng?",
+    "options": [ "Không đề cập đến tội phạm mạng", "Đưa ra biện pháp phòng chống tội phạm mạng", "Chỉ bảo vệ dữ liệu doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 68: Luật Giao dịch điện tử tại Việt Nam được ban hành vào năm nào?",
+    "options": [ "2005", "2006", "2010", "2015" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 69: Giao dịch điện tử được định nghĩa là gì?",
+    "options": [ "Mua bán hàng hóa qua cửa hàng vật lý", "Giao dịch sử dụng Internet", "Trao đổi hàng hóa, dịch vụ hoặc thông tin qua phương tiện điện tử", "Chỉ quảng cáo sản phẩm trực tuyến" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 70: Nghị định 13/2023/NĐ-CP quy định về gì?",
+    "options": [ "Thương mại điện tử", "Bảo vệ dữ liệu cá nhân", "Chữ ký số", "An ninh mạng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 71: Chứng thư số có chức năng gì?",
+    "options": [ "Tăng tốc độ giao dịch", "Xác định tính xác thực của chứng từ điện tử và đối tác giao dịch", "Chỉ dùng để quảng cáo", "Không liên quan đến bảo mật" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 72: Luật Công nghệ thông tin phục vụ mục tiêu nào?",
+    "options": [ "Phát triển kinh tế tri thức và công nghiệp hóa", "Phát triển công nghiệp hóa", "Bảo vệ dữ liệu doanh nghiệp", "Không liên quan đến TMĐT" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 73: Chứng từ điện tử cần điều kiện gì để được công nhận giá trị pháp lý?",
+    "options": [ "Phải được lưu trữ và truyền trên phương tiện điện tử", "Không cần chứng thực", "Chỉ cần có chữ ký truyền thống", "Phải được tạo và lưu trữ qua phương tiện điện tử hợp pháp" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 74: Một trong những tác dụng của pháp luật TMĐT là gì?",
+    "options": [ "Hạn chế giao dịch trực tuyến", "Đem lại niềm tin cho các bên tham gia TMĐT", "Chỉ bảo vệ", "Bảo vệ người tiêu dùng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 75: Luật An toàn thông tin mạng có những quy định nào về trách nhiệm của tổ chức?",
+    "options": [ "Các tổ chức phải có biện pháp bảo vệ an toàn thông tin", "Yêu cầu báo cáo sự cố an ninh mạng", "Cấm tổ chức thu thập dữ liệu cá nhân", "Không có quy định nào" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 76: Theo Luật Bảo vệ quyền lợi người tiêu dùng, doanh nghiệp phải làm gì?",
+    "options": [ "Cấm khiếu nại", "Không bảo vệ dữ liệu cá nhân", "Có chính sách đổi/trả hàng công bằng", "Bảo vệ việc gian lận thương mại trong giao dịch TMĐT" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 77: Chữ ký số có vai trò gì trong TMĐT?",
+    "options": [ "Thay thế chữ ký truyền thống trên giấy", "Chỉ dùng để trang trí tài liệu", "Thay thế con dấu", "Chỉ dùng trong giao dịch ngoại tuyến" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 78: Tổ chức nào cung cấp hỗ trợ kỹ thuật về TMĐT cho các quốc gia đang phát triển?",
+    "options": [ "UNCTAD", "ICANN", "OECD", "ICC" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 79: Website thông báo/đăng ký hoạt động TMĐT với Bộ công thương",
+    "options": [ "online.gov.vn", "dangkyonline.gov.vn", "online.org.vn", "Khác" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 80: Luật Bảo vệ quyền lợi người tiêu dùng được thông qua vào năm nào?",
+    "options": [ "2005", "2012", "2010", "2018" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 81: Theo Luật Giao dịch điện tử, có bao nhiêu văn bản dưới luật được ban hành trong 2006-2007?",
+    "options": [ "Một vài", "Hàng loạt", "Không có", "Chỉ một" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 82: Công ước về chứng từ điện tử nhằm mục đích gì?",
+    "options": [ "Bảo vệ giao dịch quốc tế", "Đảm bảo giá trị pháp lý ngang nhau giữa văn bản giấy và điện tử", "Chỉ áp dụng cho giao dịch nội địa", "Cấm sử dụng hợp đồng điện tử" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 83: Phạm vi áp dụng của Luật Giao dịch điện tử là gì?",
+    "options": [ "Chỉ áp dụng cho doanh nghiệp", "Áp dụng cho cả doanh nghiệp và cá nhân tham gia giao dịch điện tử", "Chỉ áp dụng cho giao dịch ngoại tuyến", "Không liên quan đến TMĐT" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 84: Nghị định 26/2007/NĐ-CP quy định về gì?",
+    "options": [ "Thương mại điện tử", "Chữ ký số và dịch vụ chứng thực chữ ký số", "An ninh mạng", "Bảo vệ quyền lợi người tiêu dùng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 85: Luật Giao dịch điện tử quy định gì về hợp đồng điện tử?",
+    "options": [ "Phải được công bố công khai trên internet", "Chỉ áp dụng cho giao dịch nội địa", "Có giá trị pháp lý tương đương hợp đồng truyền thống", "Cấm sử dụng hợp đồng điện tử" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 86: Điều nào sau đây không phải là quyền của người tiêu dùng theo Luật Bảo vệ quyền lợi người tiêu dùng?",
+    "options": [ "Quyền được thông tin đầy đủ", "Quyền được bồi thường thiệt hại", "Quyền từ chối giao dịch", "Quyền không trả tiền cho sản phẩm" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 87: Chữ ký số được cấp bởi tổ chức nào?",
+    "options": [ "Các tổ chức chứng thực chữ ký số", "Chính phủ", "Các công ty công nghệ thông tin", "Ngân hàng thương mại" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 88: Hành vi nào bị cấm theo Luật Giao dịch điện tử?",
+    "options": [ "Sử dụng chứng từ điện tử hợp pháp", "Cấm sử dụng chữ ký số", "Ngăn cản sử dụng chứng từ điện tử", "Hỗ trợ giao dịch trực tuyến" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 89: UNCITRAL chịu trách nhiệm gì trong TMĐT?",
+    "options": [ "Phát triển luật thương mại quốc tế", "Bảo vệ tên miền", "Chỉ điều chỉnh giao dịch nội địa", "Không liên quan đến TMĐT" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 90: Phần I của Luật mẫu về TMĐT của UNCITRAL gồm những nội dung gì?",
+    "options": [ "Quy định về vận tải hàng hóa", "Liên quan đến chữ ký số", "Giới thiệu khái quát về TMĐT", "Điều chỉnh giao dịch nội địa" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 91: Luật Giao dịch điện tử quy định về bảo mật thông tin như thế nào?",
+    "options": [ "Cấm sử dụng thông tin cá nhân trong giao dịch", "Chỉ yêu cầu bảo mật thông tin doanh nghiệp", "Yêu cầu các bên phải bảo vệ thông tin cá nhân và dữ liệu giao dịch", "Không có quy định nào về bảo mật thông tin" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 92: Hành vi nào bị cấm theo Luật Giao dịch điện tử?",
+    "options": [ "Sử dụng công nghệ điện tử hợp pháp", "Hạn chế khả năng chọn công nghệ điện tử", "Tăng cường bảo mật hệ thống", "Hỗ trợ giao dịch trực tuyến" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 93: Chứng từ điện tử bao gồm loại nào sau đây?",
+    "options": [ "Hóa đơn giấy", "Hóa đơn điện tử, hợp đồng điện tử và các chứng từ điện tử khác", "Hóa đơn điện tử", "Giấy phép vật lý" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 94: Luật mẫu về chữ ký điện tử của UNCITRAL có tài liệu hướng dẫn gì?",
+    "options": [ "Không có hướng dẫn", "Bản hướng dẫn thi hành chi tiết cho từng điều khoản", "Chỉ hướng dẫn giao dịch nội địa", "Cấm sử dụng chữ ký số" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 95: Theo Luật Giao dịch điện tử, quyền nào của người tiêu dùng được bảo vệ?",
+    "options": [ "Quyền hủy bỏ giao dịch", "Quyền không nhận thông tin", "Quyền tăng giá sản phẩm", "Quyền không khiếu nại" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 96: Luật Giao dịch điện tử quy định gì về bảo mật thông tin?",
+    "options": [ "Không cần bảo vệ dữ liệu cá nhân", "Bảo vệ thông tin và dữ liệu cá nhân trong giao dịch", "Chỉ bảo vệ dữ liệu doanh nghiệp", "Không liên quan đến bảo mật" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 97: Công ước về chứng từ điện tử được thông qua vào năm nào?",
+    "options": [ "1996", "2000", "2005", "2010" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 98: Nghị định 57/2006/NĐ-CP quy định về gì?",
+    "options": [ "Chữ ký số", "Thương mại điện tử", "An ninh mạng", "Bảo vệ dữ liệu cá nhân" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 99: Luật Công nghệ thông tin hỗ trợ hội nhập quốc tế với tổ chức nào?",
+    "options": [ "Chỉ EU", "ASEAN, APEC, WTO", "Chỉ UNCITRAL", "Không liên quan đến hội nhập" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 100: Điều kiện nào cần để thiết lập website TMĐT bán hàng theo Nghị định 52/2013/NĐ-CP?",
+    "options": [ "Có tên miền hợp lệ và thông báo với Bộ Công Thương", "Không cần thông báo với Bộ Công Thương", "Chỉ cần có mã số thuế cá nhân", "Không cần tên miền hợp lệ" ],
+    "answer": 0
+  }
+],
+        //  CHƯƠNG 5 ---------------------------------------------------------------------
+        [
+  {
+    "q": "Câu 1: Hạn chế của TMĐT đối với xã hội là gì?",
+    "options": [ "Cải thiện mức sống", "Tăng thất nghiệp", "Tăng khả năng tiếp cận toàn cầu", "Giảm cạnh tranh" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 2: Danh mục sản phẩm nào được mua trực tuyến nhiều nhất tại Việt Nam?",
+    "options": [ "Điện tử", "Quần áo, giày dép và mỹ phẩm", "Nội thất", "Sách" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 3: Đặc điểm của thương mại thông tin là gì?",
+    "options": [ "Thanh toán trực tuyến", "Thông tin sản phẩm trên website", "Tự động hóa toàn bộ quy trình", "Tích hợp ứng dụng di động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 4: Hạn chế của TMĐT đối với người tiêu dùng là gì?",
+    "options": [ "Đa dạng sản phẩm hơn", "Nguy cơ mất dữ liệu cá nhân", "Giá thấp hơn", "Giao hàng nhanh hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 5: Xu hướng toàn cầu liên quan đến thiết bị di động trong TMĐT là gì?",
+    "options": [ "Giảm sử dụng ứng dụng di động", "Tăng mua sắm di động", "Hạn chế tùy chọn thanh toán di động", "Giảm khả năng tiếp cận di động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 6: Điều gì cho phép doanh nghiệp hoạt động 24/7 trong TMĐT?",
+    "options": [ "Hạn chế của cửa hàng vật lý", "Nền tảng dựa trên Internet", "Quy trình giao dịch thủ công", "Giờ hoạt động giới hạn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 7: Mô hình TMĐT nào bao gồm các dịch vụ công trực tuyến?",
+    "options": [ "B2B", "C2C", "G2C", "B2C" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 8: TMĐT mang lại lợi ích gì cho người tiêu dùng?",
+    "options": [ "Ít lựa chọn sản phẩm hơn", "Giá cao hơn", "Nhiều lựa chọn sản phẩm và dịch vụ hơn", "Thời gian giao hàng lâu hơn" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 9: Doanh thu TMĐT ước tính tại Việt Nam năm 2021 là bao nhiêu?",
+    "options": [ "10 tỷ USD", "13,7 tỷ USD", "20 tỷ USD", "5 tỷ USD" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 10: B2C trong TMĐT là viết tắt của gì?",
+    "options": [ "Doanh nghiệp - Người tiêu dùng", "Doanh nghiệp - Doanh nghiệp", "Người tiêu dùng - Người tiêu dùng", "Doanh nghiệp - Chính phủ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 11: Công nghệ nào đã thúc đẩy mạnh mẽ TMĐT trong thập niên 2000?",
+    "options": [ "Internet quay số", "Ứng dụng di động", "Máy fax", "Máy điện báo" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 12: Lợi ích của TMĐT di động là gì?",
+    "options": [ "Hạn chế khả năng tiếp cận", "Trải nghiệm mua sắm linh hoạt", "Chi phí cao hơn", "Giảm dữ liệu khách hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 13: Đặc điểm của sàn giao dịch TMĐT là gì?",
+    "options": [ "Người bán đơn lẻ", "Nhiều người bán và người mua", "Không có thanh toán trực tuyến", "Hạn chế đa dạng sản phẩm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 14: Người dùng có thể làm gì ở dịch vụ công trực tuyến cấp độ 2?",
+    "options": [ "Nộp hồ sơ trực tuyến", "Tải và điền biểu mẫu", "Hoàn thành tất cả giao dịch trực tuyến", "Chỉ truy cập thông tin" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 15: Doanh thu TMĐT toàn cầu hàng năm xấp xỉ bao nhiêu?",
+    "options": [ "1 nghìn tỷ USD", "3 nghìn tỷ USD", "6 nghìn tỷ USD", "10 nghìn tỷ USD" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 16: Lý do nào khiến Shopee dẫn đầu tại Việt Nam?",
+    "options": [ "Hạn chế đa dạng sản phẩm", "Độ tin cậy cao và dễ tiếp cận", "Thiếu hỗ trợ ứng dụng di động", "Giá cao hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 17: Nền tảng nào là ví dụ về TMĐT mạng xã hội?",
+    "options": [ "Microsoft Teams", "TikTok", "Zoom", "Skype" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 18: Nền tảng nào KHÔNG phải là sàn TMĐT?",
+    "options": [ "Shopee", "Lazada", "Tiki", "Grap" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 19: Thập niên nào đánh dấu sự xuất hiện của các trang web mua sắm trực tuyến đầu tiên?",
+    "options": [ "Thập niên 1970", "Thập niên 1980", "Thập niên 1990", "Thập niên 2000" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 20: Mục tiêu của dịch vụ công trực tuyến là gì?",
+    "options": [ "Giảm tính minh bạch", "Tăng hiệu quả hành chính", "Hạn chế truy cập công chúng", "Chi phí cao hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 21: Đặc điểm của website TMĐT là gì?",
+    "options": [ "Kết nối nhiều người mua và người bán", "Do một doanh nghiệp vận hành để bán sản phẩm của mình", "Chỉ dành cho mạng xã hội", "Không hỗ trợ thanh toán trực tuyến" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 22: Trí tuệ nhân tạo đóng vai trò gì trong sự phát triển của TMĐT?",
+    "options": [ "Giảm tốc độ Internet", "Cá nhân hóa trải nghiệm mua sắm", "Đa dạng hóa hình thức sản phẩm", "Tăng sự phụ thuộc vào cửa hàng vật lý" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 23: Thách thức của TMĐT do yêu cầu kỹ năng gây ra là gì?",
+    "options": [ "Giảm cạnh tranh", "Tăng bất bình đẳng xã hội", "Giảm chi phí hoạt động", "Cải thiện dịch vụ khách hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 24: Bao nhiêu phần trăm người mua sắm trực tuyến tại Việt Nam sử dụng website TMĐT?",
+    "options": [ "42%", "47%", "78%", "90%" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 25: Định nghĩa chính về thương mại điện tử theo tài liệu là gì?",
+    "options": [ "Mua bán hàng hóa và dịch vụ qua các cửa hàng vật lý", "Thực hiện các hoạt động thương mại qua các công cụ điện tử, đặc biệt là Internet", "Trao đổi hàng hóa và dịch vụ không sử dụng Internet", "Quảng cáo sản phẩm trên các nền tảng mạng xã hội" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 26: Đâu là ví dụ về một nền tảng TMĐT?",
+    "options": [ "Microsoft Office", "Amazon", "Google Search", "Adobe Photoshop" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 27: Lợi ích của TMĐT đối với doanh nghiệp là gì?",
+    "options": [ "Tăng chi phí lưu kho", "Giảm độ trễ phân phối", "Hạn chế phạm vi thị trường", "Chi phí hoạt động cao hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 28: Nền tảng nào có số lượt truy cập cao nhất tại Việt Nam vào tháng 2/2022?",
+    "options": [ "Lazada", "Tiki", "Shopee", "Chợ Tốt" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 29: Ví dụ về dịch vụ công trực tuyến tại Việt Nam?",
+    "options": [ "Gia hạn giấy phép lái xe", "Đăng bài mạng xã hội", "Phát trực tuyến video", "Mua vé xe qua mạng" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 30: Đặc điểm chính của TMĐT theo định nghĩa của APEC là gì?",
+    "options": [ "Các giao dịch chỉ được thực hiện ngoại tuyến", "Các giao dịch chủ yếu là điện tử và dựa trên Internet", "Các giao dịch chỉ giới hạn ở hàng hóa vật lý", "Các giao dịch không bao gồm dịch vụ" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 31: Công nghệ nào được kỳ vọng sẽ nâng cao trải nghiệm TMĐT?",
+    "options": [ "Máy fax", "Thực tế ảo (VR)", "Máy đánh chữ", "Điện thoại analog" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 32: Mô hình TMĐT nào mà Airbnb thuộc về?",
+    "options": [ "B2B", "B2C", "C2C", "G2C" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 33: TMĐT có thể tác động tiêu cực đến xã hội như thế nào?",
+    "options": [ "Cải thiện mức sống", "Tăng thất nghiệp do tự động hóa", "Giảm cạnh tranh", "Tăng khả năng tiếp cận toàn cầu" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 34: Thuật ngữ 'thương mại không giấy tờ' dùng để chỉ gì?",
+    "options": [ "Bán lẻ truyền thống", "Một từ đồng nghĩa với TMĐT", "Trao đổi tài liệu vật lý", "Giao dịch không số hóa" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 35: Xu hướng liên quan đến kênh bán hàng trong TMĐT là gì?",
+    "options": [ "Bán hàng đơn kênh", "Bán hàng đa kênh", "Bán hàng chỉ ngoại tuyến", "Hạn chế tương tác khách hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 36: TMĐT chiếm bao nhiêu phần trăm tổng doanh thu bán lẻ tại Việt Nam năm 2021?",
+    "options": [ "3%", "6,5%", "10%", "15%" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 37: Thương mại điện tử B2B là gì?",
+    "options": [ "Doanh nghiệp bán hàng cho chính phủ", "Người tiêu dùng bán hàng cho doanh nghiệp", "Doanh nghiệp bán hàng cho người tiêu dùng", "Doanh nghiệp bán hàng cho doanh nghiệp khác" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 38: Tại sao người tiêu dùng thích TMĐT hơn mua sắm truyền thống?",
+    "options": [ "Thiếu sự đa dạng sản phẩm", "Tiện lợi và giá thấp hơn", "Chi phí giao hàng cao hơn", "Hạn chế tiếp cận" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 39: Công nghệ nào hỗ trợ cá nhân hóa trải nghiệm TMĐT?",
+    "options": [ "Trí tuệ nhân tạo (AI)", "Nhập dữ liệu thủ công", "Máy fax", "Máy đánh chữ" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 40: Thách thức đối với người tiêu dùng TMĐT là gì?",
+    "options": [ "Nhiều lựa chọn sản phẩm hơn", "Thiếu tương tác vật lý", "Giá thấp hơn", "Giao hàng nhanh hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 41: Lợi ích của dịch vụ công trực tuyến đối với người dân là gì?",
+    "options": [ "Tăng chi phí di chuyển", "Giảm thời gian và chi phí", "Hạn chế truy cập dịch vụ", "Tăng phí hành chính" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 42: Lợi ích của dịch vụ công trực tuyến cấp độ 4 là gì?",
+    "options": [ "Tăng lượt ghé thăm trực tiếp", "Hoàn thành giao dịch trực tuyến", "Hạn chế khả năng tiếp cận", "Chi phí cao hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 43: Công ty nào được xem là tiên phong trong lĩnh vực TMĐT?",
+    "options": [ "Google", "Amazon", "Microsoft", "Apple" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 44: Thách thức đối với các nền tảng TMĐT Việt Nam là gì?",
+    "options": [ "Thiếu truy cập Internet", "Sự chi phối của các nền tảng nước ngoài", "Hạn chế đa dạng sản phẩm", "Thời gian giao hàng chậm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 45: Nền tảng nào nổi tiếng với việc kết nối nhà cung cấp và người mua trên toàn cầu theo mô hình B2B?",
+    "options": [ "eBay", "Alibaba", "Shopee", "Facebook" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 46: Phương thức thanh toán phổ biến nhất trong TMĐT Việt Nam là gì?",
+    "options": [ "Thẻ tín dụng", "Thanh toán khi nhận hàng (COD)", "Ứng dụng di động", "Chuyển khoản ngân hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 47: Cấp độ đầu tiên của phát triển TMĐT cho doanh nghiệp là gì?",
+    "options": [ "Thương mại giao dịch", "Thương mại thông tin", "Thương mại tích hợp", "Thương mại di động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 48: Đặc điểm của Sàn giao dịch TMĐT là gì?",
+    "options": [ "Nền tảng bán nhiều loại hàng hóa", "Nhiều người mua và người bán", "Không có giao dịch trực tuyến", "Đa dạng hình thức thanh toán" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 49: Nền tảng nào KHÔNG phải là sàn TMĐT lớn tại Việt Nam?",
+    "options": [ "Shopee", "Lazada", "Tiki", "Google Maps" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 50: Cấp độ dịch vụ công trực tuyến nào hỗ trợ nộp hồ sơ trực tuyến?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Cấp độ 4" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 51: Xu hướng nào được dự đoán sẽ phát triển trong TMĐT?",
+    "options": [ "Giảm sử dụng ứng dụng di động", "Thương mại ĐT trên mạng xã hội", "Hạn chế mở rộng quốc tế", "Giảm tích hợp AI" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 52: Bao nhiêu phần trăm người mua sắm trực tuyến tại Việt Nam thích COD?",
+    "options": [ "50%", "73%", "85%", "90%" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 53: Internet xuất hiện lần đầu tiên, đặt nền móng cho TMĐT, vào thời điểm nào?",
+    "options": [ "Thập niên 1950", "Thập niên 1970 và 1980", "Thập niên 1990", "Thập niên 2000" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 54: Cấp độ dịch vụ công trực tuyến nào ít tiến bộ nhất?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Cấp độ 4" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 55: Yếu tố nào góp phần vào sự tăng trưởng TMĐT tại Việt Nam sau COVID-19?",
+    "options": [ "Giảm truy cập Internet", "Tăng áp dụng giao dịch trực tuyến", "Giảm sử dụng thiết bị di động", "Hạn chế nguồn cung sản phẩm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 56: Danh mục sản phẩm nào chiếm 64% mua sắm trực tuyến tại Việt Nam?",
+    "options": [ "Điện tử", "Thực phẩm", "Nội thất", "Sách" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 57: Nền tảng nào hỗ trợ TMĐT thông qua mạng xã hội?",
+    "options": [ "Microsoft Teams", "Facebook", "Zoom", "Skype" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 58: Lợi ích chính của TMĐT đối với doanh nghiệp là gì?",
+    "options": [ "Hạn chế phạm vi thị trường", "Mở rộng thị trường toàn cầu", "Tăng chi phí lưu kho", "Giảm tương tác với khách hàng" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 59: Lợi ích của thương mại mạng xã hội là gì?",
+    "options": [ "Giảm tương tác khách hàng", "Tăng cường tương tác khách hàng", "Hạn chế khả năng hiển thị sản phẩm", "Chi phí hoạt động cao hơn" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 60: Hạn chế của TMĐT đối với doanh nghiệp là gì?",
+    "options": [ "Giảm chi phí hoạt động", "Rủi ro an ninh mạng", "Mở rộng thị trường", "Cải thiện hệ thống phân phối" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 61: Đâu là một loại TMĐT dựa trên đối tượng tham gia?",
+    "options": [ "B2C", "C2B", "B2G", "Tất cả các loại trên" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 62: Cấp độ TMĐT nào liên quan đến truyền dữ liệu hoàn toàn tự động?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Cấp độ 4" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 63: Cấp độ TMĐT nào là tiên tiến nhất đối với doanh nghiệp?",
+    "options": [ "Thương mại thông tin", "Thương mại giao dịch", "Thương mại tích hợp", "Thương mại xã hội" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 64: Đặc điểm của cấp độ 3 trong phát triển TMĐT là gì?",
+    "options": [ "Xử lý dữ liệu thủ công", "Tích hợp với hệ thống nội bộ", "Hạn chế giao dịch trực tuyến", "Không có sự hiện diện website" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 65: Mô hình TMĐT nào liên quan đến giao dịch giữa các doanh nghiệp?",
+    "options": [ "C2C", "B2B", "B2C", "G2C" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 66: Hình thức thanh toán nào phổ biến nhất trong TMĐT trên thế giới?",
+    "options": [ "Thanh toán khi nhận hàng", "Chuyển khoản ngân hàng", "Thẻ tín dụng", "Tiền mặt" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 67: Hình thức TMĐT nào cho phép người tiêu dùng mua hàng trực tiếp từ nhà sản xuất?",
+    "options": [ "B2B", "G2B", "C2C", "B2C" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 68: Nền tảng TMĐT nào tại Việt Nam được một pháp nhân Singapore mua lại?",
+    "options": [ "Shopee", "Lazada", "Tiki", "Chợ Tốt" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 69: Cấp độ dịch vụ công trực tuyến nào cho phép xử lý hoàn toàn trực tuyến?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Cấp độ 4" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 70: Lợi ích của TMĐT đối với các quốc gia đang phát triển là gì?",
+    "options": [ "Giảm tiếp cận sản phẩm toàn cầu", "Tiếp cận sản phẩm và dịch vụ từ các nước phát triển", "Tăng chi phí di chuyển", "Tăng chi phí hành chính" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 71: Cấp độ nào cho phép doanh nghiệp xử lý đơn hàng trực tuyến?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Không có cấp độ nào" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 72: Người dùng có thể làm gì ở dịch vụ công trực tuyến cấp độ 3?",
+    "options": [ "Chỉ truy cập thông tin", "Tải và điền biểu mẫu ngoại tuyến", "Nộp hồ sơ trực tuyến", "Hoàn thành tất cả giao dịch ngoại tuyến" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 73: Doanh nghiệp đang thực hiện loại thương mại nào nếu chỉ cung cấp thông tin sản phẩm trực tuyến?",
+    "options": [ "Thương mại giao dịch", "Thương mại thông tin", "Thương mại tích hợp", "Thương mại xã hội" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 74: Động lực chính của sự tăng trưởng TMĐT tại Việt Nam là gì?",
+    "options": [ "Tốc độ Internet chậm", "Phát triển nhanh chóng của Internet", "Giảm thâm nhập điện thoại thông minh", "Hạn chế phương thức thanh toán" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 75: Đặc điểm của cấp độ 2 trong phát triển TMĐT là gì?",
+    "options": [ "Chỉ cung cấp thông tin", "Cho phép giao dịch trực tuyến", "Tự động hóa hoàn toàn quy trình", "Không hỗ trợ thanh toán trực tuyến" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 76: Yếu tố nào không phải là lợi ích của TMĐT đối với người tiêu dùng?",
+    "options": [ "Tiết kiệm thời gian", "Tiện lợi trong việc mua sắm", "Giá cả cạnh tranh hơn", "Khó khăn trong việc so sánh sản phẩm" ],
+    "answer": 3
+  },
+  {
+    "q": "Câu 77: Nền tảng TMĐT nào được mô tả là có lượng truy cập cao nhất tại Việt Nam?",
+    "options": [ "Tiki", "Lazada", "Shopee", "Sendo" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 78: Tổ chức nào định nghĩa TMĐT bao gồm việc sản xuất, quảng cáo, bán hàng và phân phối sản phẩm qua Internet?",
+    "options": [ "APEC", "Ủy ban Châu Âu", "WTO", "Amazon" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 79: Nền tảng nào là ví dụ về ứng dụng TMĐT di động?",
+    "options": [ "Microsoft Word", "Grab", "Adobe Acrobat", "Notepad" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 80: Khu vực nào là trọng tâm mở rộng TMĐT?",
+    "options": [ "Nam Cực", "Đông Á", "Bắc Cực", "Không có khu vực nào" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 81: Lợi ích của thương mại tích hợp là gì?",
+    "options": [ "Tăng can thiệp thủ công", "Giảm hiệu quả", "Giảm chi phí hoạt động", "Hạn chế phạm vi thị trường" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 82: Nền tảng mạng xã hội nào được sử dụng cho TMĐT tại Việt Nam nhiều nhất?",
+    "options": [ "Facebook", "TikTok", "Pinterest", "Reddit" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 83: Xu hướng tương lai trong TMĐT là gì?",
+    "options": [ "Giảm sử dụng AI", "Mở rộng toàn cầu", "Hạn chế phát triển ứng dụng di động", "Giảm tích hợp mạng xã hội" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 84: Lợi ích xã hội của TMĐT là gì?",
+    "options": [ "Tăng ô nhiễm", "Giảm di chuyển và tác động môi trường", "Giảm tỷ lệ thất nghiệp", "Tăng khả năng tiếp cận sản phẩm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 85: TMĐT trở thành một phần chính thức của hoạt động kinh doanh vào thập niên nào?",
+    "options": [ "Thập niên 1980", "Thập niên 1990", "Thập niên 2000", "Thập niên 2010" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 86: Ví dụ về nền tảng TMĐT C2C là gì?",
+    "options": [ "Amazon", "eBay", "Alibaba", "Shopee" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 87: Mục đích chính của Internet trong thập niên 1970 và 1980 là gì?",
+    "options": [ "Mạng xã hội", "Nghiên cứu quân sự và giáo dục", "Mua sắm trực tuyến", "Phát trực tuyến video" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 88: Thách thức cho TMĐT trong tương lai là gì?",
+    "options": [ "Giảm cạnh tranh", "Tăng rủi ro an ninh mạng", "Hạn chế mở rộng thị trường", "Giảm sử dụng di động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 89: Yếu tố nào góp phần vào sự bùng nổ TMĐT trong thập niên 2000?",
+    "options": [ "Sụt giảm sử dụng Internet", "Ra mắt các nền tảng như Wordpress và Magento", "Cấm thanh toán trực tuyến", "Giảm sử dụng thiết bị di động" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 90: Mục đích chính của dịch vụ công trực tuyến là gì?",
+    "options": [ "Tăng lượt ghé thăm văn phòng chính phủ", "Cung cấp dịch vụ hành chính tiện lợi qua Internet", "Hạn chế truy cập vào dịch vụ chính phủ", "Giảm tính minh bạch" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 91: Cấp độ TMĐT nào giảm chi phí hoạt động đáng kể?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Không có cấp độ nào" ],
+    "answer": 2
+  },
+  {
+    "q": "Câu 92: Nền tảng nào đang tích hợp TMĐT với mạng xã hội?",
+    "options": [ "TikTok", "Microsoft Excel", "Adobe Illustrator", "Notepad" ],
+    "answer": 0
+  },
+  {
+    "q": "Câu 93: Xu hướng toàn cầu trong phát triển TMĐT là gì?",
+    "options": [ "Giảm sử dụng ứng dụng di động", "Tích hợp AI và VR", "Suy giảm thương mại mạng xã hội", "Hạn chế mở rộng quốc tế" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 94: Theo Ủy ban Châu Âu, TMĐT bao gồm những gì?",
+    "options": [ "Chỉ các hàng hóa vật lý được trao đổi qua Internet", "Mua bán, trao đổi hàng hóa hoặc dịch vụ qua các giao dịch điện tử", "Chỉ các dịch vụ được giao nhận ngoại tuyến", "Các giao dịch không sử dụng máy tính" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 95: Quốc gia nào là một trong những thị trường TMĐT lớn trên thế giới?",
+    "options": [ "Brazil", "Trung Quốc", "Nga", "Nam Phi" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 96: Yếu tố nào thúc đẩy tăng trưởng TMĐT tại Việt Nam?",
+    "options": [ "Giảm truy cập Internet", "Tăng thâm nhập điện thoại thông minh", "Hạn chế tùy chọn thanh toán", "Thời gian giao hàng chậm" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 97: Xu hướng nào liên quan đến bán hàng qua nhiều nền tảng?",
+    "options": [ "Thương mại đơn kênh", "Thương mại đa kênh", "Thương mại ngoại tuyến", "Thương mại thủ công" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 98: Sự phát triển lớn trong TMĐT vào giữa thập niên 1990 là gì?",
+    "options": [ "Ra mắt ứng dụng di động", "Sự xuất hiện của hệ thống thanh toán trực tuyến an toàn", "Phát minh ra Internet", "Tạo ra mạng xã hội" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 99: Đặc điểm của dịch vụ công trực tuyến cấp độ 1 là gì?",
+    "options": [ "Nộp hồ sơ trực tuyến", "Chỉ cung cấp thông tin", "Xử lý hoàn toàn trực tuyến", "Nộp biểu mẫu ngoại tuyến" ],
+    "answer": 1
+  },
+  {
+    "q": "Câu 100: Cấp độ cao nhất của dịch vụ công trực tuyến là gì?",
+    "options": [ "Cấp độ 1", "Cấp độ 2", "Cấp độ 3", "Cấp độ 4" ],
+    "answer": 3
+  }
+],
+
     ];
 
-    // Hàm xáo trộn mảng (Fisher-Yates Shuffle)
+    let currentChapter = 0;
+    let shuffledQuestions = shuffleArray([...chapters[currentChapter]]);
+    let current = 0;
+    let answered = Array(shuffledQuestions.length).fill(null);
+    let showingAnswer = false;
+
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -1008,16 +4011,9 @@
       return array;
     }
 
-    // Xáo trộn mảng questions khi khởi tạo
-    const shuffledQuestions = shuffleArray([...questions]);
-
-    let current = 0;
-    let answered = Array(shuffledQuestions.length).fill(null);
-    let showingAnswer = false; // trạng thái: đang hiển thị đáp án hay chưa
-
     function updateProgress() {
       document.getElementById("progress").textContent =
-        `Câu ${current + 1}/${shuffledQuestions.length} - Còn lại ${shuffledQuestions.length - current - 1} câu`;
+        `Chương ${currentChapter + 1} - Câu ${current + 1}/${shuffledQuestions.length} - Còn lại ${shuffledQuestions.length - current - 1} câu`;
     }
 
     function updateQuestionGrid() {
@@ -1030,7 +4026,6 @@
       });
       grid.innerHTML = html;
 
-      // Thêm sự kiện nhấp cho các ô
       document.querySelectorAll(".grid-item").forEach(item => {
         item.addEventListener("click", () => {
           current = parseInt(item.getAttribute("data-index"));
@@ -1067,12 +4062,33 @@
 
       updateProgress();
       updateQuestionGrid();
-      showingAnswer = false; // reset trạng thái
+      showingAnswer = false;
     }
+
+    function switchChapter(chapterIndex) {
+      currentChapter = chapterIndex;
+      shuffledQuestions = shuffleArray([...chapters[currentChapter]]);
+      current = 0;
+      answered = Array(shuffledQuestions.length).fill(null);
+      showingAnswer = false;
+
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+      });
+      document.querySelector(`.tab[data-chapter="${chapterIndex}"]`).classList.add("active");
+
+      loadQuestion();
+    }
+
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        const chapterIndex = parseInt(tab.getAttribute("data-chapter"));
+        switchChapter(chapterIndex);
+      });
+    });
 
     document.getElementById("nextBtn").addEventListener("click", () => {
       if (!showingAnswer) {
-        // Hiển thị đáp án trước
         const q = shuffledQuestions[current];
         const userAns = answered[current];
         let ansHtml = `
@@ -1091,10 +4107,9 @@
         `;
         document.getElementById("answerBox").innerHTML = ansHtml;
         showingAnswer = true;
-        return; // dừng lại, chờ lần bấm tiếp theo
+        return;
       }
 
-      // Nếu đã hiển thị đáp án thì chuyển câu
       if (current < shuffledQuestions.length - 1) {
         current++;
         loadQuestion();
@@ -1113,7 +4128,7 @@
     function showSummary() {
       const correct = answered.filter((a, i) => a === shuffledQuestions[i].answer).length;
       let reviewHtml = `
-        <div class="summary">🎉 Bạn trả lời đúng ${correct}/${shuffledQuestions.length} câu!</div>
+        <div class="summary">🎉 Bạn trả lời đúng ${correct}/${shuffledQuestions.length} câu !</div>
         <div class="review">`;
       shuffledQuestions.forEach((q, i) => {
         const userAns = answered[i];
@@ -1129,37 +4144,73 @@
       reviewHtml += `
         </div>
         <div style="text-align:center; margin-top:15px;">
-          <button onclick="restartQuiz()">🔄 Làm lại</button>
+          <button id="restartChapterBtn">🔄 Làm lại</button>
         </div>
       `;
-      document.querySelector(".container").innerHTML = reviewHtml; // Hiển thị kết quả trong container
-    }
+      document.querySelector(".quiz-container").innerHTML = reviewHtml;
 
-    function restartQuiz() {
-      current = 0;
-      answered = Array(shuffledQuestions.length).fill(null);
-      location.reload();
+      document.getElementById("restartChapterBtn").addEventListener("click", () => {
+        shuffledQuestions = shuffleArray([...chapters[currentChapter]]);
+        current = 0;
+        answered = Array(shuffledQuestions.length).fill(null);
+        showingAnswer = false;
+        document.querySelector(".quiz-container").innerHTML = `
+          <div class="logo">
+            <img src="https://preview.redd.it/looking-for-opponents-for-tom-tom-and-jerry-for-a-tier-list-v0-jvusu3d0g5ta1.jpg?width=640&crop=smart&auto=webp&s=d955062a32f183d4554fda823834ef905dffa208" alt="Logo">
+          </div>
+          <div class="title">Trắc nghiệm Thương mại Điện tử</div>
+          <div id="progress"></div>
+          <div id="quiz"></div>
+          <div class="controls">
+            <button id="prevBtn">⏪ Quay lại</button>
+            <button id="nextBtn">⏭ Tiếp theo</button>
+          </div>
+        `;
+        document.getElementById("prevBtn").addEventListener("click", () => {
+          if (current > 0) {
+            current--;
+            loadQuestion();
+          }
+        });
+        document.getElementById("nextBtn").addEventListener("click", () => {
+          if (!showingAnswer) {
+            const q = shuffledQuestions[current];
+            const userAns = answered[current];
+            let ansHtml = `
+              <div class="answer-box">
+                <div>
+                  <span class="icon">${userAns === q.answer ? "✅" : "❌"}</span>
+                  Bạn chọn: <span class="${userAns === q.answer ? 'correct' : 'wrong'}">
+                    ${userAns !== null ? q.options[userAns] : "(không chọn)"}
+                  </span>
+                </div>
+                <div>
+                  <span class="icon">✔️</span>
+                  Đáp án đúng: <span class="correct">${q.options[q.answer]}</span>
+                </div>
+              </div>
+            `;
+            document.getElementById("answerBox").innerHTML = ansHtml;
+            showingAnswer = true;
+            return;
+          }
+          if (current < shuffledQuestions.length - 1) {
+            current++;
+            loadQuestion();
+          } else {
+            showSummary();
+          }
+        });
+        loadQuestion();
+      });
     }
 
     loadQuestion();
-    /* ===========================
-       CODE KHÓA XEM SOURCE (JS)
-       ===========================
-       - Ngăn chuột phải
-       - Ngăn F12, Ctrl+U, Ctrl+Shift+I/C/J (Inspector / Console)
-       - Ngăn chọn text (CSS + event)
-       - Lưu ý: chỉ là rào cản client-side
-    */
+
     (function lockDevTools() {
-      document.addEventListener('contextmenu', function(e) {
-        e.preventDefault();
-      });
-      document.addEventListener('selectstart', function(e) {
-        e.preventDefault();
-      });
-      document.addEventListener('copy', function(e) {
-        e.preventDefault();
-      });
+      document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+      document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+      document.addEventListener('copy', function(e) { e.preventDefault(); });
       document.addEventListener('keydown', function(e) {
         const key = e.key || e.keyCode;
         if (e.key === 'F12' || key === 123) {
